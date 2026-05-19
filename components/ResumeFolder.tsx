@@ -36,7 +36,7 @@ type Stop = {
 const STOPS_RAW: Stop[] = [
   // ── PRESENT — INFRARED ────────────────────────────────────────────
   {
-    range: '2024 — now', sortKey: 202401,
+    range: '2024 to now', sortKey: 202401,
     org: 'Infrared Finance', role: 'Head of Community',
     blurb:
       'Built the community function from scratch. Grew the team 8 → 20. Shipped 20+ events across 10+ cities. 30+ partnerships across APAC + EMEA.',
@@ -50,13 +50,13 @@ const STOPS_RAW: Stop[] = [
   // ── 2022 — 2024 — CONSULTING (one stop, all engagements rolled in
   //    with their years inline) ──────────────────────────────────────
   {
-    range: '2022 — 2024', sortKey: 202201,
+    range: '2022 to 2024', sortKey: 202201,
     org: 'Kana Co.',
     role: 'Independent Consultant + Strategy Consultant',
     blurb:
-      'Multi-year run of independent consulting across the first wave of Web3. Embedded with founders crossing from Web2 to Web3 — GTM, comms, community strategy, live event production.',
+      'Multi-year run of independent consulting across the first wave of Web3. Embedded with founders crossing from Web2 to Web3. GTM, comms, community strategy, and live event production.',
     scope: [
-      '2023 — 2024 · Kana Co.: GTM positioning + community-launch playbooks for early-stage protocols. Founder + comms coaching.',
+      '2023 to 2024 · Kana Co.: GTM positioning + community-launch playbooks for early-stage protocols. Founder + comms coaching.',
       '2022 · 8it / EdibleNFT: produced the first EdibleNFT Food Hunt at NFT NYC. Chef Christian Petroni × Crypto.com collab on the Garlic Butter Sicilian Pizza remix.',
       '2022 · MechArcade: tech-marketing + comms strategy for an NFT project navigating crypto from a Web2 starting point.',
       '2022 · Overtime.tv / BracketX: consulted with Overtime\u2019s Head of Product on integrating Web3 into the future of sports.',
@@ -65,10 +65,10 @@ const STOPS_RAW: Stop[] = [
   },
   // ── 2020 — 2022 — VMWARE ────────────────────────────────────────
   {
-    range: 'Jul 2020 — Mar 2022', sortKey: 202007,
+    range: 'Jul 2020 to Mar 2022', sortKey: 202007,
     org: 'VMware, Inc.', role: 'Technical Account Manager',
     blurb:
-      'Ran enterprise cloud accounts in NYC. Advised companies on deployment, migration, adoption, and operational excellence — built pre- and post-sales relationships across internal and external teams.',
+      'Ran enterprise cloud accounts in NYC. Advised companies on deployment, migration, adoption, and operational excellence. Built pre and post sales relationships across internal and external teams.',
     scope: [
       'Strategic planning + performance optimization',
       'VCP-DCV 2020 certified',
@@ -78,7 +78,7 @@ const STOPS_RAW: Stop[] = [
   },
   // ── 2018 — UCR ITS ──────────────────────────────────────────────
   {
-    range: 'Aug 2018 — Jun 2019', sortKey: 201808,
+    range: 'Aug 2018 to Jun 2019', sortKey: 201808,
     org: 'UCR · IT Solutions', role: 'IT Help Desk Student Assistant II',
     blurb:
       'Daily technical support for 25,000+ students and faculty across network, peripherals, email, and system maintenance. Tracked + documented tickets in ServiceNow.',
@@ -86,7 +86,7 @@ const STOPS_RAW: Stop[] = [
   },
   // ── 2018 SUMMER — BELKIN ────────────────────────────────────────
   {
-    range: 'Jun — Aug 2018', sortKey: 201806,
+    range: 'Jun to Aug 2018', sortKey: 201806,
     org: 'Belkin · Linksys', role: 'Program Management Intern',
     blurb:
       'Oversaw day-to-day progress of Agile-based Linksys projects across scope, schedule, budget, and quality. Built data dashboards + facilitated Scrum ceremonies.',
@@ -94,7 +94,7 @@ const STOPS_RAW: Stop[] = [
   },
   // ── 2016 — MICROMOUSE ───────────────────────────────────────────
   {
-    range: '2016 — 2017', sortKey: 201609,
+    range: '2016 to 2017', sortKey: 201609,
     org: 'Micromouse · UCR', role: 'Project Member',
     blurb:
       'Designed, built, and programmed an autonomous robot to solve a 16x16 maze. Drafted the PCB in Autodesk Eagle, coded an STM32 microcontroller in C, used flood-fill to find the fastest path to center.',
@@ -102,11 +102,11 @@ const STOPS_RAW: Stop[] = [
   },
   // ── 2015 — UCR ──────────────────────────────────────────────────
   {
-    range: '2015 — 2019', sortKey: 201509,
+    range: '2015 to 2019', sortKey: 201509,
     org: 'UC Riverside',
     role: 'B.S. Business Admin · Information Systems',
     blurb:
-      'School of Business Administration — Academic MIS Excellence Award recipient. VMware Certified Professional (VCP-DCV 2020).',
+      'School of Business Administration. Academic MIS Excellence Award recipient. VMware Certified Professional (VCP-DCV 2020).',
     tone: 'rose', kind: 'school',
   },
 ];

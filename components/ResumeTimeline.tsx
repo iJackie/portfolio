@@ -24,7 +24,7 @@ type Stop = {
 
 const STOPS: Stop[] = [
   {
-    range: '2020 — 2023',
+    range: '2020 to 2023',
     org: 'VMware',
     role: 'Technical Account Manager',
     blurb: 'Ran 10+ enterprise cloud accounts. Where I learned how operators ship at scale.',
@@ -38,14 +38,14 @@ const STOPS: Stop[] = [
     tone: 'rose',
   },
   {
-    range: '2023 — 2024',
+    range: '2023 to 2024',
     org: 'Kana Co.',
     role: 'Strategy Consultant',
     blurb: 'GTM, comms, and community-strategy for teams crossing from Web2 to Web3.',
     tone: 'sage',
   },
   {
-    range: '2024 — now',
+    range: '2024 to now',
     org: 'Infrared Finance',
     role: 'Head of Community',
     blurb: 'Grew the team 8 → 20. Built 30+ partnerships across APAC/EMEA. Shipped 20+ events.',

@@ -410,7 +410,7 @@ export default function Hero() {
           style={{ marginTop: 'clamp(8px, 1.5vw, 20px)' }}
         >
           <h3 className="font-sans font-bold uppercase text-ink-900 text-[12px] tracking-[0.2em] mb-3">
-            Build to last.
+            Building memories.
           </h3>
           <p className="font-sans text-ink-900/80 text-[14px] md:text-[15px] leading-[1.6]">
             I build communities, curate events, and run the ops behind them.
@@ -420,14 +420,13 @@ export default function Hero() {
             supporting founders and being the person they trust to hold the
             rest together.
           </p>
-          {/* GM. — short ember sign-off on its own line, doubles as a
-              mailto link without forcing the visitor to read it as a CTA. */}
+          {/* GM! Let's chat. — short ember sign-off, doubles as a mailto. */}
           <p className="font-sans text-[14px] md:text-[15px] mt-3">
             <a
               href="mailto:jacquelinegiale@gmail.com"
               className="text-ember-500 hover:underline underline-offset-4 font-medium"
             >
-              GM.
+              GM! Let&apos;s chat.
             </a>
           </p>
         </div>
@@ -1260,7 +1259,7 @@ function BadgeFront({ sheenBg }: { sheenBg: ReturnType<typeof useMotionTemplate>
                   whole panel is dense and readable across the badge. */}
               <div
                 className="flex flex-col"
-                style={{ gap: '3cqh', marginTop: '2.6cqh' }}
+                style={{ gap: '2.2cqh', marginTop: '2.4cqh' }}
               >
                 <PassFieldRow label="Name"    value="Jacqueline Mach" />
                 <PassFieldRow label="Based"   value="Brooklyn, NY" />
@@ -1327,10 +1326,9 @@ function FieldRow({ label, value }: { label: string; value: string }) {
    on the same line in italic display font, like a hand-stamped field.
    ──────────────────────────────────────────────────────────────── */
 function PassFieldRow({ label, value }: { label: string; value: string }) {
-  // Long values (the combined "Open to" line) get a slightly smaller
-  // size and are allowed to wrap to a second line, so the row reads
-  // cleanly without truncating with "...".
-  const isLong = value.length > 28;
+  // All rows use the same font size for visual consistency. Long values
+  // wrap to a second line instead of shrinking — keeps Name / Based /
+  // Open to reading as one uniform set of labels.
   return (
     <div className="flex items-baseline gap-2 min-w-0">
       <span
@@ -1340,11 +1338,11 @@ function PassFieldRow({ label, value }: { label: string; value: string }) {
         {label}:
       </span>
       <span
-        className={`font-display italic text-ink-900/90 ${isLong ? '' : 'truncate'}`}
+        className="font-display italic text-ink-900/90"
         style={{
-          fontSize: isLong ? '3.6cqh' : '4.6cqh',
-          lineHeight: 1.15,
-          whiteSpace: isLong ? 'normal' : undefined,
+          fontSize: '4.6cqh',
+          lineHeight: 1.1,
+          whiteSpace: 'normal',
         }}
       >
         {value}

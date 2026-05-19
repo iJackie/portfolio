@@ -48,7 +48,7 @@ export type VisualItem = {
 export const VISUALS: VisualItem[] = [
   {
     id: 'infrared-101-explainer',
-    title: 'Infrared 101 — Proof of Liquidity, simplified',
+    title: 'Infrared 101, Proof of Liquidity simplified',
     caption: 'A two-minute animated explainer breaking down how iBERA works.',
     category: 'educational',
     thumbnail: '/assets/Infrared101.png',
@@ -65,7 +65,7 @@ export const VISUALS: VisualItem[] = [
     thumbnail: '/assets/BeracupDevcon.png',
     poster: '/assets/BeracupDevcon.png',
     with: 'with @yourdesigner',
-    date: 'Sep–Nov 2024',
+    date: 'Sep to Nov 2024',
   },
   {
     id: 'honey-hour-campaign',
@@ -74,12 +74,12 @@ export const VISUALS: VisualItem[] = [
     category: 'marketing',
     thumbnail: '/assets/HoneyHour.png',
     poster: '/assets/HoneyHour.png',
-    date: '2024 — 2025',
+    date: '2024 to 2025',
   },
   {
     id: 'bera-spa-identity',
     title: 'Bera Spa identity',
-    caption: 'Visual concept for a Devcon-side wellness experience — soft, editorial, calm.',
+    caption: 'Visual concept for a Devcon-side wellness experience. Soft, editorial, calm.',
     category: 'brand',
     thumbnail: '/assets/BeraSpa1.png',
     poster: '/assets/BeraSpa1.png',
@@ -87,7 +87,7 @@ export const VISUALS: VisualItem[] = [
   },
   {
     id: 'liquid-staking-night-deck',
-    title: 'Liquid Staking Night — pitch deck',
+    title: 'Liquid Staking Night, pitch deck',
     caption: 'Co-hosted deck explaining the three protocols + the through-line of the night.',
     category: 'educational',
     thumbnail: '/assets/LiquidStakingNight.png',

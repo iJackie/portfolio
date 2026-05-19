@@ -53,7 +53,7 @@ export const EVENTS: EventItem[] = [
     emoji: '🍸',
     color: '#E94B35',
     description:
-      'An evening of drinks and food with three top Liquid Staking protocols across Monad, Berachain, and Babylon — all backed by Binance Labs. Co-hosted with aPriori and Lorenzo Protocol during Token2049 Singapore.',
+      'An evening of drinks and food with three top Liquid Staking protocols across Monad, Berachain, and Babylon, all backed by Binance Labs. Co-hosted with aPriori and Lorenzo Protocol during Token2049 Singapore.',
     stats: [
       { value: '239', label: 'attendees' },
       { value: '3',   label: 'protocols' },
@@ -114,7 +114,7 @@ export const EVENTS: EventItem[] = [
 
   ev({
     id: '2024-bangkok-hotpotdao',
-    name: 'HotpotDAO — Devcon Thailand',
+    name: 'HotpotDAO, Devcon Thailand',
     location: 'Bangkok, Thailand',
     venue: 'Shoo Loong Kan Hotpot',
     lat: 13.7563,
@@ -186,7 +186,7 @@ export const EVENTS: EventItem[] = [
     id: '2025-denver-honeyhappyhour',
     name: 'Honey Happy Hour',
     location: 'Denver, United States',
-    venue: "Tom's Watch Bar — Coors Field",
+    venue: "Tom's Watch Bar, Coors Field",
     lat: 39.7392,
     lng: -104.9903,
     startDate: '2025-02-25',
@@ -253,7 +253,7 @@ export const EVENTS: EventItem[] = [
 
   ev({
     id: '2025-denver-allin',
-    name: 'ALL-INnovation — Founders Soirée',
+    name: 'ALL-INnovation, Founders Soirée',
     location: 'Denver, United States',
     venue: 'Mirus Gallery & Art Bar',
     lat: 39.7392,
@@ -371,7 +371,7 @@ export const EVENTS: EventItem[] = [
     id: '2025-dubai-honeyhour',
     name: 'Beras Honey Hour with Magna',
     location: 'Dubai, United Arab Emirates',
-    venue: 'Brass Monkey — Bluewaters',
+    venue: 'Brass Monkey, Bluewaters',
     lat: 25.2048,
     lng: 55.2708,
     startDate: '2025-05-02',
@@ -426,7 +426,7 @@ export const EVENTS: EventItem[] = [
     emoji: '🌊',
     color: '#7BA68D',
     description:
-      'An exclusive Infrared team offsite along the Sicilian coast at Club Med Cefalù. A week of strategy, relaxation, and connection — ocean views, yoga, and a historic seaside village to explore.',
+      'An exclusive Infrared team offsite along the Sicilian coast at Club Med Cefalù. A week of strategy, relaxation, and connection. Ocean views, yoga, and a historic seaside village to explore.',
     stats: [
       { value: '18', label: 'attendees' },
       { value: '7',  label: 'days' },

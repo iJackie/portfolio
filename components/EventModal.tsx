@@ -220,5 +220,5 @@ function formatDateRange(start: string, end: string) {
   const e = new Date(end);
   const opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric', year: 'numeric' };
   if (start === end) return s.toLocaleDateString('en-US', opts).toLowerCase();
-  return `${s.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${e.toLocaleDateString('en-US', opts)}`.toLowerCase();
+  return `${s.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} to ${e.toLocaleDateString('en-US', opts)}`.toLowerCase();
 }

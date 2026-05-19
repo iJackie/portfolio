@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter_Tight, Fraunces, JetBrains_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import GradientCursor from '@/components/GradientCursor';
 import './globals.css';
 
@@ -34,9 +35,35 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Jacqueline Mach — Portfolio Lanyard',
+  metadataBase: new URL('https://jacquelinemach.com'),
+  title: 'Jacqueline Mach — Portfolio',
   description:
-    'Brooklyn-based, formerly Head of Community at Infrared Finance. 20+ events shipped across 10+ cities.',
+    'Brooklyn-based growth, community, and events. Scaled a crypto protocol from 8 → 20+ people and $2.5B in TVL, with 20+ events across 10+ cities.',
+  openGraph: {
+    title: 'Jacqueline Mach — Portfolio',
+    description:
+      'Growth · marketing · EA · community · events. 20+ events across 10+ cities.',
+    url: 'https://jacquelinemach.com',
+    siteName: 'Jacqueline Mach',
+    images: [
+      {
+        url: '/assets/PFPpng.png',
+        width: 1200,
+        height: 630,
+        alt: 'Jacqueline Mach portfolio',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Jacqueline Mach — Portfolio',
+    description:
+      'Growth · marketing · EA · community · events. 20+ events across 10+ cities.',
+    images: ['/assets/PFPpng.png'],
+    creator: '@berakana_',
+  },
 };
 
 export default function RootLayout({
@@ -52,6 +79,7 @@ export default function RootLayout({
       <body>
         <GradientCursor />
         <main className="ombre-page relative">{children}</main>
+        <Analytics />
       </body>
     </html>
   );

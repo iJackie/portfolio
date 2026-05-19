@@ -99,7 +99,7 @@ export default function PageFooter() {
               className="font-display italic leading-[1.02] mb-5"
               style={{ color: 'var(--plum-700)', fontSize: 'clamp(30px,4.6vw,52px)' }}
             >
-              find me at —
+              find me at.
             </h2>
 
             {/* Email pill + copy — sits on a frosted white sub-pill */}

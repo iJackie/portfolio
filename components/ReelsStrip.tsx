@@ -76,7 +76,7 @@ export default function ReelsStrip({ onSelect }: Props) {
             </h2>
             <p className="mt-3 text-ink-900/70 max-w-[58ch] text-[14px]">
               Every event I&apos;ve produced, side by side. Scroll through the
-              flyers — tap any card for the full story, photos, and merch.
+              flyers. Tap any card for the full story, photos, and merch.
             </p>
           </div>
 

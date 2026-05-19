@@ -37,7 +37,7 @@ export default function About() {
           </h2>
           <div className="mt-6 space-y-4 text-ink-900/80 max-w-[58ch]">
             <p>
-              I&apos;m Jacqueline — currently Head of Community at Infrared Finance,
+              I&apos;m Jacqueline, currently Head of Community at Infrared Finance,
               the largest liquid-staking protocol on Berachain (peak TVL $2.5B).
               I led global GTM and 30+ ecosystem partnerships across APAC and EMEA,
               and shipped 20+ events from spas in Bangkok to bowling nights in Denver.

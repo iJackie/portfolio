@@ -119,7 +119,7 @@ const CONTENT_ITEMS: ContentItem[] = [
   {
     id: 'video-teaser-bus-1',
     kind: 'reel',
-    title: 'KBW Shuttle Teaser — Vol. 1',
+    title: 'KBW Shuttle Teaser, Vol. 1',
     src: '/assets/videoTeaser_Teaser1Bus.mp4',
     // For mp4 reels: a static thumb image makes the grid much faster.
     // Replace with a real screenshot when you have one.
@@ -131,11 +131,11 @@ const CONTENT_ITEMS: ContentItem[] = [
   {
     id: 'video-teaser-bus-2',
     kind: 'reel',
-    title: 'KBW Shuttle Teaser — Vol. 2',
+    title: 'KBW Shuttle Teaser, Vol. 2',
     src: '/assets/videoTeaser_Teaser2Bus.mp4',
     thumb: '/assets/flyer_KBWShuttle.avif',
     eyebrow: 'TEASER · KBW 2025',
-    caption: 'Second cut — built for the IG drop.',
+    caption: 'Second cut, built for the IG drop.',
     span: 'tall',
   },
 
@@ -261,7 +261,7 @@ const CONTENT_ITEMS: ContentItem[] = [
     src: '/assets/meme_TeddyInfrared.png',
     thumb: '/assets/meme_TeddyInfrared.png',
     eyebrow: 'MEME',
-    caption: 'Community meme drop — Teddy era.',
+    caption: 'Community meme drop, Teddy era.',
     span: 'sm',
   },
   {
@@ -283,7 +283,7 @@ const CONTENT_ITEMS: ContentItem[] = [
     src: '/assets/merch_InfraredToteBag.jpg',
     thumb: '/assets/merch_InfraredToteBag.jpg',
     eyebrow: 'MERCH',
-    caption: 'Limited-run tote — Devcon Bangkok.',
+    caption: 'Limited-run tote, Devcon Bangkok.',
     span: 'sm',
   },
 
