@@ -76,3 +76,4 @@ Single source of truth: `app/globals.css` and `tailwind.config.ts`.
 - All motion respects `prefers-reduced-motion`.
 - Event flyers in `public/assets/` are originals from the previous build — feel free to compress them further (the largest `PFPpng.png` is 4 MB; consider exporting at 1200px wide JPG/WebP).
 # portfolio
+# portfolio
