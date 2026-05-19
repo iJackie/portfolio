@@ -1,0 +1,706 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary palette: soft rose pinks (kept under --rust-* names for compat) */
+  --rust-100: #FCE4EC;
+  --rust-200: #F8CFDC;
+  --rust-300: #F2B4C7;
+  --rust-400: #EC93AE;
+  --rust-500: #E879A0;
+  --rust-600: #D45C8B;
+  --rust-700: #A6406A;
+  --rust-800: #7A2D50;
+  --cream-100: #FBF6F1;
+  --cream-200: #F4ECE4;
+  --warm-300: #D8CDC4;
+  --warm-500: #7A6E66;
+  --sage-300: #BCD3C5;
+  --sage-500: #9BBDA8;
+  --sage-700: #5C8770;
+  --ink-700: #2D2820;
+  --ink-900: #1A1612;
+  /* Archive palette — paper, moss, ember, plum */
+  --paper-50:  #F4F0E8;
+  --paper-100: #EBE5D8;
+  --paper-200: #D8D2C2;
+  --paper-300: #BFB7A4;
+  --moss-300: #A8B59A;
+  --moss-400: #7A8A6E;
+  --moss-500: #5C6F50;
+  --moss-700: #3D4A35;
+  --moss-900: #222B1E;
+  --ember-300: #FFB38A;
+  --ember-400: #FF8A5C;
+  --ember-500: #FF5A2C;
+  --ember-600: #E0431A;
+  --plum-700: #3F1F2D;
+  --plum-900: #1A0F1F;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+html, body {
+  background: var(--cream-100);
+  color: var(--ink-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Ensure long page heights for ombre-page to wash through */
+  min-height: 100vh;
+}
+body {
+  font-family: var(--font-inter-tight), system-ui, -apple-system, sans-serif;
+}
+
+/* Keep the NATIVE OS cursor everywhere. The GradientCursor component drops
+   a fading sparkle trail behind whatever cursor the OS is showing (arrow
+   on most of the page, finger on links/buttons). */
+
+/* ============================================================
+   OMBRE BACKGROUNDS
+   ============================================================ */
+
+/* Peach × lavender ombre — soft, dreamy, girly. Used by the lanyard hero. */
+.ombre-peach-lavender {
+  position: relative;
+  background:
+    /* Lavender glow top-right */
+    radial-gradient(ellipse 70% 55% at 92% 8%, #d9c7ee 0%, transparent 60%),
+    /* Soft peach mid-left */
+    radial-gradient(ellipse 65% 60% at 6% 40%, #ffd6c2 0%, transparent 60%),
+    /* Hot pink bloom center-bottom (anchored behind the wordmark) */
+    radial-gradient(ellipse 55% 40% at 50% 92%, #f4a8c1 0%, transparent 65%),
+    /* Coral wash bottom-right */
+    radial-gradient(ellipse 60% 50% at 88% 96%, #ffbfa3 0%, transparent 70%),
+    /* Pale base */
+    linear-gradient(180deg, #fff4ee 0%, #fde6e9 45%, #ecdaf2 100%);
+  overflow: hidden;
+}
+
+/* PAGE-WIDE ombre — applied to <main> so it stretches under BOTH the hero
+   and the folder section with no seam.
+
+   STRATEGY:
+   - All radial blooms are anchored in vh units inside the FIRST viewport
+     (the hero region) so they feel identical to the original hero ombre.
+   - A vertical linear-gradient runs the FULL document height, carrying
+     the warm pink/lavender base into the folder section below.
+   - Two extra blooms (lavender + coral) sit further down so the folder
+     area never looks flat. */
+.ombre-page {
+  position: relative;
+  background:
+    /* HERO REGION — same blooms as the original .ombre-peach-lavender */
+    radial-gradient(ellipse 70vw 55vh at 92% 8vh,  #d9c7ee 0%, transparent 60%),
+    radial-gradient(ellipse 65vw 60vh at 6% 40vh,  #ffd6c2 0%, transparent 60%),
+    radial-gradient(ellipse 55vw 40vh at 50% 92vh, #f4a8c1 0%, transparent 65%),
+    radial-gradient(ellipse 60vw 50vh at 88% 96vh, #ffbfa3 0%, transparent 70%),
+    /* FOLDER REGION — extra blooms further down so the lower page isn't flat */
+    radial-gradient(ellipse 70vw 40vh at 15% 145vh, #f4d4e5 0%, transparent 65%),
+    radial-gradient(ellipse 60vw 35vh at 90% 175vh, #e8dcec 0%, transparent 65%),
+    radial-gradient(ellipse 55vw 30vh at 45% 210vh, #ffd6e0 0%, transparent 65%),
+    /* BASE — vertical wash running the full document height */
+    linear-gradient(180deg,
+      #fff4ee 0vh,
+      #fde6e9 45vh,
+      #ecdaf2 100vh,
+      #f4dceb 150vh,
+      #ecdaf2 220vh,
+      #e3d4eb 100%);
+}
+.ombre-page::before {
+  /* Page-wide grain */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='gp'><feTurbulence baseFrequency='0.75' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.25  0 0 0 0 0.18  0 0 0 0 0.22  0 0 0 0.18 0'/></filter><rect width='280' height='280' filter='url(%23gp)'/></svg>");
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+
+/* ============================================================
+   HERO TEXTURES + OVERLAYS
+   ============================================================ */
+
+.halftone-dots {
+  position: relative;
+}
+.halftone-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, rgba(63,31,45,0.18) 1px, transparent 1.6px);
+  background-size: 6px 6px;
+  opacity: 0.3;
+  /* Mask: only show dots at top and bottom edges of the hero */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 24%, transparent 76%, #000 100%);
+          mask-image: linear-gradient(180deg, #000 0%, transparent 24%, transparent 76%, #000 100%);
+  z-index: 1;
+}
+
+.crosshair {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(255,90,44,0.04) 50%, transparent 100%);
+  mix-blend-mode: multiply;
+}
+
+.lanyard-webbing {
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, #3F1F2D 0%, #2A1320 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+/* ============================================================
+   WORDMARK MISREGISTER (JACQUELINE)
+   ============================================================ */
+
+.wordmark-misregister {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+.wordmark-misregister::before,
+.wordmark-misregister::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  text-align: inherit;
+  pointer-events: none;
+  z-index: -1;
+}
+.wordmark-misregister::before {
+  color: #FF5A2C; /* ember */
+  transform: translate(-3px, 1px);
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+.wordmark-misregister::after {
+  color: #E879A0; /* rose */
+  transform: translate(3px, -1px);
+  mix-blend-mode: multiply;
+  opacity: 0.65;
+}
+
+/* ============================================================
+   PULSING STATUS DOT (used by CONTACT ME + OPEN TO WORK)
+   ============================================================ */
+
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--ember-500);
+  border-radius: 9999px;
+}
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ember-500);
+  border-radius: 9999px;
+  animation: pulse-ring 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(0.85); opacity: 0.7; }
+  100% { transform: scale(1.8);  opacity: 0;   }
+}
+
+/* ============================================================
+   ASCII TOKEN DRIFTS + ROAMS
+   ============================================================ */
+
+@keyframes drift-1 {
+  0%, 100% { transform: translate(0, 0) rotate(-2deg); }
+  50%      { transform: translate(8px, -6px) rotate(2deg); }
+}
+@keyframes drift-2 {
+  0%, 100% { transform: translate(0, 0) rotate(1deg); }
+  50%      { transform: translate(-7px, 5px) rotate(-3deg); }
+}
+@keyframes drift-3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33%      { transform: translate(5px, 4px) rotate(2deg); }
+  66%      { transform: translate(-4px, -5px) rotate(-2deg); }
+}
+.drift-1 { animation: drift-1 6s ease-in-out infinite; }
+.drift-2 { animation: drift-2 7.5s ease-in-out infinite; }
+.drift-3 { animation: drift-3 8.5s ease-in-out infinite; }
+
+/* Long, wandering paths for ASCII tokens that roam across the whole hero */
+@keyframes roam-1 {
+  0%   { transform: translate(0, 0)        rotate(0deg); }
+  20%  { transform: translate(40vw, 10vh)  rotate(8deg); }
+  40%  { transform: translate(60vw, -8vh)  rotate(-6deg); }
+  60%  { transform: translate(20vw, 18vh)  rotate(4deg); }
+  80%  { transform: translate(-20vw, 6vh)  rotate(-3deg); }
+  100% { transform: translate(0, 0)        rotate(0deg); }
+}
+@keyframes roam-2 {
+  0%   { transform: translate(0, 0)         rotate(0deg); }
+  25%  { transform: translate(-30vw, 12vh)  rotate(-8deg); }
+  50%  { transform: translate(-50vw, -4vh)  rotate(5deg); }
+  75%  { transform: translate(-10vw, 20vh)  rotate(-4deg); }
+  100% { transform: translate(0, 0)         rotate(0deg); }
+}
+@keyframes roam-3 {
+  0%   { transform: translate(0, 0)         rotate(0deg); }
+  33%  { transform: translate(25vw, -14vh)  rotate(6deg); }
+  66%  { transform: translate(-15vw, 16vh)  rotate(-5deg); }
+  100% { transform: translate(0, 0)         rotate(0deg); }
+}
+@keyframes roam-4 {
+  0%   { transform: translate(0, 0)         rotate(0deg); }
+  20%  { transform: translate(-25vw, -10vh) rotate(-7deg); }
+  50%  { transform: translate(35vw, 8vh)    rotate(5deg); }
+  80%  { transform: translate(10vw, -18vh)  rotate(-2deg); }
+  100% { transform: translate(0, 0)         rotate(0deg); }
+}
+@keyframes roam-5 {
+  0%   { transform: translate(0, 0)         rotate(0deg); }
+  25%  { transform: translate(20vw, 20vh)   rotate(5deg); }
+  50%  { transform: translate(-30vw, 14vh)  rotate(-6deg); }
+  75%  { transform: translate(-10vw, -16vh) rotate(3deg); }
+  100% { transform: translate(0, 0)         rotate(0deg); }
+}
+.roam-1 { animation: roam-1 42s ease-in-out infinite; }
+.roam-2 { animation: roam-2 48s ease-in-out infinite; }
+.roam-3 { animation: roam-3 38s ease-in-out infinite; }
+.roam-4 { animation: roam-4 52s ease-in-out infinite; }
+.roam-5 { animation: roam-5 45s ease-in-out infinite; }
+
+/* Cross-screen traversals — tokens travel from off-screen left to
+   off-screen right (or vice-versa), drifting vertically as they go.
+   Used by FolderAscii / FooterAscii to make characters wander across
+   the WHOLE width of the section, not just the gutters. */
+@keyframes traverse-lr {
+  0%   { transform: translate(-15vw, 0)    rotate(-4deg); opacity: 0; }
+  8%   { opacity: 0.55; }
+  50%  { transform: translate(50vw, -8vh)  rotate(6deg);  opacity: 0.55; }
+  92%  { opacity: 0.55; }
+  100% { transform: translate(115vw, 4vh)  rotate(-3deg); opacity: 0; }
+}
+@keyframes traverse-rl {
+  0%   { transform: translate(15vw, 0)     rotate(3deg);  opacity: 0; }
+  8%   { opacity: 0.55; }
+  50%  { transform: translate(-50vw, 6vh)  rotate(-5deg); opacity: 0.55; }
+  92%  { opacity: 0.55; }
+  100% { transform: translate(-115vw, -3vh) rotate(4deg); opacity: 0; }
+}
+/* A gentle wandering version that stays within the section but covers
+   a much wider area than the small drift-N keyframes. */
+@keyframes traverse-wander {
+  0%   { transform: translate(0, 0)         rotate(0deg); }
+  25%  { transform: translate(35vw, 4vh)    rotate(5deg); }
+  50%  { transform: translate(70vw, -3vh)   rotate(-4deg); }
+  75%  { transform: translate(35vw, 6vh)    rotate(3deg); }
+  100% { transform: translate(0, 0)         rotate(0deg); }
+}
+.traverse-lr      { animation: traverse-lr      28s linear infinite; }
+.traverse-lr--slow { animation: traverse-lr     46s linear infinite; }
+.traverse-rl      { animation: traverse-rl      32s linear infinite; }
+.traverse-rl--slow { animation: traverse-rl     50s linear infinite; }
+.traverse-wander  { animation: traverse-wander  38s ease-in-out infinite; }
+
+/* ============================================================
+   LANYARD IDLE SWAY (kept for compat)
+   ============================================================ */
+@keyframes lanyard-idle {
+  0%, 100% { transform: rotate(-0.4deg); }
+  50%      { transform: rotate(0.4deg); }
+}
+
+/* ============================================================
+   MONO PILL — used by hero meta links + tags
+   ============================================================ */
+
+.mono-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-900);
+  background: var(--paper-50);
+  border: 1px solid rgba(26,22,18,0.18);
+  padding: 6px 12px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px -8px rgba(0,0,0,0.25);
+  white-space: nowrap;
+}
+.mono-pill .glyph {
+  color: var(--ember-500);
+  font-size: 11px;
+  line-height: 1;
+}
+.mono-pill.rose .glyph  { color: var(--rust-600); }
+.mono-pill.moss .glyph  { color: var(--moss-500); }
+
+/* =========================================================================
+   FOLDER TABS — manila-folder navigation below the hero
+   ========================================================================= */
+
+/* TAB BUTTON — manila file-folder tab.
+   All tabs sit at the SAME baseline (no Y translation) so the bottom
+   edge of the row aligns exactly with the top edge of the folder body.
+   The active tab is distinguished by color + opacity + elevation only,
+   never by movement — so it can never visually bleed into the body. */
+.folder-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 12px 24px 12px;
+  border-radius: 12px 12px 0 0;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(63, 31, 45, 0.6);
+  border: 1px solid rgba(63, 31, 45, 0.18);
+  border-bottom: none;
+  cursor: pointer;
+  opacity: 0.82;
+  transition: color 0.18s ease,
+              opacity 0.18s ease,
+              box-shadow 0.18s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 -2px 6px -4px rgba(63, 31, 45, 0.12);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
+  background-size: 4px 4px, 6px 6px;
+}
+.folder-tab:hover {
+  color: rgba(63, 31, 45, 0.9);
+  opacity: 1;
+}
+
+/* ACTIVE tab — full color + opacity + z-index lift so it visually
+   "joins" the body. No transform, so the row's bottom edge stays
+   stable and never overpaints the body header below. */
+.folder-tab--open {
+  color: #3F1F2D;
+  opacity: 1;
+  z-index: 3;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    -4px 0 10px -8px rgba(63, 31, 45, 0.22),
+    4px 0 10px -8px rgba(63, 31, 45, 0.22);
+}
+.folder-tab__index {
+  font-weight: 600;
+  color: rgba(255, 90, 44, 0.85);
+}
+.folder-tab__divider {
+  color: rgba(63, 31, 45, 0.35);
+}
+.folder-tab__title {
+  font-weight: 500;
+}
+
+/* TINT VARIANTS — each folder gets a distinct ombre tint */
+.folder-tint-peach {
+  background-color: #FCE0D2;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 138, 92, 0.18) 0%, transparent 65%),
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
+  background-size: auto, auto, 4px 4px, 6px 6px;
+}
+.folder-tint-lavender {
+  background-color: #E8DCEC;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(166, 64, 106, 0.16) 0%, transparent 65%),
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
+  background-size: auto, auto, 4px 4px, 6px 6px;
+}
+.folder-tint-rose {
+  background-color: #F8D6DE;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(232, 121, 160, 0.20) 0%, transparent 65%),
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
+  background-size: auto, auto, 4px 4px, 6px 6px;
+}
+.folder-tint-ember {
+  background-color: #FFD4B8;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(224, 67, 26, 0.20) 0%, transparent 65%),
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
+  background-size: auto, auto, 4px 4px, 6px 6px;
+}
+
+/* FOLDER BODY — the main "page" inside the folder. Top-left corner is
+   square so it sits flush against the active tab; the other three
+   corners are rounded. */
+.folder-body {
+  position: relative;
+  border-radius: 0 14px 14px 14px;
+  border: 1px solid rgba(63, 31, 45, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 18px 44px -22px rgba(63, 31, 45, 0.35),
+    0 4px 0 rgba(63, 31, 45, 0.04);
+  overflow: hidden;
+}
+.folder-body__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  border-bottom: 1px dashed rgba(63, 31, 45, 0.18);
+  background: rgba(255, 255, 255, 0.25);
+}
+.folder-body__content {
+  padding: 32px 28px 36px;
+}
+
+/* PLACEHOLDER GRID */
+.folder-placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+  max-width: 520px;
+}
+@media (max-width: 640px) {
+  .folder-placeholder-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.folder-placeholder-cell {
+  aspect-ratio: 1 / 1;
+  border: 1px dashed rgba(63, 31, 45, 0.18);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* =========================================================================
+   CONTENT BENTO — mixed-size tile grid for tab 03
+   ========================================================================= */
+
+/* FILTER CHIPS */
+.bento-chip {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(63, 31, 45, 0.65);
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(63, 31, 45, 0.18);
+  padding: 7px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bento-chip:hover {
+  color: rgba(63, 31, 45, 0.95);
+  transform: translateY(-1px);
+}
+.bento-chip--active {
+  background: #3F1F2D;
+  color: #fdf9f2;
+  border-color: #3F1F2D;
+  box-shadow: 0 4px 12px -6px rgba(63, 31, 45, 0.5);
+}
+.bento-chip--active:hover {
+  color: #fdf9f2;
+}
+
+/* GRID — 6-col responsive, tiles span 1-3 cols */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-rows: 130px;
+  gap: 10px;
+}
+@media (max-width: 900px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 160px;
+  }
+}
+
+/* TILE */
+.bento-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(63, 31, 45, 0.18);
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 6px 16px -10px rgba(63, 31, 45, 0.3);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  text-align: left;
+  font: inherit;
+}
+.bento-tile:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 14px 28px -14px rgba(63, 31, 45, 0.45);
+}
+.bento-tile:hover .bento-tile__overlay { opacity: 0.55; }
+.bento-tile:hover .bento-tile__play   { transform: translate(-50%, -50%) scale(1.08); }
+
+/* TILE FOOTPRINTS */
+.bento-tile--sm   { grid-column: span 2; grid-row: span 2; }
+.bento-tile--md   { grid-column: span 3; grid-row: span 2; }
+.bento-tile--lg   { grid-column: span 4; grid-row: span 3; }
+.bento-tile--tall { grid-column: span 2; grid-row: span 4; }
+.bento-tile--wide { grid-column: span 4; grid-row: span 2; }
+
+@media (max-width: 900px) {
+  .bento-tile--lg   { grid-column: span 4; grid-row: span 3; }
+  .bento-tile--wide { grid-column: span 4; grid-row: span 2; }
+  .bento-tile--md   { grid-column: span 2; grid-row: span 2; }
+}
+@media (max-width: 560px) {
+  .bento-tile--sm,
+  .bento-tile--md,
+  .bento-tile--lg,
+  .bento-tile--tall,
+  .bento-tile--wide {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .bento-tile--tall { grid-row: span 3; }
+  .bento-tile--lg   { grid-row: span 3; }
+}
+
+.bento-tile__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bento-tile__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(63, 31, 45, 0.7) 100%);
+  opacity: 0.35;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.bento-tile__kind {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fdf9f2;
+  background: rgba(63, 31, 45, 0.78);
+  padding: 4px 8px;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+.bento-tile__ext {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 13px;
+  color: #fdf9f2;
+  background: rgba(63, 31, 45, 0.78);
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.bento-tile__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background: rgba(255, 90, 44, 0.92);
+  color: #fdf9f2;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 3px;
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bento-tile__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: none;
+}
+.bento-tile__eyebrow {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(253, 249, 242, 0.85);
+}
+.bento-tile__title {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #fdf9f2;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}

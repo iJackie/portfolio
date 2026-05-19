@@ -1,0 +1,50 @@
+# dependencies
+node_modules/
+.pnp/
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+coverage/
+
+# next.js
+.next/
+out/
+build/
+dist/
+
+# production
+*.tsbuildinfo
+next-env.d.ts
+
+# misc
+.DS_Store
+*.pem
+.idea/
+.vscode/
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# Large media — hosted externally (Vercel Blob / Mux / etc), not tracked in git.
+# Videos, big design files, presentations, and the largest design assets are
+# excluded. Small flyers and photos stay in the repo.
+public/assets/*.mp4
+public/assets/*.mov
+public/assets/*.webm
+public/assets/*.pdf
+public/assets/*.ai
+public/assets/*.psd
+public/assets/*.sketch
+public/assets/*.zip
+public/assets/design-InfraredTABLECLOTH.png
+public/assets/design-drink-bear-pegatina*.png
