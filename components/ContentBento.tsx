@@ -140,6 +140,15 @@ const CONTENT_ITEMS: ContentItem[] = [
   },
 
   // ── PRODUCT / FEATURE VIDEOS ──────────────────────────────────────
+  //
+  // ⚠️ HIDDEN UNTIL UPLOADED TO VERCEL BLOB.
+  // These mp4s are too big for git (50–140 MB each) so they're not in
+  // the deployed bundle. When you upload them to Vercel Blob:
+  //   1. Replace each `src` with the Blob URL (e.g.,
+  //      'https://abc123.public.blob.vercel-storage.com/video_TGE.mp4')
+  //   2. Uncomment the block by removing the /* and */
+  //   3. git add . && git commit -m "wire videos" && git push
+  /*
   {
     id: 'video-tge',
     kind: 'reel',
@@ -190,6 +199,7 @@ const CONTENT_ITEMS: ContentItem[] = [
     caption: 'Cut explaining the v1.8 public redemption window.',
     span: 'sm',
   },
+  */
 
   // ── DESIGNS — brand kits, posters, GTM decks ──────────────────────
   {
@@ -212,6 +222,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     caption: 'Cover art for the Korea GTM deck.',
     span: 'wide',
   },
+  // ⚠️ HIDDEN: 42 MB PNG, gitignored. Upload to Vercel Blob and swap src.
+  /*
   {
     id: 'design-tablecloth',
     kind: 'graphic',
@@ -222,6 +234,7 @@ const CONTENT_ITEMS: ContentItem[] = [
     caption: 'Custom event tablecloth design.',
     span: 'md',
   },
+  */
   {
     id: 'design-bear-1',
     kind: 'graphic',
@@ -232,6 +245,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     caption: 'Brand bear illustration (v1).',
     span: 'sm',
   },
+  // ⚠️ HIDDEN: 51 MB PNG, gitignored. Upload to Vercel Blob and swap src.
+  /*
   {
     id: 'design-drink-bear-sticker',
     kind: 'graphic',
@@ -242,6 +257,7 @@ const CONTENT_ITEMS: ContentItem[] = [
     caption: 'Sticker art for the drink-bear merch series.',
     span: 'sm',
   },
+  */
   {
     id: 'design-liquid-staking-advantage',
     kind: 'graphic',
