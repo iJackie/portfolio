@@ -32,7 +32,9 @@ export interface GalleryItem {
   text: string;
 }
 
-interface CircularGalleryProps extends React.HTMLAttributes<HTMLDivElement> {
+// Omit the DOM's built-in `onSelect` from HTMLAttributes so we can re-declare
+// it with our own (item, index) signature — otherwise TS sees a conflict.
+interface CircularGalleryProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
   items?: GalleryItem[];
   bend?: number;
   borderRadius?: number;
@@ -659,7 +661,8 @@ class App {
     this.boundOnTouchUp = this.onTouchUp;
 
     window.addEventListener('resize', this.boundOnResize);
-    window.addEventListener('mousewheel', this.boundOnWheel);
+    // 'wheel' is the modern standard event — 'mousewheel' was legacy IE
+    // and isn't in TypeScript's WindowEventMap, so we only bind 'wheel'.
     window.addEventListener('wheel', this.boundOnWheel);
     this.container.addEventListener('mousedown', this.boundOnTouchDown);
     window.addEventListener('mousemove', this.boundOnTouchMove);
@@ -672,7 +675,6 @@ class App {
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.boundOnResize);
-    window.removeEventListener('mousewheel', this.boundOnWheel);
     window.removeEventListener('wheel', this.boundOnWheel);
     this.container.removeEventListener('mousedown', this.boundOnTouchDown);
     window.removeEventListener('mousemove', this.boundOnTouchMove);
