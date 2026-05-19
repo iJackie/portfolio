@@ -845,50 +845,52 @@ function BadgePouch({ sheenBg }: { sheenBg: ReturnType<typeof useMotionTemplate>
         }
       `}</style>
 
-      {/* OPEN TO WORK pill — sits ON TOP of the lanyard. Hidden on the
-          back face so it doesn't show mirrored when the badge flips. */}
+      {/* OPEN TO WORK pill — small, anchored to the lanyard's top-right
+          corner. Hidden on the back face so it doesn't show mirrored on
+          flip. */}
       <div
         className="absolute pointer-events-none z-30"
         style={{
-          top: -18,
-          right: 12,
+          // Right-corner anchor — sits ON the lanyard's top-right edge.
+          top: -12,
+          right: -8,
           transformStyle: 'preserve-3d',
         }}
         aria-hidden
       >
         <div
           style={{
-            transform: 'rotate(6deg)',
-            transformOrigin: 'bottom left',
+            transform: 'rotate(8deg)',
+            transformOrigin: 'bottom right',
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
           }}
         >
           <span
-            className="font-mono uppercase inline-flex items-center gap-1.5"
+            className="font-mono uppercase inline-flex items-center gap-1"
             style={{
-              fontSize: 11,
-              letterSpacing: '0.22em',
+              fontSize: 9,
+              letterSpacing: '0.18em',
               fontWeight: 600,
               color: 'var(--ember-600)',
               background: 'rgba(253,249,242,0.96)',
-              padding: '5px 11px',
+              padding: '3px 8px',
               borderRadius: 999,
               border: '1px solid rgba(255,90,44,0.45)',
               boxShadow:
-                '0 4px 12px -6px rgba(255,90,44,0.45), inset 0 1px 0 rgba(255,255,255,0.7)',
+                '0 3px 10px -6px rgba(255,90,44,0.45), inset 0 1px 0 rgba(255,255,255,0.7)',
               whiteSpace: 'nowrap',
             }}
           >
             <span
               className="pulse-dot"
               style={{
-                width: 7,
-                height: 7,
+                width: 5,
+                height: 5,
                 borderRadius: '50%',
                 background: 'var(--ember-500)',
                 display: 'inline-block',
-                boxShadow: '0 0 8px rgba(255,90,44,0.7)',
+                boxShadow: '0 0 6px rgba(255,90,44,0.7)',
               }}
             />
             open to work
