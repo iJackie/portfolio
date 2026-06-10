@@ -111,10 +111,9 @@ export default function MediaModal({
             <div
               className="relative rounded-[14px] overflow-hidden"
               style={{
-                background: '#fdf9f2',
-                border: '1.5px solid rgba(255,255,255,0.85)',
-                boxShadow:
-                  '0 24px 56px -20px rgba(0,0,0,0.6), inset 0 1.5px 0 rgba(255,255,255,0.95), inset 0 -1.5px 0 rgba(0,0,0,0.06)',
+                background: 'var(--paper-bright)',
+                border: '1.5px solid rgba(var(--hi-rgb),0.85)',
+                boxShadow: '0 24px 56px -20px rgba(0,0,0,0.6)',
               }}
             >
               {/* Paper grain */}
@@ -136,7 +135,7 @@ export default function MediaModal({
                     {media.eyebrow && (
                       <span
                         className="font-mono text-[10px] tracking-[0.22em] uppercase"
-                        style={{ color: 'rgba(255,90,44,0.85)' }}
+                        style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                       >
                         {media.eyebrow}
                       </span>
@@ -144,7 +143,7 @@ export default function MediaModal({
                     {media.title && (
                       <h3
                         className="font-display italic text-[clamp(20px,2.6vw,30px)] leading-tight"
-                        style={{ color: '#3F1F2D' }}
+                        style={{ color: 'var(--ink-strong)' }}
                       >
                         {media.title}
                       </h3>
@@ -159,7 +158,7 @@ export default function MediaModal({
                 {media.caption && (
                   <p
                     className="mt-4 px-1 font-sans text-[14px] leading-relaxed max-w-2xl"
-                    style={{ color: 'rgba(63,31,45,0.7)' }}
+                    style={{ color: 'rgba(var(--ink-rgb),0.7)' }}
                   >
                     {media.caption}
                   </p>

@@ -43,7 +43,9 @@ type Token = {
     | 'traverse-lr--slow'
     | 'traverse-rl'
     | 'traverse-rl--slow'
-    | 'traverse-wander';
+    | 'traverse-wander'
+    | 'drop-flow'
+    | 'drop-flow--slow';
   delay: number;
   lineHeight?: number;
 };
@@ -101,6 +103,31 @@ o_(")(")`,
   // Final sparkles near the very bottom
   { art: '✦ ✧',          size: 14, top: '94%', left: '15%', color: 'var(--ember-500)', traverse: 'traverse-wander',   delay: -16 },
   { art: '♡',            size: 16, top: '96%', left: '80%', color: 'var(--rust-500)',  traverse: 'traverse-rl',       delay: -4 },
+
+  // ── DROP-INS — characters that fall in from above, drift down, and
+  //    fade out on a loop, so the cast keeps refreshing ─────────────
+  { art: '₍ᐢ. .ᐢ₎',      size: 16, top: '6%',  left: '25%', color: 'var(--rust-500)',  traverse: 'drop-flow',        delay: -2 },
+  { art: '✩',            size: 20, top: '12%', left: '92%', color: 'var(--ember-400)', traverse: 'drop-flow--slow',  delay: -9 },
+  { art: '(=^･ω･^=)',    size: 15, top: '24%', left: '68%', color: 'var(--rust-600)',  traverse: 'drop-flow',        delay: -15 },
+  { art: '☆',            size: 16, top: '34%', left: '12%', color: 'var(--ember-500)', traverse: 'drop-flow--slow',  delay: -24 },
+  { art: '♪',            size: 18, top: '44%', left: '90%', color: 'var(--rust-500)',  traverse: 'drop-flow',        delay: -7 },
+  { art: '(ง •̀_•́)ง',     size: 14, top: '50%', left: '45%', color: 'var(--ink-900)',   traverse: 'drop-flow--slow',  delay: -18 },
+  { art: '❀ ⋆ ❀',        size: 14, top: '62%', left: '5%',  color: 'var(--rust-600)',  traverse: 'drop-flow',        delay: -11 },
+  { art: '𓆝 𓆟',          size: 15, top: '70%', left: '85%', color: 'var(--moss-500)',  traverse: 'drop-flow--slow',  delay: -28 },
+  { art: '(≧◡≦)',        size: 14, top: '78%', left: '28%', color: 'var(--rust-500)',  traverse: 'drop-flow',        delay: -21 },
+  { art: '⊹ ࣪ ˖',         size: 16, top: '86%', left: '60%', color: 'var(--ember-400)', traverse: 'drop-flow--slow',  delay: -5 },
+
+  // Extra wanderers so the space between folders never feels empty
+  { art: '(￣o￣) zzZ',   size: 14, top: '10%', left: '55%', color: 'var(--ink-900)',   traverse: 'traverse-rl--slow', delay: -34 },
+  { art: '♡⸜(˶˃ ᵕ ˂˶)⸝♡', size: 13, top: '47%', left: '15%', color: 'var(--rust-500)',  traverse: 'traverse-lr--slow', delay: -26 },
+  { art: '✿ ✦',          size: 18, top: '56%', left: '92%', color: 'var(--rust-600)',  traverse: 'traverse-wander',   delay: -9 },
+  { art: '(づ｡◕‿‿◕｡)づ',  size: 14, top: '18%', left: '32%', color: 'var(--rust-500)',  traverse: 'traverse-lr',       delay: -13 },
+  { art: '˖ ݁𖥔 ݁˖',        size: 15, top: '26%', left: '48%', color: 'var(--ember-400)', traverse: 'drop-flow--slow',   delay: -31 },
+  { art: 'ʚɞ',           size: 18, top: '36%', left: '75%', color: 'var(--rust-500)',  traverse: 'traverse-rl',       delay: -19 },
+  { art: '(ᵔᴥᵔ)',        size: 16, top: '60%', left: '52%', color: 'var(--moss-500)',  traverse: 'drop-flow',         delay: -25 },
+  { art: '⋆˚꩜｡',          size: 16, top: '68%', left: '22%', color: 'var(--ember-500)', traverse: 'traverse-wander',   delay: -29 },
+  { art: '♡ ̆̈',           size: 15, top: '82%', left: '8%',  color: 'var(--rust-600)',  traverse: 'drop-flow--slow',   delay: -17 },
+  { art: '(っ˘ω˘ς )',     size: 14, top: '90%', left: '68%', color: 'var(--rust-500)',  traverse: 'traverse-lr--slow', delay: -22 },
 ];
 
 const REPEL_RADIUS = 180;
@@ -239,8 +266,8 @@ function RoamingToken({
           style={{
             fontSize: token.size,
             color: token.color,
-            opacity: isMultiline ? 0.42 : 0.55,
-            textShadow: '0 0 10px rgba(255,255,255,0.45)',
+            opacity: isMultiline ? 0.5 : 0.62,
+            textShadow: '0 0 10px rgba(var(--ascii-glow),0.5)',
             fontFamily: isMultiline
               ? 'var(--font-jetbrains), ui-monospace, monospace'
               : 'inherit',

@@ -37,6 +37,56 @@
   --ember-600: #E0431A;
   --plum-700: #3F1F2D;
   --plum-900: #1A0F1F;
+
+  /* ── SEMANTIC THEME TOKENS ─────────────────────────────────────────
+     Components reference these instead of hardcoded colors so the
+     whole site can flip to dark mode by overriding them on html.dark.
+     RGB triplets (no rgba wrapper) so call sites keep their own alpha:
+       color: rgba(var(--ink-rgb), 0.55)                              */
+  --ink-rgb: 63, 31, 45;        /* plum ink — body text, borders      */
+  --ink-strong: #3F1F2D;        /* headings, filled chips             */
+  --paper-rgb: 253, 249, 242;   /* warm paper — card surfaces         */
+  --paper-bright: #fdf9f2;      /* brightest card / text-on-plum      */
+  --accent-rgb: 255, 90, 44;    /* ember — interactive accent         */
+  --rose-rgb: 212, 92, 139;     /* rose — secondary accent            */
+  --hi-rgb: 255, 255, 255;      /* inset edge highlights              */
+  /* Space-separated channel vars for Tailwind's <alpha-value> syntax
+     (text-ink-900/80 etc.) — same colors as --ink-700/--ink-900. */
+  --ink-700-ch: 45 40 32;
+  --ink-900-ch: 26 22 18;
+  /* Glow behind ASCII drift tokens — white by day, hot pink at night */
+  --ascii-glow: 255, 255, 255;
+}
+
+/* ── DARK MODE — wine-black base, maroon structure, hot-pink glow ──
+   Ink and paper invert as a pair so every ink-on-paper (and
+   paper-on-ink) pairing keeps its contrast automatically. Ember
+   accents re-tint to hot pink; highlights become maroon. */
+html.dark {
+  --ink-rgb: 245, 230, 237;     /* warm pink-white text               */
+  --ink-strong: #F5E6ED;
+  --paper-rgb: 26, 18, 22;      /* #1A1216 smoky wine surfaces        */
+  --paper-bright: #1A1216;
+  --accent-rgb: 255, 90, 160;   /* hot pink                           */
+  --rose-rgb: 232, 121, 160;
+  --hi-rgb: 142, 42, 78;        /* maroon edge-light                  */
+
+  /* Re-tint the shared palette vars used across components */
+  --ember-300: #FFAFD0;
+  --ember-400: #FF8AC0;
+  --ember-500: #FF5AA0;
+  --ember-600: #E0407E;
+  --plum-700: #F5E6ED;
+  --cream-100: #0E0A0D;
+  --paper-50: #1C1115;
+  --paper-100: #241419;
+  --ink-900: #F5E6ED;
+  --ink-700: #E8D5DE;
+  --ink-700-ch: 232 213 222;
+  --ink-900-ch: 245 230 237;
+  --ascii-glow: 255, 90, 160;
+  --rust-500: #FF7AB5;
+  --rust-600: #E8669C;
 }
 
 html {
@@ -123,6 +173,30 @@ body {
   z-index: 0;
 }
 
+/* DARK ombre — same bloom structure, wine-black base with soft pink
+   and maroon glows so the page still feels dimensional, never flat. */
+html.dark .ombre-page {
+  background:
+    radial-gradient(ellipse 70vw 55vh at 92% 8vh,  #2A1430 0%, transparent 60%),
+    radial-gradient(ellipse 65vw 60vh at 6% 40vh,  #331622 0%, transparent 60%),
+    radial-gradient(ellipse 55vw 40vh at 50% 92vh, #3A1428 0%, transparent 65%),
+    radial-gradient(ellipse 60vw 50vh at 88% 96vh, #2E1220 0%, transparent 70%),
+    radial-gradient(ellipse 70vw 40vh at 15% 145vh, #2A1124 0%, transparent 65%),
+    radial-gradient(ellipse 60vw 35vh at 90% 175vh, #251227 0%, transparent 65%),
+    radial-gradient(ellipse 55vw 30vh at 45% 210vh, #331526 0%, transparent 65%),
+    linear-gradient(180deg,
+      #120B10 0vh,
+      #140C12 45vh,
+      #170D17 100vh,
+      #150C13 150vh,
+      #170D17 220vh,
+      #130B11 100%);
+}
+html.dark .ombre-page::before {
+  opacity: 0.3;
+  mix-blend-mode: screen;
+}
+
 /* ============================================================
    HERO TEXTURES + OVERLAYS
    ============================================================ */
@@ -135,7 +209,7 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(circle at center, rgba(63,31,45,0.18) 1px, transparent 1.6px);
+  background-image: radial-gradient(circle at center, rgba(var(--ink-rgb),0.18) 1px, transparent 1.6px);
   background-size: 6px 6px;
   opacity: 0.3;
   /* Mask: only show dots at top and bottom edges of the hero */
@@ -315,6 +389,25 @@ body {
 .traverse-rl--slow { animation: traverse-rl     50s linear infinite; }
 .traverse-wander  { animation: traverse-wander  38s ease-in-out infinite; }
 
+/* DROP-FLOW — tokens fall in from above, drift down through the section,
+   and fade out — then loop. Gives the page a "characters keep arriving"
+   feel instead of a fixed cast. Horizontal sway keeps it floaty. */
+@keyframes drop-flow {
+  0%   { transform: translate(0, -24vh) rotate(-6deg); opacity: 0; }
+  12%  { opacity: 1; }
+  40%  { transform: translate(6vw, 4vh) rotate(4deg); }
+  70%  { transform: translate(-4vw, 20vh) rotate(-3deg); opacity: 1; }
+  100% { transform: translate(2vw, 36vh) rotate(2deg); opacity: 0; }
+}
+.drop-flow        { animation: drop-flow 24s ease-in-out infinite; }
+.drop-flow--slow  { animation: drop-flow 36s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .drop-flow, .drop-flow--slow,
+  .traverse-lr, .traverse-lr--slow,
+  .traverse-rl, .traverse-rl--slow,
+  .traverse-wander { animation: none; }
+}
+
 /* ============================================================
    LANYARD IDLE SWAY (kept for compat)
    ============================================================ */
@@ -338,7 +431,7 @@ body {
   text-transform: uppercase;
   color: var(--ink-900);
   background: var(--paper-50);
-  border: 1px solid rgba(26,22,18,0.18);
+  border: 1px solid rgba(var(--ink-rgb), 0.18);
   padding: 6px 12px;
   border-radius: 9999px;
   box-shadow: 0 4px 14px -8px rgba(0,0,0,0.25);
@@ -353,152 +446,127 @@ body {
 .mono-pill.moss .glyph  { color: var(--moss-500); }
 
 /* =========================================================================
-   FOLDER TABS — manila-folder navigation below the hero
+   FOLDER TINTS — flat pastel per folder (no grain, no gradient stack).
+   Dark mode swaps each to a wine-dark surface with a matching hue.
+   ========================================================================= */
+.folder-tint-peach    { background-color: #FCE0D2; }
+.folder-tint-lavender { background-color: #E8DCEC; }
+.folder-tint-rose     { background-color: #F8D6DE; }
+.folder-tint-ember    { background-color: #FFD4B8; }
+html.dark .folder-tint-peach    { background-color: #2A151B; }
+html.dark .folder-tint-lavender { background-color: #241327; }
+html.dark .folder-tint-rose     { background-color: #2C1320; }
+html.dark .folder-tint-ember    { background-color: #2E141A; }
+
+/* =========================================================================
+   FOLDER TABS — the OG manila tab-strip navigation, supersized.
+   A row of big folder tabs; one is always open and its body sits flush
+   below. Tabs keep the big italic display titles from the stack
+   experiment, with clean flat tints (no grain, single soft shadow).
    ========================================================================= */
 
-/* TAB BUTTON — manila file-folder tab.
-   All tabs sit at the SAME baseline (no Y translation) so the bottom
-   edge of the row aligns exactly with the top edge of the folder body.
-   The active tab is distinguished by color + opacity + elevation only,
-   never by movement — so it can never visually bleed into the body. */
 .folder-tab {
   position: relative;
   display: inline-flex;
   align-items: baseline;
-  gap: 10px;
-  padding: 12px 24px 12px;
-  border-radius: 12px 12px 0 0;
-  font-family: var(--font-jetbrains), ui-monospace, monospace;
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(63, 31, 45, 0.6);
-  border: 1px solid rgba(63, 31, 45, 0.18);
+  gap: 12px;
+  padding: 16px 26px 14px;
+  border-radius: 14px 14px 0 0;
+  border: 1px solid rgba(var(--ink-rgb), 0.18);
   border-bottom: none;
   cursor: pointer;
-  opacity: 0.82;
-  transition: color 0.18s ease,
-              opacity 0.18s ease,
-              box-shadow 0.18s ease;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 -2px 6px -4px rgba(63, 31, 45, 0.12);
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
-    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
-  background-size: 4px 4px, 6px 6px;
+  opacity: 0.78;
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 .folder-tab:hover {
-  color: rgba(63, 31, 45, 0.9);
   opacity: 1;
+  transform: translateY(-2px);
 }
-
-/* ACTIVE tab — full color + opacity + z-index lift so it visually
-   "joins" the body. No transform, so the row's bottom edge stays
-   stable and never overpaints the body header below. */
 .folder-tab--open {
-  color: #3F1F2D;
   opacity: 1;
   z-index: 3;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    -4px 0 10px -8px rgba(63, 31, 45, 0.22),
-    4px 0 10px -8px rgba(63, 31, 45, 0.22);
+  transform: none;
+  box-shadow: 0 -6px 16px -10px rgba(0, 0, 0, 0.25);
 }
 .folder-tab__index {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 11px;
   font-weight: 600;
-  color: rgba(255, 90, 44, 0.85);
-}
-.folder-tab__divider {
-  color: rgba(63, 31, 45, 0.35);
+  letter-spacing: 0.24em;
+  color: rgba(var(--accent-rgb), 0.9);
 }
 .folder-tab__title {
-  font-weight: 500;
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(20px, 2.6vw, 32px);
+  line-height: 1;
+  color: var(--ink-strong);
+  white-space: nowrap;
 }
 
-/* TINT VARIANTS — each folder gets a distinct ombre tint */
-.folder-tint-peach {
-  background-color: #FCE0D2;
-  background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.55) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 80%, rgba(255, 138, 92, 0.18) 0%, transparent 65%),
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
-    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
-  background-size: auto, auto, 4px 4px, 6px 6px;
-}
-.folder-tint-lavender {
-  background-color: #E8DCEC;
-  background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.55) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 80%, rgba(166, 64, 106, 0.16) 0%, transparent 65%),
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
-    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
-  background-size: auto, auto, 4px 4px, 6px 6px;
-}
-.folder-tint-rose {
-  background-color: #F8D6DE;
-  background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.55) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 80%, rgba(232, 121, 160, 0.20) 0%, transparent 65%),
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
-    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
-  background-size: auto, auto, 4px 4px, 6px 6px;
-}
-.folder-tint-ember {
-  background-color: #FFD4B8;
-  background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.55) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 80%, rgba(224, 67, 26, 0.20) 0%, transparent 65%),
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0.5px, transparent 1px),
-    radial-gradient(circle at 70% 60%, rgba(63,31,45,0.04) 0.5px, transparent 1px);
-  background-size: auto, auto, 4px 4px, 6px 6px;
-}
-
-/* FOLDER BODY — the main "page" inside the folder. Top-left corner is
-   square so it sits flush against the active tab; the other three
-   corners are rounded. */
+/* FOLDER BODY — flush below the tab row. Square top-left so the active
+   tab visually merges into it; generous padding; one soft shadow. */
 .folder-body {
   position: relative;
-  border-radius: 0 14px 14px 14px;
-  border: 1px solid rgba(63, 31, 45, 0.18);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 18px 44px -22px rgba(63, 31, 45, 0.35),
-    0 4px 0 rgba(63, 31, 45, 0.04);
-  overflow: hidden;
-}
-.folder-body__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 22px;
-  border-bottom: 1px dashed rgba(63, 31, 45, 0.18);
-  background: rgba(255, 255, 255, 0.25);
+  border-radius: 0 16px 16px 16px;
+  border: 1px solid rgba(var(--ink-rgb), 0.18);
+  box-shadow: 0 18px 44px -22px rgba(0, 0, 0, 0.3);
 }
 .folder-body__content {
-  padding: 32px 28px 36px;
-}
-
-/* PLACEHOLDER GRID */
-.folder-placeholder-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 6px;
-  max-width: 520px;
+  padding: 34px 30px 40px;
 }
 @media (max-width: 640px) {
-  .folder-placeholder-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+  .folder-body__content { padding: 22px 14px 28px; }
 }
-.folder-placeholder-cell {
-  aspect-ratio: 1 / 1;
-  border: 1px dashed rgba(63, 31, 45, 0.18);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.18);
+
+/* Edge fade masks for the EventRecap flyer strip — matched to the
+   lavender folder tint, with a dark-mode variant. */
+.recap-fade-left,
+.recap-fade-right {
+  --recap-fade: rgba(232, 220, 236, 0.85);
+}
+html.dark .recap-fade-left,
+html.dark .recap-fade-right {
+  --recap-fade: rgba(36, 19, 39, 0.85);
+}
+.recap-fade-left  { background: linear-gradient(90deg,  var(--recap-fade), transparent); }
+.recap-fade-right { background: linear-gradient(270deg, var(--recap-fade), transparent); }
+
+/* EXPANDED BODY — same tint, all the vertical space it needs */
+.folder-row__body {
+  border-radius: 0 0 18px 18px;
+  padding: 30px 26px 36px;
+}
+@media (max-width: 640px) {
+  .folder-row__body { padding: 20px 14px 26px; }
+}
+
+/* =========================================================================
+   FOOTER PILL — big ombre contact capsule (PageFooter)
+   ========================================================================= */
+
+.footer-pill {
+  border-radius: 9999px;
+  background:
+    radial-gradient(ellipse 60% 80% at 15% 30%, rgba(255,214,194,0.95) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 90% at 85% 75%, rgba(217,199,238,0.85) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 70% at 50% 95%, rgba(244,168,193,0.55) 0%, transparent 70%),
+    linear-gradient(135deg, #FFD6C2 0%, #F4A8C1 45%, #D9C7EE 100%);
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.85),
+    0 22px 48px -20px rgba(255,90,44,0.35);
+}
+html.dark .footer-pill {
+  background:
+    radial-gradient(ellipse 60% 80% at 15% 30%, rgba(94,30,58,0.9) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 90% at 85% 75%, rgba(58,22,66,0.85) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 70% at 50% 95%, rgba(255,90,160,0.22) 0%, transparent 70%),
+    linear-gradient(135deg, #3A1626 0%, #4A1A36 45%, #2E1438 100%);
+  border: 1px solid rgba(255,90,160,0.25);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,138,192,0.18),
+    0 22px 48px -20px rgba(255,90,160,0.3);
 }
 
 /* =========================================================================
@@ -512,26 +580,26 @@ body {
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(63, 31, 45, 0.65);
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(63, 31, 45, 0.18);
+  color: rgba(var(--ink-rgb), 0.65);
+  background: rgba(var(--hi-rgb), 0.3);
+  border: 1px solid rgba(var(--ink-rgb), 0.18);
   padding: 7px 14px;
   border-radius: 9999px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bento-chip:hover {
-  color: rgba(63, 31, 45, 0.95);
+  color: rgba(var(--ink-rgb), 0.95);
   transform: translateY(-1px);
 }
 .bento-chip--active {
-  background: #3F1F2D;
-  color: #fdf9f2;
-  border-color: #3F1F2D;
-  box-shadow: 0 4px 12px -6px rgba(63, 31, 45, 0.5);
+  background: var(--ink-strong);
+  color: var(--paper-bright);
+  border-color: var(--ink-strong);
+  box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.35);
 }
 .bento-chip--active:hover {
-  color: #fdf9f2;
+  color: var(--paper-bright);
 }
 
 /* GRID — 6-col responsive, tiles span 1-3 cols */
@@ -561,12 +629,10 @@ body {
   height: 100%;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(63, 31, 45, 0.18);
-  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(var(--ink-rgb), 0.18);
+  background: rgba(var(--hi-rgb), 0.3);
   cursor: pointer;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 6px 16px -10px rgba(63, 31, 45, 0.3);
+  box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.3);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   padding: 0;
@@ -575,9 +641,7 @@ body {
 }
 .bento-tile:hover {
   transform: translateY(-2px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0 14px 28px -14px rgba(63, 31, 45, 0.45);
+  box-shadow: 0 14px 28px -14px rgba(0, 0, 0, 0.45);
 }
 .bento-tile:hover .bento-tile__overlay { opacity: 0.55; }
 .bento-tile:hover .bento-tile__play   { transform: translate(-50%, -50%) scale(1.08); }

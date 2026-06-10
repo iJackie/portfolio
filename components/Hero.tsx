@@ -418,7 +418,16 @@ export default function Hero() {
             and $2.5B in TVL, with 20+ events across 10+ cities. Equal parts
             marketer, EA, and project manager, with a real love for
             supporting founders and being the person they trust to hold the
-            rest together.
+            rest together. Currently building{' '}
+            <a
+              href="https://dropdeck.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ember-500 hover:underline underline-offset-4 font-medium"
+            >
+              dropdeck.xyz
+            </a>
+            , a canvas-tech UGC agency.
           </p>
           {/* GM! Let's chat. — short ember sign-off, doubles as a mailto. */}
           <p className="font-sans text-[14px] md:text-[15px] mt-3">
@@ -565,7 +574,7 @@ function RepellingToken({
             fontSize: token.size,
             color: token.color,
             opacity: isMultiline ? 0.55 : 0.7,
-            textShadow: '0 0 12px rgba(255,255,255,0.4)',
+            textShadow: '0 0 12px rgba(var(--ascii-glow),0.45)',
             fontFamily: isMultiline
               ? 'var(--font-jetbrains), ui-monospace, monospace'
               : 'inherit',
@@ -873,7 +882,7 @@ function BadgePouch({ sheenBg }: { sheenBg: ReturnType<typeof useMotionTemplate>
               letterSpacing: '0.18em',
               fontWeight: 600,
               color: 'var(--ember-600)',
-              background: 'rgba(253,249,242,0.96)',
+              background: 'rgba(var(--paper-rgb),0.96)',
               padding: '3px 8px',
               borderRadius: 999,
               border: '1px solid rgba(255,90,44,0.45)',

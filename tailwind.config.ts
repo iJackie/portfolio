@@ -58,11 +58,13 @@ const config: Config = {
           600: '#7FA68C',
           700: '#5C8770',
         },
-        /* Ink is now a warm plum-brown instead of charcoal, to feel softer */
+        /* Ink is now a warm plum-brown instead of charcoal, to feel softer.
+           700/900 read from CSS channel vars so they flip in dark mode
+           while keeping /80-style alpha modifiers working. */
         ink: {
-          700: '#2D2820',
+          700: 'rgb(var(--ink-700-ch) / <alpha-value>)',
           800: '#3F1F2D',
-          900: '#1A1612',
+          900: 'rgb(var(--ink-900-ch) / <alpha-value>)',
         },
         /* Paper — warm cream archive paper tones for folders + backgrounds */
         paper: {

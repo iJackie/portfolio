@@ -169,19 +169,19 @@ export default function ResumeFolder() {
       {/* Header */}
       <p
         className="font-mono text-[10px] tracking-[0.3em] mb-3"
-        style={{ color: 'rgba(255,90,44,0.85)' }}
+        style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
       >
         ✦ TIMELINE · MOST RECENT FIRST
       </p>
       <h3
         className="font-display italic text-[clamp(28px,5vw,52px)] leading-[1.05] mb-2"
-        style={{ color: '#3F1F2D' }}
+        style={{ color: 'var(--ink-strong)' }}
       >
         The road so far.
       </h3>
       <p
         className="font-sans text-[15px] leading-relaxed max-w-xl mb-10"
-        style={{ color: 'rgba(63,31,45,0.7)' }}
+        style={{ color: 'rgba(var(--ink-rgb),0.7)' }}
       >
         Most recent role at the top. Scroll down — the dot follows you
         and lights up each stop as it passes.
@@ -201,7 +201,7 @@ export default function ResumeFolder() {
             left: '50%',
             width: 2,
             marginLeft: -1,
-            background: 'rgba(63,31,45,0.14)',
+            background: 'rgba(var(--ink-rgb),0.14)',
           }}
         />
         {/* (b) Drawn foreground rail — scales with scroll progress */}
@@ -214,7 +214,7 @@ export default function ResumeFolder() {
             marginLeft: -1,
             scaleY: railScaleY,
             background:
-              'linear-gradient(180deg, rgba(255,90,44,0.95) 0%, rgba(232,121,160,0.8) 55%, rgba(155,189,168,0.65) 100%)',
+              'linear-gradient(180deg, rgba(var(--accent-rgb),0.95) 0%, rgba(232,121,160,0.8) 55%, rgba(155,189,168,0.65) 100%)',
           }}
         />
         {/* (c) LIVE DOT — rides the rail; position from scroll. The
@@ -232,7 +232,7 @@ export default function ResumeFolder() {
             marginTop: -8,
             background: 'var(--ember-500)',
             boxShadow:
-              '0 0 0 5px rgba(253,249,242,0.95), 0 0 0 8px rgba(255,90,44,0.32), 0 0 22px rgba(255,90,44,0.65)',
+              '0 0 0 5px rgba(var(--paper-rgb),0.95), 0 0 0 8px rgba(var(--accent-rgb),0.32), 0 0 22px rgba(var(--accent-rgb),0.65)',
           }}
         />
 
@@ -298,8 +298,8 @@ function TimelineStop({
           marginTop: -DOT / 2,
           background: TONE_COLOR[stop.tone],
           boxShadow: isActive
-            ? `0 0 0 5px rgba(253,249,242,0.95), 0 0 0 8px ${TONE_COLOR[stop.tone]}55, 0 0 22px ${TONE_COLOR[stop.tone]}80`
-            : `0 0 0 4px rgba(253,249,242,0.95), 0 0 0 5px ${TONE_COLOR[stop.tone]}40`,
+            ? `0 0 0 5px rgba(var(--paper-rgb),0.95), 0 0 0 8px ${TONE_COLOR[stop.tone]}55, 0 0 22px ${TONE_COLOR[stop.tone]}80`
+            : `0 0 0 4px rgba(var(--paper-rgb),0.95), 0 0 0 5px ${TONE_COLOR[stop.tone]}40`,
           transition: 'box-shadow 0.3s',
         }}
       />
@@ -334,10 +334,10 @@ function TimelineStop({
         <div
           className="rounded-[10px] px-5 md:px-6 py-5"
           style={{
-            background: 'rgba(253,249,242,0.75)',
-            border: '1px solid rgba(63,31,45,0.16)',
+            background: 'rgba(var(--paper-rgb),0.75)',
+            border: '1px solid rgba(var(--ink-rgb),0.16)',
             boxShadow:
-              'inset 0 1px 0 rgba(255,255,255,0.7), 0 10px 26px -16px rgba(63,31,45,0.35)',
+              'inset 0 1px 0 rgba(var(--hi-rgb),0.7), 0 10px 26px -16px rgba(var(--ink-rgb),0.35)',
           }}
         >
           <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1.5">
@@ -350,9 +350,9 @@ function TimelineStop({
             <span
               className="font-mono text-[9.5px] tracking-[0.22em] uppercase px-2 py-0.5 rounded-full"
               style={{
-                color: 'rgba(63,31,45,0.6)',
-                border: '1px solid rgba(63,31,45,0.18)',
-                background: 'rgba(255,255,255,0.55)',
+                color: 'rgba(var(--ink-rgb),0.6)',
+                border: '1px solid rgba(var(--ink-rgb),0.18)',
+                background: 'rgba(var(--hi-rgb),0.55)',
               }}
             >
               {KIND_LABEL[stop.kind]}
@@ -361,21 +361,21 @@ function TimelineStop({
 
           <h4
             className="font-display italic leading-tight mb-1"
-            style={{ color: '#3F1F2D', fontSize: 'clamp(20px,2.2vw,28px)' }}
+            style={{ color: 'var(--ink-strong)', fontSize: 'clamp(20px,2.2vw,28px)' }}
           >
             {stop.org}
           </h4>
 
           <p
             className="font-mono text-[10.5px] tracking-[0.18em] uppercase mb-3"
-            style={{ color: 'rgba(63,31,45,0.55)' }}
+            style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
           >
             {stop.role}
           </p>
 
           <p
             className="font-sans text-[13.5px] leading-relaxed"
-            style={{ color: 'rgba(63,31,45,0.78)' }}
+            style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
           >
             {stop.blurb}
           </p>
@@ -386,7 +386,7 @@ function TimelineStop({
                 <li
                   key={j}
                   className="flex items-baseline gap-3 font-sans text-[12.5px]"
-                  style={{ color: 'rgba(63,31,45,0.72)' }}
+                  style={{ color: 'rgba(var(--ink-rgb),0.72)' }}
                 >
                   <span
                     aria-hidden

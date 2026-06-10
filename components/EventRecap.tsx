@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { EVENTS as RAW_EVENTS, type EventItem } from '@/data/events';
@@ -17,17 +17,6 @@ import { EVENTS as RAW_EVENTS, type EventItem } from '@/data/events';
  * Data source: /data/events.ts — real flyers in /public/assets, real
  * attendee counts, real venues, real luma URLs.
  */
-
-/* Fisher-Yates shuffle — used for the per-visit randomized order so
-   the strip feels fresh every time the page loads. */
-function shuffle<T>(arr: T[]): T[] {
-  const out = [...arr];
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
-  return out;
-}
 
 /* Sort newest first. Within the same date, keep original order. */
 const EVENTS: EventItem[] = [...RAW_EVENTS].sort((a, b) => {
@@ -85,10 +74,6 @@ export default function EventRecap() {
   const [openId, setOpenId] = useState<string | null>(null);
   const openEvent = openId ? EVENTS.find((e) => e.id === openId) ?? null : null;
   const scrollRef = useRef<HTMLDivElement | null>(null);
-
-  // Randomize event order PER VISIT — same order across renders within a
-  // single page load (useMemo with [] deps) but fresh on every reload.
-  const shuffledEvents = useMemo(() => shuffle(EVENTS), []);
 
   const scrollBy = (dir: -1 | 1) => {
     const el = scrollRef.current;
@@ -226,7 +211,7 @@ export default function EventRecap() {
       <div className="flex items-center justify-between mb-4">
         <p
           className="font-mono text-[10px] tracking-[0.3em]"
-          style={{ color: 'rgba(255,90,44,0.85)' }}
+          style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
         >
           ✦ EVENTS · SCROLL OR DRAG · CLICK A FLYER
         </p>
@@ -235,11 +220,11 @@ export default function EventRecap() {
             type="button"
             aria-label="Scroll left"
             onClick={() => scrollBy(-1)}
-            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-white/70"
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-[rgba(var(--hi-rgb),0.5)]"
             style={{
-              border: '1px solid rgba(63,31,45,0.2)',
-              background: 'rgba(253,249,242,0.6)',
-              color: 'rgba(63,31,45,0.7)',
+              border: '1px solid rgba(var(--ink-rgb),0.2)',
+              background: 'rgba(var(--paper-rgb),0.6)',
+              color: 'rgba(var(--ink-rgb),0.7)',
             }}
           >
             ‹
@@ -248,11 +233,11 @@ export default function EventRecap() {
             type="button"
             aria-label="Scroll right"
             onClick={() => scrollBy(1)}
-            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-white/70"
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-[rgba(var(--hi-rgb),0.5)]"
             style={{
-              border: '1px solid rgba(63,31,45,0.2)',
-              background: 'rgba(253,249,242,0.6)',
-              color: 'rgba(63,31,45,0.7)',
+              border: '1px solid rgba(var(--ink-rgb),0.2)',
+              background: 'rgba(var(--paper-rgb),0.6)',
+              color: 'rgba(var(--ink-rgb),0.7)',
             }}
           >
             ›
@@ -266,13 +251,11 @@ export default function EventRecap() {
         {/* Edge fade masks so the strip feels like a film roll */}
         <div
           aria-hidden
-          className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 z-10"
-          style={{ background: 'linear-gradient(90deg, rgba(232,220,236,0.85), transparent)' }}
+          className="recap-fade-left pointer-events-none absolute left-0 top-0 bottom-0 w-10 z-10"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 z-10"
-          style={{ background: 'linear-gradient(270deg, rgba(232,220,236,0.85), transparent)' }}
+          className="recap-fade-right pointer-events-none absolute right-0 top-0 bottom-0 w-10 z-10"
         />
 
         {/* Hidden-scrollbar styles so the wrap-around teleport is
@@ -292,11 +275,11 @@ export default function EventRecap() {
           className="event-strip flex gap-4 overflow-x-auto pb-4"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
-          {/* INFINITE-FEEL strip: render the shuffled events 3x so the
-              row never feels like it ends. Order is randomized per
-              visit (see shuffledEvents above). */}
+          {/* INFINITE-FEEL strip: render the events 3x so the row never
+              feels like it ends. Newest first — deterministic so the
+              strip is scannable. */}
           {Array.from({ length: 3 }).flatMap((_, rep) =>
-            shuffledEvents.map((event) => (
+            EVENTS.map((event) => (
               <div
                 key={`${event.id}:rep-${rep}`}
                 className="snap-start shrink-0"
@@ -334,10 +317,10 @@ function FlyerCard({ event, onClick }: { event: EventItem; onClick: () => void }
       aria-label={`Open ${event.name} recap`}
       className="group relative block w-full text-left rounded-[12px] overflow-hidden transition-transform duration-200 hover:-translate-y-1"
       style={{
-        border: '1px solid rgba(63,31,45,0.18)',
+        border: '1px solid rgba(var(--ink-rgb),0.18)',
         background: '#2A1320',
         boxShadow:
-          'inset 0 1px 0 rgba(255,255,255,0.18), 0 12px 26px -14px rgba(63,31,45,0.4)',
+          'inset 0 1px 0 rgba(255,255,255,0.18), 0 12px 26px -14px rgba(var(--ink-rgb),0.4)',
       }}
     >
       {/* TOP REGION — full-bleed flyer image. object-cover fills the
@@ -367,6 +350,7 @@ function FlyerCard({ event, onClick }: { event: EventItem; onClick: () => void }
 
         {/* TOP-LEFT: city · country chip — floats over the flyer, but
             small and tucked in the corner so it never crosses the art. */}
+        {/* Literal colors — the chip floats on the photo, same in both themes */}
         <span
           className="absolute top-2.5 left-2.5 font-mono text-[9px] tracking-[0.2em] uppercase px-2 py-1 rounded-full"
           style={{
@@ -500,7 +484,7 @@ function EventModal({
               onClick={onClose}
               aria-label="Close event recap"
               className="absolute -top-10 right-0 font-mono text-[11px] tracking-[0.22em] uppercase hover:text-ember-400 transition-colors flex items-center gap-2"
-              style={{ color: 'rgba(253,249,242,0.8)' }}
+              style={{ color: 'rgba(253,249,242,0.8)' /* on dark scrim */ }}
             >
               <span aria-hidden>✕</span> close
             </button>
@@ -508,28 +492,27 @@ function EventModal({
             <div
               className="rounded-[14px] overflow-hidden"
               style={{
-                background: '#fdf9f2',
-                border: '1.5px solid rgba(255,255,255,0.85)',
-                boxShadow:
-                  '0 24px 56px -20px rgba(0,0,0,0.6), inset 0 1.5px 0 rgba(255,255,255,0.95)',
+                background: 'var(--paper-bright)',
+                border: '1.5px solid rgba(var(--hi-rgb),0.85)',
+                boxShadow: '0 24px 56px -20px rgba(0,0,0,0.6)',
               }}
             >
               {/* Header strip */}
               <div
                 className="flex items-center justify-between px-6 py-4"
-                style={{ borderBottom: '1px dashed rgba(63,31,45,0.18)' }}
+                style={{ borderBottom: '1px dashed rgba(var(--ink-rgb),0.18)' }}
               >
                 <div className="flex items-baseline gap-3">
                   <span
                     className="font-mono text-[10px] tracking-[0.22em] uppercase"
-                    style={{ color: 'rgba(255,90,44,0.85)' }}
+                    style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                   >
                     RECAP
                   </span>
-                  <span className="font-mono text-[10px]" style={{ color: 'rgba(63,31,45,0.4)' }}>•</span>
+                  <span className="font-mono text-[10px]" style={{ color: 'rgba(var(--ink-rgb),0.4)' }}>•</span>
                   <span
                     className="font-mono text-[10px] tracking-[0.22em] uppercase"
-                    style={{ color: 'rgba(63,31,45,0.55)' }}
+                    style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
                   >
                     {event.city} · {fmtMonth(event.startDate)}
                   </span>
@@ -544,21 +527,21 @@ function EventModal({
                   <div>
                     <h3
                       className="font-display italic leading-[1.05] mb-4"
-                      style={{ color: '#3F1F2D', fontSize: 'clamp(28px,4vw,42px)' }}
+                      style={{ color: 'var(--ink-strong)', fontSize: 'clamp(28px,4vw,42px)' }}
                     >
                       {event.name}
                     </h3>
                     {event.venue && (
                       <p
                         className="font-mono text-[10.5px] tracking-[0.18em] uppercase mb-4"
-                        style={{ color: 'rgba(63,31,45,0.55)' }}
+                        style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
                       >
                         {event.venue}
                       </p>
                     )}
                     <p
                       className="font-sans text-[15px] leading-relaxed mb-6"
-                      style={{ color: 'rgba(63,31,45,0.78)' }}
+                      style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
                     >
                       {event.description}
                     </p>
@@ -571,19 +554,19 @@ function EventModal({
                             key={i}
                             className="rounded-md px-3 py-2.5"
                             style={{
-                              background: 'rgba(255,255,255,0.6)',
-                              border: '1px solid rgba(63,31,45,0.12)',
+                              background: 'rgba(var(--hi-rgb),0.45)',
+                              border: '1px solid rgba(var(--ink-rgb),0.12)',
                             }}
                           >
                             <p
                               className="font-display italic leading-tight"
-                              style={{ color: '#3F1F2D', fontSize: 22 }}
+                              style={{ color: 'var(--ink-strong)', fontSize: 22 }}
                             >
                               {s.value}
                             </p>
                             <p
                               className="font-mono text-[9px] tracking-[0.18em] uppercase mt-0.5"
-                              style={{ color: 'rgba(63,31,45,0.55)' }}
+                              style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
                             >
                               {s.label}
                             </p>
@@ -601,11 +584,11 @@ function EventModal({
                             href={l.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-mono text-[10.5px] tracking-[0.22em] uppercase px-3 py-1.5 rounded-full transition-colors hover:bg-white/80"
+                            className="font-mono text-[10.5px] tracking-[0.22em] uppercase px-3 py-1.5 rounded-full transition-colors hover:bg-[rgba(var(--hi-rgb),0.5)]"
                             style={{
-                              border: '1px solid rgba(63,31,45,0.25)',
-                              background: 'rgba(255,255,255,0.55)',
-                              color: '#3F1F2D',
+                              border: '1px solid rgba(var(--ink-rgb),0.25)',
+                              background: 'rgba(var(--hi-rgb),0.4)',
+                              color: 'var(--ink-strong)',
                             }}
                           >
                             ↗ {l.label}
@@ -621,7 +604,7 @@ function EventModal({
                       <div>
                         <p
                           className="font-mono text-[10px] tracking-[0.22em] uppercase mb-2"
-                          style={{ color: 'rgba(255,90,44,0.85)' }}
+                          style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                         >
                           ✦ MERCH + SWAG
                         </p>
@@ -638,10 +621,10 @@ function EventModal({
                                         rel: 'noopener noreferrer',
                                       }
                                     : {})}
-                                  className="flex items-center gap-2.5 px-3 py-2 rounded-md transition-colors hover:bg-white/80"
+                                  className="flex items-center gap-2.5 px-3 py-2 rounded-md transition-colors hover:bg-[rgba(var(--hi-rgb),0.5)]"
                                   style={{
-                                    background: 'rgba(255,255,255,0.55)',
-                                    border: '1px solid rgba(63,31,45,0.12)',
+                                    background: 'rgba(var(--hi-rgb),0.4)',
+                                    border: '1px solid rgba(var(--ink-rgb),0.12)',
                                   }}
                                 >
                                   <span
@@ -652,14 +635,14 @@ function EventModal({
                                   </span>
                                   <span
                                     className="flex-1 font-sans text-[13px] truncate"
-                                    style={{ color: 'rgba(63,31,45,0.85)' }}
+                                    style={{ color: 'rgba(var(--ink-rgb),0.85)' }}
                                   >
                                     {m.name}
                                   </span>
                                   {m.price && (
                                     <span
                                       className="font-mono text-[10px] tracking-[0.18em] shrink-0"
-                                      style={{ color: 'rgba(255,90,44,0.85)' }}
+                                      style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                                     >
                                       {m.price}
                                     </span>
@@ -667,7 +650,7 @@ function EventModal({
                                   {m.link && (
                                     <span
                                       className="font-mono text-[10px] shrink-0"
-                                      style={{ color: 'rgba(63,31,45,0.4)' }}
+                                      style={{ color: 'rgba(var(--ink-rgb),0.4)' }}
                                     >
                                       ↗
                                     </span>
@@ -689,10 +672,10 @@ function EventModal({
                       <div
                         className="relative w-full overflow-hidden rounded-[8px] flex items-center justify-center"
                         style={{
-                          border: '1px solid rgba(63,31,45,0.2)',
+                          border: '1px solid rgba(var(--ink-rgb),0.2)',
                           boxShadow:
-                            'inset 0 0 0 2px #fdf9f2, 0 12px 28px -18px rgba(63,31,45,0.4)',
-                          background: 'rgba(255,255,255,0.6)',
+                            'inset 0 0 0 2px var(--paper-bright), 0 12px 28px -18px rgba(0,0,0,0.4)',
+                          background: 'rgba(var(--hi-rgb),0.45)',
                           minHeight: 360,
                           maxHeight: '68vh',
                         }}
@@ -709,8 +692,8 @@ function EventModal({
                       <div
                         className="relative w-full aspect-[4/5] rounded-[6px] flex items-center justify-center"
                         style={{
-                          border: '1px solid rgba(63,31,45,0.2)',
-                          background: 'rgba(255,255,255,0.5)',
+                          border: '1px solid rgba(var(--ink-rgb),0.2)',
+                          background: 'rgba(var(--hi-rgb),0.4)',
                         }}
                       >
                         <span className="text-6xl" aria-hidden>{event.emoji}</span>
@@ -722,9 +705,9 @@ function EventModal({
                       <div
                         className="relative w-full overflow-hidden rounded-[6px] flex items-center justify-center"
                         style={{
-                          border: '1px solid rgba(63,31,45,0.2)',
-                          boxShadow: 'inset 0 0 0 2px #fdf9f2',
-                          background: 'rgba(255,255,255,0.5)',
+                          border: '1px solid rgba(var(--ink-rgb),0.2)',
+                          boxShadow: 'inset 0 0 0 2px var(--paper-bright)',
+                          background: 'rgba(var(--hi-rgb),0.4)',
                           minHeight: 180,
                         }}
                       >

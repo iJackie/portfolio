@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter_Tight, Fraunces, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import GradientCursor from '@/components/GradientCursor';
+import ThemeToggle from '@/components/ThemeToggle';
 import './globals.css';
 
 /**
@@ -75,10 +76,22 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${interTight.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Apply a saved dark-mode choice BEFORE first paint (no flash).
+            Light is the default for first-time visitors. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}",
+          }}
+        />
+      </head>
       <body>
         <GradientCursor />
         <main className="ombre-page relative">{children}</main>
+        <ThemeToggle />
         <Analytics />
       </body>
     </html>

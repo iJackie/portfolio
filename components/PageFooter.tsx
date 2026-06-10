@@ -42,27 +42,9 @@ export default function PageFooter() {
           palette (peach → ember → lavender). The whole thing reads as
           one capsule, not a flat card. */}
       <div className="relative mx-auto max-w-[760px]" style={{ zIndex: 1 }}>
-        <div
-          className="relative overflow-hidden"
-          style={{
-            // Fully-rounded pill (very large radius pinned to the card height).
-            borderRadius: 9999,
-            // Multi-stop ombre using the project's existing palette tokens.
-            background: `
-              radial-gradient(ellipse 60% 80% at 15% 30%, rgba(255,214,194,0.95) 0%, transparent 65%),
-              radial-gradient(ellipse 70% 90% at 85% 75%, rgba(217,199,238,0.85) 0%, transparent 65%),
-              radial-gradient(ellipse 55% 70% at 50% 95%, rgba(244,168,193,0.55) 0%, transparent 70%),
-              linear-gradient(135deg, #FFD6C2 0%, #F4A8C1 45%, #D9C7EE 100%)
-            `,
-            border: '1px solid rgba(255,255,255,0.7)',
-            boxShadow: `
-              inset 0 1.5px 0 rgba(255,255,255,0.85),
-              inset 0 -1.5px 0 rgba(63,31,45,0.08),
-              0 22px 48px -20px rgba(255,90,44,0.35),
-              0 8px 20px -12px rgba(63,31,45,0.25)
-            `,
-          }}
-        >
+        {/* Ombre + border + shadow live in .footer-pill (globals.css)
+            so dark mode can swap to the wine-black variant. */}
+        <div className="footer-pill relative overflow-hidden">
           {/* Soft paper grain — keeps the ombre from feeling plastic. */}
           <div
             aria-hidden
@@ -81,7 +63,7 @@ export default function PageFooter() {
             style={{
               height: '40%',
               background:
-                'linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%)',
+                'linear-gradient(180deg, rgba(var(--hi-rgb),0.45) 0%, rgba(var(--hi-rgb),0) 100%)',
             }}
           />
 
@@ -106,10 +88,9 @@ export default function PageFooter() {
             <div
               className="flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full"
               style={{
-                background: 'rgba(255,255,255,0.55)',
-                border: '1px solid rgba(255,255,255,0.85)',
-                boxShadow:
-                  'inset 0 1px 0 rgba(255,255,255,0.9), 0 4px 12px -6px rgba(63,31,45,0.2)',
+                background: 'rgba(var(--hi-rgb),0.4)',
+                border: '1px solid rgba(var(--hi-rgb),0.7)',
+                boxShadow: '0 4px 12px -6px rgba(0,0,0,0.2)',
               }}
             >
               <span
@@ -126,10 +107,10 @@ export default function PageFooter() {
                 className="font-mono text-[10.5px] tracking-[0.22em] uppercase px-4 py-2.5 rounded-full transition-colors"
                 style={{
                   background: copied
-                    ? 'rgba(255,90,44,0.18)'
-                    : 'rgba(63,31,45,0.92)',
-                  color: copied ? 'var(--ember-600)' : '#fdf9f2',
-                  boxShadow: '0 4px 10px -6px rgba(63,31,45,0.55)',
+                    ? 'rgba(var(--accent-rgb),0.18)'
+                    : 'rgba(var(--ink-rgb),0.92)',
+                  color: copied ? 'var(--ember-600)' : 'var(--paper-bright)',
+                  boxShadow: '0 4px 10px -6px rgba(var(--ink-rgb),0.55)',
                 }}
                 aria-live="polite"
               >
@@ -145,10 +126,10 @@ export default function PageFooter() {
                 style={{
                   background:
                     'linear-gradient(135deg, var(--ember-500) 0%, var(--rust-600) 100%)',
-                  color: '#fdf9f2',
+                  color: 'var(--paper-bright)',
                   boxShadow:
-                    '0 12px 24px -10px rgba(255,90,44,0.65), inset 0 1px 0 rgba(255,255,255,0.45)',
-                  border: '1px solid rgba(255,255,255,0.3)',
+                    '0 12px 24px -10px rgba(var(--accent-rgb),0.65), inset 0 1px 0 rgba(var(--hi-rgb),0.45)',
+                  border: '1px solid rgba(var(--hi-rgb),0.3)',
                 }}
               >
                 get in touch
@@ -158,11 +139,11 @@ export default function PageFooter() {
                 download
                 className="font-mono text-[11px] tracking-[0.22em] uppercase px-7 py-3.5 rounded-full transition-transform hover:-translate-y-0.5"
                 style={{
-                  background: 'rgba(253,249,242,0.85)',
+                  background: 'rgba(var(--paper-rgb),0.85)',
                   color: 'var(--plum-700)',
-                  border: '1px solid rgba(63,31,45,0.22)',
+                  border: '1px solid rgba(var(--ink-rgb),0.22)',
                   boxShadow:
-                    '0 10px 22px -12px rgba(63,31,45,0.35), inset 0 1px 0 rgba(255,255,255,0.8)',
+                    '0 10px 22px -12px rgba(var(--ink-rgb),0.35), inset 0 1px 0 rgba(var(--hi-rgb),0.8)',
                 }}
               >
                 ↓ download resume
@@ -173,13 +154,13 @@ export default function PageFooter() {
             <div
               className="mt-7 pt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[10px] md:text-[11px] tracking-[0.18em] uppercase"
               style={{
-                borderTop: '1px dashed rgba(63,31,45,0.22)',
+                borderTop: '1px dashed rgba(var(--ink-rgb),0.22)',
                 color: 'var(--plum-700)',
                 width: '100%',
                 maxWidth: 560,
               }}
             >
-              <span style={{ color: 'rgba(63,31,45,0.55)' }}>also here →</span>
+              <span style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>also here →</span>
               <FooterSocial label="tg" handle="@ijackie_eth" href="https://t.me/ijackie_eth" />
               <FooterSocial label="twitter" handle="@berakana_" href="https://twitter.com/berakana_" />
               <FooterSocial label="linkedin" handle="/jacquelinemach" href="https://linkedin.com/in/jacquelinemach" />
@@ -202,13 +183,13 @@ function FooterSocial({
 }) {
   return (
     <span className="flex items-center gap-1.5">
-      <span style={{ color: 'rgba(63,31,45,0.45)' }}>{label}:</span>
+      <span style={{ color: 'rgba(var(--ink-rgb),0.45)' }}>{label}:</span>
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-ember-500 transition-colors underline-offset-4 hover:underline"
-        style={{ color: 'rgba(63,31,45,0.8)' }}
+        style={{ color: 'rgba(var(--ink-rgb),0.8)' }}
       >
         {handle}
       </a>

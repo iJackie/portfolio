@@ -48,3 +48,6 @@ public/assets/*.sketch
 public/assets/*.zip
 public/assets/design-InfraredTABLECLOTH.png
 public/assets/design-drink-bear-pegatina*.png
+
+# claude local config (personal, not for the repo)
+.claude/settings.local.json

@@ -508,7 +508,7 @@ export default function ContentBento() {
       {/* Eyebrow */}
       <p
         className="font-mono text-[10px] tracking-[0.3em] mb-3"
-        style={{ color: 'rgba(255,90,44,0.85)' }}
+        style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
       >
         ✦ REELS, TALKS, POSTS, GRAPHICS
       </p>
