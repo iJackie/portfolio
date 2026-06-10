@@ -9,6 +9,7 @@ import {
   useMotionTemplate,
   type MotionValue,
 } from 'framer-motion';
+import StatsStrip from '@/components/StatsStrip';
 
 /**
  * Hero — "Portfolio Lanyard" v6 — Borcelle-faithful, badge above wordmark
@@ -409,6 +410,14 @@ export default function Hero() {
           className="relative z-10 w-full max-w-[640px] mx-auto text-center px-2"
           style={{ marginTop: 'clamp(8px, 1.5vw, 20px)' }}
         >
+          {/* THE ASK — what she does + what she's looking for, stated
+              plainly before any vibes. Recruiters read this first. */}
+          <p
+            className="font-mono text-[10.5px] md:text-[11.5px] tracking-[0.26em] uppercase mb-3"
+            style={{ color: 'var(--ember-500)' }}
+          >
+            ✦ growth · community · events lead — open to work ✦
+          </p>
           <h3 className="font-sans font-bold uppercase text-ink-900 text-[12px] tracking-[0.2em] mb-3">
             Building memories.
           </h3>
@@ -439,6 +448,31 @@ export default function Hero() {
             </a>
           </p>
         </div>
+
+        {/* THE PROOF — four big numbers, right where the eye lands next */}
+        <StatsStrip />
+
+        {/* Scroll cue — the folders live below the fold; make sure
+            nobody bounces without knowing they exist. */}
+        <div
+          aria-hidden
+          className="relative z-10 mt-8 font-mono text-[10px] tracking-[0.3em] uppercase scroll-cue"
+          style={{ color: 'rgba(var(--ink-rgb),0.5)' }}
+        >
+          ↓ open the folders
+        </div>
+        <style jsx>{`
+          .scroll-cue {
+            animation: scroll-cue-bounce 2.2s ease-in-out infinite;
+          }
+          @keyframes scroll-cue-bounce {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(6px); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .scroll-cue { animation: none; }
+          }
+        `}</style>
       </div>
     </section>
   );

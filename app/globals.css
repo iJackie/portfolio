@@ -177,20 +177,20 @@ body {
    and maroon glows so the page still feels dimensional, never flat. */
 html.dark .ombre-page {
   background:
-    radial-gradient(ellipse 70vw 55vh at 92% 8vh,  #2A1430 0%, transparent 60%),
-    radial-gradient(ellipse 65vw 60vh at 6% 40vh,  #331622 0%, transparent 60%),
-    radial-gradient(ellipse 55vw 40vh at 50% 92vh, #3A1428 0%, transparent 65%),
-    radial-gradient(ellipse 60vw 50vh at 88% 96vh, #2E1220 0%, transparent 70%),
-    radial-gradient(ellipse 70vw 40vh at 15% 145vh, #2A1124 0%, transparent 65%),
-    radial-gradient(ellipse 60vw 35vh at 90% 175vh, #251227 0%, transparent 65%),
-    radial-gradient(ellipse 55vw 30vh at 45% 210vh, #331526 0%, transparent 65%),
+    radial-gradient(ellipse 70vw 55vh at 92% 8vh,  #3A1C44 0%, transparent 60%),
+    radial-gradient(ellipse 65vw 60vh at 6% 40vh,  #471E2E 0%, transparent 60%),
+    radial-gradient(ellipse 55vw 40vh at 50% 92vh, #521C38 0%, transparent 65%),
+    radial-gradient(ellipse 60vw 50vh at 88% 96vh, #40182C 0%, transparent 70%),
+    radial-gradient(ellipse 70vw 40vh at 15% 145vh, #3B1732 0%, transparent 65%),
+    radial-gradient(ellipse 60vw 35vh at 90% 175vh, #341936 0%, transparent 65%),
+    radial-gradient(ellipse 55vw 30vh at 45% 210vh, #471D34 0%, transparent 65%),
     linear-gradient(180deg,
       #120B10 0vh,
-      #140C12 45vh,
-      #170D17 100vh,
-      #150C13 150vh,
-      #170D17 220vh,
-      #130B11 100%);
+      #150C13 45vh,
+      #190E19 100vh,
+      #160D14 150vh,
+      #190E19 220vh,
+      #140B12 100%);
 }
 html.dark .ombre-page::before {
   opacity: 0.3;
@@ -453,10 +453,12 @@ html.dark .ombre-page::before {
 .folder-tint-lavender { background-color: #E8DCEC; }
 .folder-tint-rose     { background-color: #F8D6DE; }
 .folder-tint-ember    { background-color: #FFD4B8; }
+.folder-tint-mint     { background-color: #DCEAE0; }
 html.dark .folder-tint-peach    { background-color: #2A151B; }
 html.dark .folder-tint-lavender { background-color: #241327; }
 html.dark .folder-tint-rose     { background-color: #2C1320; }
 html.dark .folder-tint-ember    { background-color: #2E141A; }
+html.dark .folder-tint-mint     { background-color: #16241C; }
 
 /* =========================================================================
    FOLDER TABS — the OG manila tab-strip navigation, supersized.
@@ -469,6 +471,7 @@ html.dark .folder-tint-ember    { background-color: #2E141A; }
   position: relative;
   display: inline-flex;
   align-items: baseline;
+  flex-shrink: 0;
   gap: 12px;
   padding: 16px 26px 14px;
   border-radius: 14px 14px 0 0;
@@ -478,6 +481,23 @@ html.dark .folder-tint-ember    { background-color: #2E141A; }
   opacity: 0.78;
   transition: opacity 0.18s ease, transform 0.18s ease;
 }
+@media (max-width: 760px) {
+  .folder-tab { padding: 12px 16px 10px; gap: 8px; }
+  .folder-tab__title { font-size: 17px !important; }
+}
+
+/* Tab strip scrolls horizontally on small screens instead of wrapping
+   into a clumsy multi-row pile. Scrollbar hidden — the cut-off tab
+   peeking at the edge is the affordance. */
+.folder-tab-strip {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.folder-tab-strip::-webkit-scrollbar { display: none; }
 .folder-tab:hover {
   opacity: 1;
   transform: translateY(-2px);

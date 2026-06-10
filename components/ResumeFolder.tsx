@@ -126,6 +126,16 @@ const KIND_LABEL: Record<StopKind, string> = {
   extra: 'SIDE PROJECT',
 };
 
+/* ── SOCIAL PROOF — short quotes from founders/partners you've worked
+   with. THE single most convincing thing on a community person's
+   portfolio. Ask 2-3 people you've supported; keep quotes ≤2 sentences.
+   The section renders only once this array has entries. Example:
+     { quote: 'Jacqueline ran our entire APAC events calendar and it
+       never once felt like we had to check on it.', who: 'Founder,
+       Infrared Finance' }                                            */
+type Quote = { quote: string; who: string };
+const QUOTES: Quote[] = [];
+
 export default function ResumeFolder() {
   // Track page-level scroll progress through THIS timeline section
   // (no internal scroller). Live ember dot rides 0→1 as the user
@@ -249,6 +259,43 @@ export default function ResumeFolder() {
           ))}
         </div>
       </div>
+
+      {/* WHAT THEY SAY — renders only once QUOTES has entries */}
+      {QUOTES.length > 0 && (
+        <div className="mt-12 mx-auto" style={{ maxWidth: 760 }}>
+          <p
+            className="font-mono text-[10px] tracking-[0.3em] uppercase mb-4 text-center"
+            style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
+          >
+            ✦ what they say
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {QUOTES.map((q, i) => (
+              <figure
+                key={i}
+                className="rounded-[12px] px-5 py-4"
+                style={{
+                  background: 'rgba(var(--paper-rgb),0.75)',
+                  border: '1px solid rgba(var(--ink-rgb),0.16)',
+                }}
+              >
+                <blockquote
+                  className="font-display italic text-[16px] leading-snug"
+                  style={{ color: 'var(--ink-strong)' }}
+                >
+                  “{q.quote}”
+                </blockquote>
+                <figcaption
+                  className="font-mono text-[9.5px] tracking-[0.2em] uppercase mt-3"
+                  style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
+                >
+                  — {q.who}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

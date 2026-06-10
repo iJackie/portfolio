@@ -79,22 +79,27 @@ export default function DropdeckFolder() {
       >
         dropdeck.xyz
       </h3>
+      {/* TODO(jacqueline): make this blurb yours — what dropdeck is in
+          YOUR words, and what your role is (founder? building solo?). */}
       <p
-        className="font-sans text-[14px] leading-relaxed mb-8 max-w-[560px]"
+        className="font-sans text-[14px] leading-relaxed mb-5 max-w-[560px]"
         style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
       >
-        A canvas-tech UGC agency — connecting brands with creators and
-        turning campaigns into content that actually ships.{' '}
-        <a
-          href="https://dropdeck.xyz"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-4 transition-colors"
-          style={{ color: 'var(--ember-500)' }}
-        >
-          dropdeck.xyz ↗
-        </a>
+        A canvas-tech UGC agency — pairing brands with creators.
       </p>
+      <a
+        href="https://dropdeck.xyz"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block font-mono text-[11px] tracking-[0.22em] uppercase px-6 py-3 rounded-full mb-9 transition-transform hover:-translate-y-0.5"
+        style={{
+          background: 'linear-gradient(135deg, var(--ember-500) 0%, var(--rust-600) 100%)',
+          color: 'var(--paper-bright)',
+          boxShadow: '0 12px 24px -10px rgba(var(--accent-rgb),0.55)',
+        }}
+      >
+        visit dropdeck.xyz ↗
+      </a>
 
       {/* Partners */}
       <div

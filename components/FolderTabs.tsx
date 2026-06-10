@@ -32,7 +32,7 @@ const FOLDERS: Folder[] = [
   { id: 'deep-dive',     index: '02', title: 'event recap',  tintClass: 'folder-tint-lavender' },
   { id: 'content',       index: '03', title: 'content',      tintClass: 'folder-tint-rose'     },
   { id: 'resume',        index: '04', title: 'resume',       tintClass: 'folder-tint-ember'    },
-  { id: 'dropdeck',      index: '05', title: 'dropdeck',     tintClass: 'folder-tint-peach'    },
+  { id: 'dropdeck',      index: '05', title: 'dropdeck',     tintClass: 'folder-tint-mint'     },
 ];
 
 function folderBody(id: FolderId) {
@@ -60,7 +60,7 @@ export default function FolderTabs() {
         <div
           role="tablist"
           aria-label="Folders"
-          className="flex flex-wrap items-end gap-2 relative z-20"
+          className="folder-tab-strip relative z-20"
         >
           {FOLDERS.map((f) => {
             const isOpen = openId === f.id;

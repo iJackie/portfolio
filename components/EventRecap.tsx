@@ -546,6 +546,37 @@ function EventModal({
                       {event.description}
                     </p>
 
+                    {/* WHAT I DID — case-study bullets (only on events
+                        with `role` filled in data/events.ts) */}
+                    {event.role && event.role.length > 0 && (
+                      <div className="mb-6">
+                        <p
+                          className="font-mono text-[10px] tracking-[0.22em] uppercase mb-2"
+                          style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
+                        >
+                          ✦ WHAT I DID
+                        </p>
+                        <ul className="space-y-1.5">
+                          {event.role.map((line, i) => (
+                            <li
+                              key={i}
+                              className="flex items-baseline gap-3 font-sans text-[13.5px] leading-relaxed"
+                              style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
+                            >
+                              <span
+                                aria-hidden
+                                className="font-mono text-[10px] shrink-0"
+                                style={{ color: 'var(--ember-500)' }}
+                              >
+                                ◇
+                              </span>
+                              <span>{line}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
                     {/* Stats grid */}
                     {event.stats && event.stats.length > 0 && (
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">

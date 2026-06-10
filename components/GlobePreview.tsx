@@ -495,7 +495,7 @@ export default function GlobePreview() {
       <div className="relative w-full grid grid-cols-1 md:grid-cols-[1.15fr_1fr] gap-6 md:gap-8 items-start">
         {/* PEEK CARD — desktop: floating overlay anchored top-left;
             mobile: in-flow below the globe. */}
-        <div className="order-2 md:order-none md:absolute md:left-0 md:top-2 md:z-30 w-full max-w-[280px] mx-auto md:mx-0 md:w-[250px]">
+        <div className="order-2 md:order-none md:absolute md:-left-2 md:top-0 md:z-30 w-full max-w-[280px] mx-auto md:mx-0 md:w-[240px]">
           {/* mode="popLayout" → the OLD card and the NEW card overlap
               during the swap, so the canvas highlight and the visible
               card stay in sync. */}
@@ -1141,6 +1141,32 @@ function EventDetailModal({
                     >
                       {event.description}
                     </p>
+
+                    {/* WHAT I DID — case-study bullets when present */}
+                    {event.role && event.role.length > 0 && (
+                      <div className="mb-5">
+                        <p
+                          className="font-mono text-[9.5px] tracking-[0.22em] uppercase mb-2"
+                          style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
+                        >
+                          ✦ WHAT I DID
+                        </p>
+                        <ul className="space-y-1.5">
+                          {event.role.map((line, i) => (
+                            <li
+                              key={i}
+                              className="flex items-baseline gap-2.5 font-sans text-[13px] leading-relaxed"
+                              style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
+                            >
+                              <span aria-hidden className="font-mono text-[9px] shrink-0" style={{ color: 'var(--ember-500)' }}>
+                                ◇
+                              </span>
+                              <span>{line}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     {/* Stat tiles */}
                     {event.stats && event.stats.length > 0 && (

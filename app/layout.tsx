@@ -37,11 +37,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://jacquelinemach.com'),
-  title: 'Jacqueline Mach — Portfolio',
+  title: 'Jacqueline Mach · Growth, Community & Events',
   description:
     'Brooklyn-based growth, community, and events. Scaled a crypto protocol from 8 → 20+ people and $2.5B in TVL, with 20+ events across 10+ cities.',
   openGraph: {
-    title: 'Jacqueline Mach — Portfolio',
+    title: 'Jacqueline Mach · Growth, Community & Events',
     description:
       'Growth · marketing · EA · community · events. 20+ events across 10+ cities.',
     url: 'https://jacquelinemach.com',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jacqueline Mach — Portfolio',
+    title: 'Jacqueline Mach · Growth, Community & Events',
     description:
       'Growth · marketing · EA · community · events. 20+ events across 10+ cities.',
     images: ['/assets/PFPpng.png'],

@@ -32,6 +32,17 @@ export type EventItem = {
   merch?: EventMerch[];
   links?: EventLink[];
   featured?: boolean;
+  /** CASE-STUDY bullets — "what I did" rendered in the event modal.
+   *  Add these to your 2-3 flagship events to turn a recap into a
+   *  case study. Be concrete: budget owned, sponsors closed, how it
+   *  came together, the result. Example:
+   *    role: [
+   *      'Produced end-to-end: venue, F&B, run-of-show, staffing',
+   *      'Closed 3 co-host partnerships (aPriori, Lorenzo, …)',
+   *      'Sold out — 239 RSVPs in 5 days, 40% partner-sourced',
+   *    ],
+   */
+  role?: string[];
 };
 
 const ev = (item: Omit<EventItem, 'slug' | 'city' | 'country'>): EventItem => {
