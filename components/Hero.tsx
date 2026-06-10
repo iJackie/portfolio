@@ -10,6 +10,7 @@ import {
   type MotionValue,
 } from 'framer-motion';
 import StatsStrip from '@/components/StatsStrip';
+import ThemeToggle from '@/components/ThemeToggle';
 
 /**
  * Hero — "Portfolio Lanyard" v6 — Borcelle-faithful, badge above wordmark
@@ -351,8 +352,8 @@ export default function Hero() {
     >
       <div className="crosshair" aria-hidden />
 
-      {/* TOP-LEFT — CONTACT ME (mailto) with pulsing dot */}
-      <div className="absolute top-5 left-6 md:top-7 md:left-10 z-30 font-mono text-[10px] md:text-[11px] tracking-[0.18em] uppercase">
+      {/* TOP-LEFT — CONTACT ME (mailto) with pulsing dot + theme toggle */}
+      <div className="absolute top-5 left-6 md:top-7 md:left-10 z-30 font-mono text-[10px] md:text-[11px] tracking-[0.18em] uppercase flex flex-col items-start gap-3">
         <a
           href="mailto:jacquelinegiale@gmail.com"
           className="text-ink-900/80 hover:text-ember-500 transition-colors underline-offset-4 hover:underline flex items-center gap-2"
@@ -360,6 +361,7 @@ export default function Hero() {
           <span className="pulse-dot">✦</span>
           contact me
         </a>
+        <ThemeToggle />
       </div>
 
       {/* TOP-RIGHT — Socials */}
@@ -1058,7 +1060,7 @@ function BadgeBack() {
       >
         {/* Cardstock insert (back side) */}
         <div
-          className="absolute inset-[3.5%] rounded-[6px] overflow-hidden"
+          className="badge-card absolute inset-[3.5%] rounded-[6px] overflow-hidden"
           style={{
             background: '#fdf9f2',
             boxShadow:
@@ -1208,7 +1210,7 @@ function BadgeFront({ sheenBg }: { sheenBg: ReturnType<typeof useMotionTemplate>
 
         {/* Cardstock insert (container queries for proportional internal type) */}
         <div
-          className="absolute inset-[3.5%] rounded-[6px] overflow-hidden"
+          className="badge-card absolute inset-[3.5%] rounded-[6px] overflow-hidden"
           style={{
             background: '#fdf9f2',
             boxShadow:

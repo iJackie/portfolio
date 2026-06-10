@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter_Tight, Fraunces, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import GradientCursor from '@/components/GradientCursor';
-import ThemeToggle from '@/components/ThemeToggle';
 import './globals.css';
 
 /**
@@ -91,7 +90,6 @@ export default function RootLayout({
       <body>
         <GradientCursor />
         <main className="ombre-page relative">{children}</main>
-        <ThemeToggle />
         <Analytics />
       </body>
     </html>

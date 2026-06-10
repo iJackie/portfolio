@@ -58,6 +58,28 @@
   --ascii-glow: 255, 255, 255;
 }
 
+/* ── BADGE CARDSTOCK — the lanyard pass is a PHYSICAL white card; it
+   must read identically in both themes. Re-pin every themed var to its
+   light value here so all text/accents inside stay plum-on-cream even
+   when html.dark flips the rest of the page. */
+.badge-card {
+  --ink-900-ch: 26 22 18;
+  --ink-700-ch: 45 40 32;
+  --ink-rgb: 63, 31, 45;
+  --ink-strong: #3F1F2D;
+  --ink-900: #1A1612;
+  --ink-700: #2D2820;
+  --ember-300: #FFB38A;
+  --ember-400: #FF8A5C;
+  --ember-500: #FF5A2C;
+  --ember-600: #E0431A;
+  --rust-500: #E879A0;
+  --rust-600: #D45C8B;
+  --plum-700: #3F1F2D;
+  --paper-50: #F4F0E8;
+  --cream-100: #FBF6F1;
+}
+
 /* ── DARK MODE — wine-black base, maroon structure, hot-pink glow ──
    Ink and paper invert as a pair so every ink-on-paper (and
    paper-on-ink) pairing keeps its contrast automatically. Ember
@@ -87,6 +109,15 @@ html.dark {
   --ascii-glow: 255, 90, 160;
   --rust-500: #FF7AB5;
   --rust-600: #E8669C;
+  /* Moss/sage lighten so green ASCII critters + timeline dots stay
+     visible on the wine-black background */
+  --moss-300: #C4DEC9;
+  --moss-400: #A9CDB3;
+  --moss-500: #9BC4A8;
+  --moss-700: #7FAE8E;
+  --sage-300: #C4DEC9;
+  --sage-500: #A8CDB5;
+  --sage-700: #8FBC9E;
 }
 
 html {
