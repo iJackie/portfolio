@@ -70,7 +70,7 @@ export default function PageFooter() {
           <div className="relative flex flex-col items-center text-center px-8 md:px-14 py-10 md:py-14">
             {/* Tiny eyebrow */}
             <p
-              className="font-mono text-[10px] tracking-[0.32em] uppercase mb-4"
+              className="font-mono text-[11px] tracking-[0.32em] uppercase mb-4"
               style={{ color: 'var(--ember-600)' }}
             >
               ✦ let&apos;s talk ✦
@@ -94,7 +94,7 @@ export default function PageFooter() {
               }}
             >
               <span
-                className="font-mono text-[12px] md:text-[13px] tracking-[0.04em] px-4 py-2.5 rounded-full select-all"
+                className="font-mono text-[13px] md:text-[14px] tracking-[0.04em] px-4 py-2.5 rounded-full select-all"
                 style={{
                   color: 'var(--plum-700)',
                 }}
@@ -104,7 +104,7 @@ export default function PageFooter() {
               <button
                 type="button"
                 onClick={handleCopy}
-                className="font-mono text-[10.5px] tracking-[0.22em] uppercase px-4 py-2.5 rounded-full transition-colors"
+                className="font-mono text-[11.5px] tracking-[0.22em] uppercase px-4 py-2.5 rounded-full transition-colors"
                 style={{
                   background: copied
                     ? 'rgba(var(--accent-rgb),0.18)'
@@ -122,7 +122,7 @@ export default function PageFooter() {
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <a
                 href={`mailto:${EMAIL}?subject=Saw%20your%20portfolio`}
-                className="font-mono text-[11px] tracking-[0.22em] uppercase px-7 py-3.5 rounded-full transition-transform hover:-translate-y-0.5"
+                className="font-mono text-[12px] tracking-[0.22em] uppercase px-7 py-3.5 rounded-full transition-transform hover:-translate-y-0.5"
                 style={{
                   background:
                     'linear-gradient(135deg, var(--ember-500) 0%, var(--rust-600) 100%)',
@@ -137,7 +137,7 @@ export default function PageFooter() {
               <a
                 href="/resume.pdf"
                 download
-                className="font-mono text-[11px] tracking-[0.22em] uppercase px-7 py-3.5 rounded-full transition-transform hover:-translate-y-0.5"
+                className="font-mono text-[12px] tracking-[0.22em] uppercase px-7 py-3.5 rounded-full transition-transform hover:-translate-y-0.5"
                 style={{
                   background: 'rgba(var(--paper-rgb),0.85)',
                   color: 'var(--plum-700)',
@@ -152,7 +152,7 @@ export default function PageFooter() {
 
             {/* Socials */}
             <div
-              className="mt-7 pt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[10px] md:text-[11px] tracking-[0.18em] uppercase"
+              className="mt-7 pt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[11px] md:text-[12px] tracking-[0.18em] uppercase"
               style={{
                 borderTop: '1px dashed rgba(var(--ink-rgb),0.22)',
                 color: 'var(--plum-700)',

@@ -40,7 +40,7 @@ export default function StatsStrip() {
               {s.value}
             </p>
             <p
-              className="font-mono text-[9.5px] tracking-[0.22em] uppercase mt-2"
+              className="font-mono text-[10.5px] tracking-[0.22em] uppercase mt-2"
               style={{ color: 'rgba(var(--ink-rgb),0.6)' }}
             >
               {s.label}

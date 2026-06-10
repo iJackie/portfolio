@@ -482,7 +482,7 @@ export default function GlobePreview() {
     <div className="relative w-full flex flex-col items-center">
       {/* Eyebrow */}
       <p
-        className="font-mono text-[10px] tracking-[0.3em] mb-3 uppercase"
+        className="font-mono text-[11px] tracking-[0.3em] mb-3 uppercase"
         style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
       >
         ✦ DRAG TO SPIN · CLICK A PIN OR A CITY
@@ -619,7 +619,7 @@ export default function GlobePreview() {
                   >
                     {p.city.events.length}
                   </span>
-                  <span className="font-mono text-[10px] tracking-[0.05em] lowercase">
+                  <span className="font-mono text-[11px] tracking-[0.05em] lowercase">
                     {p.city.city}
                   </span>
                 </div>
@@ -645,7 +645,7 @@ export default function GlobePreview() {
 
       {/* Footer — no event/city count, just a soft hint */}
       <p
-        className="mt-5 font-mono text-[10px] tracking-[0.22em] uppercase text-center"
+        className="mt-5 font-mono text-[11px] tracking-[0.22em] uppercase text-center"
         style={{ color: 'rgba(var(--ink-rgb),0.5)' }}
       >
         ✦ scroll the cities · click a pin · drag to spin
@@ -706,7 +706,7 @@ function CityCard({
       </h4>
       {city.highlight && (
         <p
-          className="font-sans text-[12px] leading-snug mb-3"
+          className="font-sans text-[13px] leading-snug mb-3"
           style={{ color: 'rgba(var(--ink-rgb),0.75)' }}
         >
           {city.highlight}
@@ -752,7 +752,7 @@ function CityCard({
                   )}
                 </div>
                 <span
-                  className="flex-1 font-sans text-[12px] leading-tight truncate"
+                  className="flex-1 font-sans text-[13px] leading-tight truncate"
                   style={{ color: 'rgba(var(--ink-rgb),0.9)' }}
                 >
                   {ev.name}
@@ -867,13 +867,13 @@ function CityList({
         }}
       >
         <span
-          className="font-mono text-[10px] tracking-[0.22em] uppercase"
+          className="font-mono text-[11px] tracking-[0.22em] uppercase"
           style={{ color: 'rgba(var(--ink-rgb),0.6)' }}
         >
           ❀ cities · click to focus
         </span>
         <span
-          className="font-mono text-[9.5px] tracking-[0.18em] uppercase"
+          className="font-mono text-[10.5px] tracking-[0.18em] uppercase"
           style={{ color: 'rgba(var(--ink-rgb),0.4)' }}
         >
           scroll ↕
@@ -990,7 +990,7 @@ function CityList({
                         {c.city}
                       </p>
                       <p
-                        className="font-mono text-[9.5px] tracking-[0.2em] uppercase mt-0.5 truncate"
+                        className="font-mono text-[10.5px] tracking-[0.2em] uppercase mt-0.5 truncate"
                         style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
                       >
                         {/* Country + highlight (no event count to keep the
@@ -1009,7 +1009,7 @@ function CityList({
 
                     {/* Right glyph — explore arrow / active indicator */}
                     <span
-                      className="font-mono text-[14px] shrink-0 transition-transform"
+                      className="font-mono text-[15px] shrink-0 transition-transform"
                       style={{
                         color: isSpotlit ? 'var(--ember-500)' : 'rgba(var(--ink-rgb),0.35)',
                       }}
@@ -1085,7 +1085,7 @@ function EventDetailModal({
             <button
               onClick={onClose}
               aria-label="Close event"
-              className="absolute -top-10 right-0 font-mono text-[11px] tracking-[0.22em] uppercase hover:text-ember-400 transition-colors flex items-center gap-2"
+              className="absolute -top-10 right-0 font-mono text-[12px] tracking-[0.22em] uppercase hover:text-ember-400 transition-colors flex items-center gap-2"
               style={{ color: 'rgba(253,249,242,0.8)' /* light in both themes — sits on the dark scrim */ }}
             >
               <span aria-hidden>✕</span> close
@@ -1105,14 +1105,14 @@ function EventDetailModal({
               >
                 <div className="flex items-baseline gap-3">
                   <span
-                    className="font-mono text-[10px] tracking-[0.22em] uppercase"
+                    className="font-mono text-[11px] tracking-[0.22em] uppercase"
                     style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                   >
                     EVENT
                   </span>
-                  <span className="font-mono text-[10px]" style={{ color: 'rgba(var(--ink-rgb),0.4)' }}>•</span>
+                  <span className="font-mono text-[11px]" style={{ color: 'rgba(var(--ink-rgb),0.4)' }}>•</span>
                   <span
-                    className="font-mono text-[10px] tracking-[0.22em] uppercase"
+                    className="font-mono text-[11px] tracking-[0.22em] uppercase"
                     style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
                   >
                     {event.city} · {new Date(event.startDate).toLocaleString('en-US', { month: 'short', year: 'numeric' })}
@@ -1131,14 +1131,14 @@ function EventDetailModal({
                     </h3>
                     {event.venue && (
                       <p
-                        className="font-mono text-[10px] tracking-[0.18em] uppercase mb-4"
+                        className="font-mono text-[11px] tracking-[0.18em] uppercase mb-4"
                         style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
                       >
                         {event.venue}
                       </p>
                     )}
                     <p
-                      className="font-sans text-[14px] leading-relaxed mb-5"
+                      className="font-sans text-[15px] leading-relaxed mb-5"
                       style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
                     >
                       {event.description}
@@ -1148,7 +1148,7 @@ function EventDetailModal({
                     {event.role && event.role.length > 0 && (
                       <div className="mb-5">
                         <p
-                          className="font-mono text-[9.5px] tracking-[0.22em] uppercase mb-2"
+                          className="font-mono text-[10.5px] tracking-[0.22em] uppercase mb-2"
                           style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                         >
                           ✦ WHAT I DID
@@ -1157,7 +1157,7 @@ function EventDetailModal({
                           {event.role.map((line, i) => (
                             <li
                               key={i}
-                              className="flex items-baseline gap-2.5 font-sans text-[13px] leading-relaxed"
+                              className="flex items-baseline gap-2.5 font-sans text-[14px] leading-relaxed"
                               style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
                             >
                               <span aria-hidden className="font-mono text-[9px] shrink-0" style={{ color: 'var(--ember-500)' }}>
@@ -1205,7 +1205,7 @@ function EventDetailModal({
                             href={l.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-mono text-[10.5px] tracking-[0.22em] uppercase px-3 py-1.5 rounded-full transition-colors hover:bg-[rgba(var(--hi-rgb),0.5)]"
+                            className="font-mono text-[11.5px] tracking-[0.22em] uppercase px-3 py-1.5 rounded-full transition-colors hover:bg-[rgba(var(--hi-rgb),0.5)]"
                             style={{
                               border: '1px solid rgba(var(--ink-rgb),0.25)',
                               background: 'rgba(var(--hi-rgb),0.55)',

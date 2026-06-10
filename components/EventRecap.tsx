@@ -210,7 +210,7 @@ export default function EventRecap() {
       {/* Eyebrow + chevron controls */}
       <div className="flex items-center justify-between mb-4">
         <p
-          className="font-mono text-[10px] tracking-[0.3em]"
+          className="font-mono text-[11px] tracking-[0.3em]"
           style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
         >
           ✦ EVENTS · SCROLL OR DRAG · CLICK A FLYER
@@ -483,7 +483,7 @@ function EventModal({
             <button
               onClick={onClose}
               aria-label="Close event recap"
-              className="absolute -top-10 right-0 font-mono text-[11px] tracking-[0.22em] uppercase hover:text-ember-400 transition-colors flex items-center gap-2"
+              className="absolute -top-10 right-0 font-mono text-[12px] tracking-[0.22em] uppercase hover:text-ember-400 transition-colors flex items-center gap-2"
               style={{ color: 'rgba(253,249,242,0.8)' /* on dark scrim */ }}
             >
               <span aria-hidden>✕</span> close
@@ -504,14 +504,14 @@ function EventModal({
               >
                 <div className="flex items-baseline gap-3">
                   <span
-                    className="font-mono text-[10px] tracking-[0.22em] uppercase"
+                    className="font-mono text-[11px] tracking-[0.22em] uppercase"
                     style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                   >
                     RECAP
                   </span>
-                  <span className="font-mono text-[10px]" style={{ color: 'rgba(var(--ink-rgb),0.4)' }}>•</span>
+                  <span className="font-mono text-[11px]" style={{ color: 'rgba(var(--ink-rgb),0.4)' }}>•</span>
                   <span
-                    className="font-mono text-[10px] tracking-[0.22em] uppercase"
+                    className="font-mono text-[11px] tracking-[0.22em] uppercase"
                     style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
                   >
                     {event.city} · {fmtMonth(event.startDate)}
@@ -533,14 +533,14 @@ function EventModal({
                     </h3>
                     {event.venue && (
                       <p
-                        className="font-mono text-[10.5px] tracking-[0.18em] uppercase mb-4"
+                        className="font-mono text-[11.5px] tracking-[0.18em] uppercase mb-4"
                         style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
                       >
                         {event.venue}
                       </p>
                     )}
                     <p
-                      className="font-sans text-[15px] leading-relaxed mb-6"
+                      className="font-sans text-[16px] leading-relaxed mb-6"
                       style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
                     >
                       {event.description}
@@ -551,7 +551,7 @@ function EventModal({
                     {event.role && event.role.length > 0 && (
                       <div className="mb-6">
                         <p
-                          className="font-mono text-[10px] tracking-[0.22em] uppercase mb-2"
+                          className="font-mono text-[11px] tracking-[0.22em] uppercase mb-2"
                           style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                         >
                           ✦ WHAT I DID
@@ -560,12 +560,12 @@ function EventModal({
                           {event.role.map((line, i) => (
                             <li
                               key={i}
-                              className="flex items-baseline gap-3 font-sans text-[13.5px] leading-relaxed"
+                              className="flex items-baseline gap-3 font-sans text-[14.5px] leading-relaxed"
                               style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
                             >
                               <span
                                 aria-hidden
-                                className="font-mono text-[10px] shrink-0"
+                                className="font-mono text-[11px] shrink-0"
                                 style={{ color: 'var(--ember-500)' }}
                               >
                                 ◇
@@ -615,7 +615,7 @@ function EventModal({
                             href={l.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-mono text-[10.5px] tracking-[0.22em] uppercase px-3 py-1.5 rounded-full transition-colors hover:bg-[rgba(var(--hi-rgb),0.5)]"
+                            className="font-mono text-[11.5px] tracking-[0.22em] uppercase px-3 py-1.5 rounded-full transition-colors hover:bg-[rgba(var(--hi-rgb),0.5)]"
                             style={{
                               border: '1px solid rgba(var(--ink-rgb),0.25)',
                               background: 'rgba(var(--hi-rgb),0.4)',
@@ -634,7 +634,7 @@ function EventModal({
                     {event.merch && event.merch.length > 0 && (
                       <div>
                         <p
-                          className="font-mono text-[10px] tracking-[0.22em] uppercase mb-2"
+                          className="font-mono text-[11px] tracking-[0.22em] uppercase mb-2"
                           style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                         >
                           ✦ MERCH + SWAG
@@ -665,14 +665,14 @@ function EventModal({
                                     {m.icon ?? '🛍️'}
                                   </span>
                                   <span
-                                    className="flex-1 font-sans text-[13px] truncate"
+                                    className="flex-1 font-sans text-[14px] truncate"
                                     style={{ color: 'rgba(var(--ink-rgb),0.85)' }}
                                   >
                                     {m.name}
                                   </span>
                                   {m.price && (
                                     <span
-                                      className="font-mono text-[10px] tracking-[0.18em] shrink-0"
+                                      className="font-mono text-[11px] tracking-[0.18em] shrink-0"
                                       style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
                                     >
                                       {m.price}
@@ -680,7 +680,7 @@ function EventModal({
                                   )}
                                   {m.link && (
                                     <span
-                                      className="font-mono text-[10px] shrink-0"
+                                      className="font-mono text-[11px] shrink-0"
                                       style={{ color: 'rgba(var(--ink-rgb),0.4)' }}
                                     >
                                       ↗

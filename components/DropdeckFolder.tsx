@@ -101,7 +101,7 @@ function PartnerLogo({ name, logo }: { name: string; logo: string }) {
 function SectionRule({ label }: { label: string }) {
   return (
     <div
-      className="flex items-center gap-3 mb-4 font-mono text-[10px] tracking-[0.26em] uppercase"
+      className="flex items-center gap-3 mb-4 font-mono text-[11px] tracking-[0.26em] uppercase"
       style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
     >
       <span>{label}</span>
@@ -121,7 +121,7 @@ export default function DropdeckFolder() {
     <div className="relative w-full max-w-[920px] mx-auto">
       {/* Intro */}
       <p
-        className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3"
+        className="font-mono text-[11px] tracking-[0.3em] uppercase mb-3"
         style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
       >
         ✦ currently building
@@ -135,7 +135,7 @@ export default function DropdeckFolder() {
       {/* TODO(jacqueline): make this blurb yours — what dropdeck is in
           YOUR words, and what your role is (founder? building solo?). */}
       <p
-        className="font-sans text-[14px] leading-relaxed mb-5 max-w-[560px]"
+        className="font-sans text-[15px] leading-relaxed mb-5 max-w-[560px]"
         style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
       >
         A canvas-tech UGC agency — pairing brands with creators.
@@ -144,7 +144,7 @@ export default function DropdeckFolder() {
         href="https://dropdeck.xyz"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block font-mono text-[11px] tracking-[0.22em] uppercase px-6 py-3 rounded-full mb-10 transition-transform hover:-translate-y-0.5"
+        className="inline-block font-mono text-[12px] tracking-[0.22em] uppercase px-6 py-3 rounded-full mb-10 transition-transform hover:-translate-y-0.5"
         style={{
           background: 'linear-gradient(135deg, var(--ember-500) 0%, var(--rust-600) 100%)',
           color: 'var(--paper-bright)',
@@ -168,7 +168,7 @@ export default function DropdeckFolder() {
           >
             <div className="flex items-baseline gap-2.5 mb-2">
               <span
-                className="font-mono text-[10px] tracking-[0.2em]"
+                className="font-mono text-[11px] tracking-[0.2em]"
                 style={{ color: 'rgba(var(--accent-rgb),0.9)' }}
               >
                 0{i + 1}
@@ -184,7 +184,7 @@ export default function DropdeckFolder() {
               </span>
             </div>
             <p
-              className="font-sans text-[12.5px] leading-relaxed"
+              className="font-sans text-[13.5px] leading-relaxed"
               style={{ color: 'rgba(var(--ink-rgb),0.7)' }}
             >
               {s.blurb}
@@ -193,7 +193,7 @@ export default function DropdeckFolder() {
             {i < STEPS.length - 1 && (
               <span
                 aria-hidden
-                className="hidden sm:flex absolute top-1/2 -right-[14px] -translate-y-1/2 font-mono text-[12px] z-10"
+                className="hidden sm:flex absolute top-1/2 -right-[14px] -translate-y-1/2 font-mono text-[13px] z-10"
                 style={{ color: 'rgba(var(--accent-rgb),0.7)' }}
               >
                 →
@@ -224,7 +224,7 @@ export default function DropdeckFolder() {
               <span aria-hidden className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(var(--ink-rgb),0.2)' }} />
               <span aria-hidden className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(var(--ink-rgb),0.2)' }} />
               <span
-                className="ml-1 flex-1 font-mono text-[9.5px] tracking-[0.14em] px-2.5 py-1 rounded-full truncate"
+                className="ml-1 flex-1 font-mono text-[10.5px] tracking-[0.14em] px-2.5 py-1 rounded-full truncate"
                 style={{
                   background: 'rgba(var(--hi-rgb),0.35)',
                   color: 'rgba(var(--ink-rgb),0.55)',
@@ -267,7 +267,7 @@ export default function DropdeckFolder() {
                   {t.value}
                 </p>
                 <p
-                  className="font-mono text-[9.5px] tracking-[0.22em] uppercase mt-2"
+                  className="font-mono text-[10.5px] tracking-[0.22em] uppercase mt-2"
                   style={{ color: 'rgba(var(--ink-rgb),0.6)' }}
                 >
                   {t.label}
@@ -324,7 +324,7 @@ export default function DropdeckFolder() {
         {/* "More soon" placeholder cell keeps the grid from feeling empty */}
         <li>
           <div
-            className="flex items-center justify-center rounded-[12px] px-4 py-6 h-full font-mono text-[10px] tracking-[0.24em] uppercase"
+            className="flex items-center justify-center rounded-[12px] px-4 py-6 h-full font-mono text-[11px] tracking-[0.24em] uppercase"
             style={{
               border: '1px dashed rgba(var(--ink-rgb),0.25)',
               color: 'rgba(var(--ink-rgb),0.45)',

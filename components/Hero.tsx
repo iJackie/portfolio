@@ -353,7 +353,7 @@ export default function Hero() {
       <div className="crosshair" aria-hidden />
 
       {/* TOP-LEFT — CONTACT ME (mailto) with pulsing dot + theme toggle */}
-      <div className="absolute top-5 left-6 md:top-7 md:left-10 z-30 font-mono text-[10px] md:text-[11px] tracking-[0.18em] uppercase flex flex-col items-start gap-3">
+      <div className="absolute top-5 left-6 md:top-7 md:left-10 z-30 font-mono text-[11px] md:text-[12px] tracking-[0.18em] uppercase flex flex-col items-start gap-3">
         <a
           href="mailto:jacquelinegiale@gmail.com"
           className="text-ink-900/80 hover:text-ember-500 transition-colors underline-offset-4 hover:underline flex items-center gap-2"
@@ -365,7 +365,7 @@ export default function Hero() {
       </div>
 
       {/* TOP-RIGHT — Socials */}
-      <div className="absolute top-5 right-6 md:top-7 md:right-10 z-30 font-mono text-[10px] md:text-[11px] tracking-[0.18em] uppercase text-ink-900/80 text-right leading-[1.8]">
+      <div className="absolute top-5 right-6 md:top-7 md:right-10 z-30 font-mono text-[11px] md:text-[12px] tracking-[0.18em] uppercase text-ink-900/80 text-right leading-[1.8]">
         <MetaLink href="https://t.me/ijackie_eth" label="tg" handle="@ijackie_eth" />
         <MetaLink href="https://twitter.com/berakana_" label="twitter" handle="@berakana_" />
         <MetaLink href="https://linkedin.com/in/jacquelinemach" label="linkedin" handle="/jacquelinemach" />
@@ -412,10 +412,10 @@ export default function Hero() {
           className="relative z-10 w-full max-w-[640px] mx-auto text-center px-2"
           style={{ marginTop: 'clamp(8px, 1.5vw, 20px)' }}
         >
-          <h3 className="font-sans font-bold uppercase text-ink-900 text-[12px] tracking-[0.2em] mb-3">
+          <h3 className="font-sans font-bold uppercase text-ink-900 text-[13px] tracking-[0.2em] mb-3">
             Building memories.
           </h3>
-          <p className="font-sans text-ink-900/80 text-[14px] md:text-[15px] leading-[1.6]">
+          <p className="font-sans text-ink-900/80 text-[15px] md:text-[16px] leading-[1.6]">
             I build communities, curate events, and run the ops behind them.
             Most recently scaled a crypto protocol from 8 to 20+ employees
             and $2.5B in TVL, with 20+ events across 10+ cities. Equal parts
@@ -433,7 +433,7 @@ export default function Hero() {
             , a canvas-tech UGC agency.
           </p>
           {/* GM! Let's chat. — short ember sign-off, doubles as a mailto. */}
-          <p className="font-sans text-[14px] md:text-[15px] mt-3">
+          <p className="font-sans text-[15px] md:text-[16px] mt-3">
             <a
               href="mailto:jacquelinegiale@gmail.com"
               className="text-ember-500 hover:underline underline-offset-4 font-medium"
@@ -450,7 +450,7 @@ export default function Hero() {
             nobody bounces without knowing they exist. */}
         <div
           aria-hidden
-          className="relative z-10 mt-8 font-mono text-[10px] tracking-[0.3em] uppercase scroll-cue"
+          className="relative z-10 mt-8 font-mono text-[11px] tracking-[0.3em] uppercase scroll-cue"
           style={{ color: 'rgba(var(--ink-rgb),0.5)' }}
         >
           ↓ open the folders

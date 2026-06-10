@@ -38,13 +38,13 @@ export default function BuildLog() {
         <span aria-hidden className="w-2.5 h-2.5 rounded-full" style={{ background: '#FEBC2E' }} />
         <span aria-hidden className="w-2.5 h-2.5 rounded-full" style={{ background: '#28C840' }} />
         <span
-          className="ml-2 font-mono text-[10px] tracking-[0.18em]"
+          className="ml-2 font-mono text-[11px] tracking-[0.18em]"
           style={{ color: 'rgba(253,249,242,0.45)' }}
         >
           ~/jacqueline/log
         </span>
       </div>
-      <div className="px-4 py-4 font-mono text-[12px] leading-[1.9]">
+      <div className="px-4 py-4 font-mono text-[13px] leading-[1.9]">
         {LOG.map((entry, i) => (
           <p key={i} className="whitespace-nowrap overflow-hidden text-ellipsis">
             <span style={{ color: 'rgba(255,90,160,0.85)' }}>{entry.date}</span>

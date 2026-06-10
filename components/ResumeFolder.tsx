@@ -179,7 +179,7 @@ export default function ResumeFolder() {
     <div>
       {/* Header */}
       <p
-        className="font-mono text-[10px] tracking-[0.3em] mb-3"
+        className="font-mono text-[11px] tracking-[0.3em] mb-3"
         style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
       >
         ✦ TIMELINE · MOST RECENT FIRST
@@ -191,7 +191,7 @@ export default function ResumeFolder() {
         The road so far.
       </h3>
       <p
-        className="font-sans text-[15px] leading-relaxed max-w-xl mb-10"
+        className="font-sans text-[16px] leading-relaxed max-w-xl mb-10"
         style={{ color: 'rgba(var(--ink-rgb),0.7)' }}
       >
         Most recent role at the top. Scroll down — the dot follows you
@@ -268,7 +268,7 @@ export default function ResumeFolder() {
       {QUOTES.length > 0 && (
         <div className="mt-12 mx-auto" style={{ maxWidth: 760 }}>
           <p
-            className="font-mono text-[10px] tracking-[0.3em] uppercase mb-4 text-center"
+            className="font-mono text-[11px] tracking-[0.3em] uppercase mb-4 text-center"
             style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
           >
             ✦ what they say
@@ -290,7 +290,7 @@ export default function ResumeFolder() {
                   “{q.quote}”
                 </blockquote>
                 <figcaption
-                  className="font-mono text-[9.5px] tracking-[0.2em] uppercase mt-3"
+                  className="font-mono text-[10.5px] tracking-[0.2em] uppercase mt-3"
                   style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
                 >
                   — {q.who}
@@ -393,13 +393,13 @@ function TimelineStop({
         >
           <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1.5">
             <span
-              className="font-mono text-[10px] tracking-[0.22em] uppercase"
+              className="font-mono text-[11px] tracking-[0.22em] uppercase"
               style={{ color: TONE_COLOR[stop.tone] }}
             >
               {stop.range}
             </span>
             <span
-              className="font-mono text-[9.5px] tracking-[0.22em] uppercase px-2 py-0.5 rounded-full"
+              className="font-mono text-[10.5px] tracking-[0.22em] uppercase px-2 py-0.5 rounded-full"
               style={{
                 color: 'rgba(var(--ink-rgb),0.6)',
                 border: '1px solid rgba(var(--ink-rgb),0.18)',
@@ -418,14 +418,14 @@ function TimelineStop({
           </h4>
 
           <p
-            className="font-mono text-[10.5px] tracking-[0.18em] uppercase mb-3"
+            className="font-mono text-[11.5px] tracking-[0.18em] uppercase mb-3"
             style={{ color: 'rgba(var(--ink-rgb),0.55)' }}
           >
             {stop.role}
           </p>
 
           <p
-            className="font-sans text-[13.5px] leading-relaxed"
+            className="font-sans text-[14.5px] leading-relaxed"
             style={{ color: 'rgba(var(--ink-rgb),0.78)' }}
           >
             {stop.blurb}
@@ -436,12 +436,12 @@ function TimelineStop({
               {stop.scope.map((line, j) => (
                 <li
                   key={j}
-                  className="flex items-baseline gap-3 font-sans text-[12.5px]"
+                  className="flex items-baseline gap-3 font-sans text-[13.5px]"
                   style={{ color: 'rgba(var(--ink-rgb),0.72)' }}
                 >
                   <span
                     aria-hidden
-                    className="font-mono text-[10px] shrink-0"
+                    className="font-mono text-[11px] shrink-0"
                     style={{ color: TONE_COLOR[stop.tone] }}
                   >
                     ◇
