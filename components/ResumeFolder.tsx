@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import BuildLog from '@/components/BuildLog';
 
 /**
  * ResumeFolder — body of the "04 / RESUME" folder.
@@ -196,6 +197,9 @@ export default function ResumeFolder() {
         Most recent role at the top. Scroll down — the dot follows you
         and lights up each stop as it passes.
       </p>
+
+      {/* NOW — terminal-style log of what's shipping right now */}
+      <BuildLog />
 
       {/* TIMELINE TRACK — centered rail with cards alternating sides.
           No internal scroller; this is just a tall container in the

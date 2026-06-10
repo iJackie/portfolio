@@ -9,23 +9,15 @@ import { useState } from 'react';
  * partners she's working with.
  *
  * Everything is data-driven from the arrays below:
- *   LOG       — build-log lines. Add one whenever something happens;
- *               newest first. This is what keeps the folder feeling alive.
  *   STEPS     — the 3-step "how it works" row.
  *   TRACTION  — real numbers only. Renders ONLY when non-empty.
  *   PARTNERS  — logo cards. Logos live in public/assets/partners/.
  *   PRODUCT_PEEK — screenshot of the canvas. Drop the file at
  *               public/assets/dropdeck/canvas-peek.png and the browser
  *               frame appears automatically (hidden while missing).
+ *
+ * (The terminal build log moved to the RESUME folder — see BuildLog.tsx.)
  */
-
-/* ── BUILD LOG — newest first. Format: { date: 'YYYY-MM', line } ────
-   TODO(jacqueline): add a line every time something ships. */
-const LOG: { date: string; line: string }[] = [
-  { date: '2026-06', line: 'partnered with poncho — first AI client onboard' },
-  { date: '2026-06', line: 'dropdeck folder goes live on the portfolio' },
-  { date: '2026-05', line: 'building dropdeck.xyz — canvas-tech UGC agency' },
-];
 
 /* ── HOW IT WORKS ───────────────────────────────────────────────────
    TODO(jacqueline): tune this copy to how dropdeck ACTUALLY works. */
@@ -211,62 +203,15 @@ export default function DropdeckFolder() {
         ))}
       </div>
 
-      {/* BUILD LOG (terminal) + PRODUCT PEEK side by side */}
-      <SectionRule label="build log" />
-      <div
-        className={`grid grid-cols-1 ${!peekFailed ? 'md:grid-cols-[1.1fr_1fr]' : ''} gap-4 mb-10 items-start`}
-      >
-        {/* Terminal window — stays dark in both themes, like a real one */}
-        <div
-          className="rounded-[12px] overflow-hidden"
-          style={{
-            background: '#1A0E16',
-            border: '1px solid rgba(255,255,255,0.1)',
-            boxShadow: '0 16px 36px -20px rgba(0,0,0,0.6)',
-          }}
-        >
+      {/* PRODUCT PEEK — browser-frame mockup; appears once the
+          screenshot exists at public/assets/dropdeck/canvas-peek.png */}
+      {!peekFailed && (
+        <div className="mb-10">
+          <SectionRule label="the canvas" />
           <div
-            className="flex items-center gap-2 px-3.5 py-2.5"
-            style={{ background: 'rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
-          >
-            <span aria-hidden className="w-2.5 h-2.5 rounded-full" style={{ background: '#FF5F57' }} />
-            <span aria-hidden className="w-2.5 h-2.5 rounded-full" style={{ background: '#FEBC2E' }} />
-            <span aria-hidden className="w-2.5 h-2.5 rounded-full" style={{ background: '#28C840' }} />
-            <span
-              className="ml-2 font-mono text-[10px] tracking-[0.18em]"
-              style={{ color: 'rgba(253,249,242,0.45)' }}
-            >
-              ~/dropdeck/log
-            </span>
-          </div>
-          <div className="px-4 py-4 font-mono text-[12px] leading-[1.9]">
-            {LOG.map((entry, i) => (
-              <p key={i} className="whitespace-nowrap overflow-hidden text-ellipsis">
-                <span style={{ color: 'rgba(255,90,160,0.85)' }}>{entry.date}</span>
-                <span style={{ color: 'rgba(253,249,242,0.35)' }}> ▸ </span>
-                <span style={{ color: 'rgba(253,249,242,0.85)' }}>{entry.line}</span>
-              </p>
-            ))}
-            <p aria-hidden>
-              <span style={{ color: 'rgba(253,249,242,0.45)' }}>$ </span>
-              <span className="dropdeck-cursor" style={{ color: 'var(--ember-400)' }}>▌</span>
-            </p>
-          </div>
-          <style jsx>{`
-            .dropdeck-cursor { animation: dropdeck-blink 1.1s steps(1) infinite; }
-            @keyframes dropdeck-blink { 50% { opacity: 0; } }
-            @media (prefers-reduced-motion: reduce) {
-              .dropdeck-cursor { animation: none; }
-            }
-          `}</style>
-        </div>
-
-        {/* Product peek — browser-frame mockup; appears once the
-            screenshot exists at public/assets/dropdeck/canvas-peek.png */}
-        {!peekFailed && (
-          <div
-            className="rounded-[12px] overflow-hidden"
+            className="rounded-[12px] overflow-hidden mx-auto"
             style={{
+              maxWidth: 640,
               background: 'rgba(var(--paper-rgb),0.8)',
               border: '1px solid rgba(var(--ink-rgb),0.16)',
               boxShadow: '0 16px 36px -22px rgba(0,0,0,0.4)',
@@ -298,8 +243,8 @@ export default function DropdeckFolder() {
               onError={() => setPeekFailed(true)}
             />
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* TRACTION — real numbers only; hidden until TRACTION has entries */}
       {TRACTION.length > 0 && (
