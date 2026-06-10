@@ -489,13 +489,15 @@ export default function GlobePreview() {
       </p>
 
       {/* TWO-COLUMN layout inside the folder — BIG globe left, city list
-          right. The spotlighted city's card floats OVER the globe's
-          left edge on desktop (inside the folder, never off-screen) and
-          stacks below the globe on mobile. */}
+          right. The spotlighted city's card POPS OUT of the folder's
+          left edge on desktop (~72% of it hangs outside, into the page
+          gutter) and stacks below the globe on mobile. */}
       <div className="relative w-full grid grid-cols-1 md:grid-cols-[1.15fr_1fr] gap-6 md:gap-8 items-start">
-        {/* PEEK CARD — desktop: floating overlay anchored top-left;
-            mobile: in-flow below the globe. */}
-        <div className="order-2 md:order-none md:absolute md:-left-2 md:top-0 md:z-30 w-full max-w-[280px] mx-auto md:mx-0 md:w-[240px]">
+        {/* PEEK CARD — desktop: popped out past the folder edge;
+            mobile: in-flow below the globe. The translate lives on this
+            OUTER positioner so framer-motion can own the transform on
+            the inner motion.div without clobbering it. */}
+        <div className="order-2 md:order-none md:absolute md:left-0 md:top-6 md:z-30 md:-translate-x-[72%] w-full max-w-[280px] mx-auto md:mx-0 md:w-[250px]">
           {/* mode="popLayout" → the OLD card and the NEW card overlap
               during the swap, so the canvas highlight and the visible
               card stay in sync. */}

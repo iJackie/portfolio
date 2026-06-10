@@ -1,79 +1,73 @@
 # jacquelinemach.com
 
-Personal portfolio + event showcase for Jacqueline Mach — Head of Community at Infrared Finance.
+Personal portfolio + event showcase for Jacqueline Mach — growth, community & events.
 
-Built with Next.js 14 (App Router) · TypeScript · Tailwind · Framer Motion · react-globe.gl.
+Built with Next.js 15 (App Router) · TypeScript · Tailwind · Framer Motion · a hand-rolled canvas globe (no three.js).
 
 ## Run locally
 
 ```bash
-cd event-showcase
 npm install
-npm run dev
+npm run dev          # http://localhost:3000
+npx next dev -p 3002 # or any other port
 ```
 
-Open <http://localhost:3000>.
+## How the site is laid out
 
-## What's in here
+One page (`app/page.tsx`): **Hero** (lanyard badge + bio + stats strip) → **FolderTabs** (the five big folders) → **PageFooter** (contact pill). A site-wide ASCII drift layer (`PageAscii`) floats behind everything below the hero, and `ThemeToggle` (bottom-right) flips dark mode.
 
-| Page | Path | What it does |
+| Folder | Component | Data lives in |
 |---|---|---|
-| Home | `/` | Hero → stats strip → rotating 3D globe with event pins → featured events → about teaser |
-| Events | `/events` | Full archive of all events with city filter pills |
-| Resume | `/resume` | Styled resume + PDF download |
+| 01 map | `components/GlobePreview.tsx` | `data/events.ts` (auto-derived) |
+| 02 event recap | `components/EventRecap.tsx` | `data/events.ts` |
+| 03 content | `components/ContentBento.tsx` | `CONTENT_ITEMS` array inside the component |
+| 04 resume | `components/ResumeFolder.tsx` | `STOPS_RAW` + `QUOTES` arrays inside the component |
+| 05 dropdeck | `components/DropdeckFolder.tsx` | `PARTNERS` array inside the component |
 
-Keyboard easter egg: press <kbd>/</kbd> anywhere to open a terminal. Try `help`, `ls events`, `cat about`, `open <slug>`.
+## ✦ Adding content (the cheat sheet)
 
-## Editing content
+### Add a new event (shows up on the MAP **and** in EVENT RECAP automatically)
+1. Drop the flyer into `public/assets/` (name it `flyer_YourEvent.png`).
+2. Open `data/events.ts` and copy any `ev({ ... })` block. Fill in:
+   - `id` (unique slug), `name`, `location` (`'City, Country'`), `lat`/`lng` (google "city coordinates"),
+   - `startDate`/`endDate` (`'YYYY-MM-DD'`), `description`, `stats` (4 punchy numbers),
+   - `photos: ['/assets/flyer_YourEvent.png']`, optional `links` (luma), `merch`.
+3. Optional but powerful: add `role: ['what I did…', '…']` bullets — they render as a **✦ WHAT I DID** case-study section in the event modal. Do this for your flagship events.
 
-- **Events:** edit `data/events.ts`. Each event has a slug, coordinates, photos, stats, description, and links. Set `featured: true` to surface it on the homepage.
-- **Resume:** edit `app/resume/page.tsx`. Update the `ROLES` and `SKILLS` arrays.
-- **Profile photo:** replace `public/assets/PFPpng.png`.
-- **PDF resume:** drop a new file at `public/resume.pdf` (same filename).
-- **Socials / contact:** edit `components/Footer.tsx`.
+That's it — the globe pin, city list, and flyer strip all derive from this one entry.
+
+### Add content (reels, talks, graphics, tweets → the CONTENT folder)
+1. Drop the media into `public/assets/` (video `.mp4` + a `thumb` image, or just an image).
+2. Open `components/ContentBento.tsx`, find `CONTENT_ITEMS`, copy an entry of the same kind (`video` / `youtube` / `image` / `graphic` / `tweet`…) and fill in `src`, `thumb`, `title`, `eyebrow`, `size`.
+
+### Add a dropdeck partner
+1. Logo → `public/assets/partners/<name>.svg` (or .png).
+2. Add to `PARTNERS` in `components/DropdeckFolder.tsx`: `{ name, tagline, logo: '/assets/partners/<name>.svg', href? }`.
+
+### Add a resume role / testimonial
+- Roles: `STOPS_RAW` in `components/ResumeFolder.tsx` (sorted newest-first by `sortKey: YYYYMM`).
+- Testimonials: `QUOTES` in the same file — the "what they say" section appears as soon as the array has entries.
+
+### Swap evergreen assets
+- Profile photo: `public/assets/PFPpng.png` · Resume PDF: `public/resume.pdf` (same filenames).
+- Hero bio + "open to work" line: `components/Hero.tsx` · Stats tiles: `components/StatsStrip.tsx`.
 
 ## Design system
 
-Single source of truth: `app/globals.css` and `tailwind.config.ts`.
+Theme lives in `app/globals.css` as CSS variables — **light values on `:root`, dark overrides on `html.dark`**.
 
-- Primary: rust `#E94B35`
-- Surface: cream `#FBF6F1`
-- Accent: sage `#7BA68D`
-- Anchor: ink `#2B1410`
-- Display font: Fraunces (italic) · Body: Inter Tight · Mono: JetBrains Mono
+- Use `rgba(var(--ink-rgb), α)` for text/borders, `rgba(var(--paper-rgb), α)` for surfaces, `rgba(var(--accent-rgb), α)` for interactive accents — these flip automatically in dark mode.
+- Keep literal colors only for things that shouldn't flip: modal backdrop scrims, text/chips sitting on photos, the white lanyard badge, the dark flyer cards.
+- Folder tints: `.folder-tint-{peach,lavender,rose,ember,mint}` (each has a dark variant).
+- Display: Fraunces italic · Body: Inter Tight · Mono: JetBrains Mono.
 
-## Deploy to Vercel
+## Deploy
 
-1. **Create a GitHub repo** (only the `event-showcase/` folder needs to be tracked):
-
-   ```bash
-   cd event-showcase
-   git init
-   git add .
-   git commit -m "init: personal portfolio"
-   gh repo create jacqueline-mach-portfolio --public --source=. --push
-   ```
-
-   (or use the GitHub web UI to create the repo, then `git remote add origin …` and `git push -u origin main`)
-
-2. **Connect to Vercel:**
-   - Go to <https://vercel.com/new>
-   - Import the repo you just pushed
-   - Framework preset: **Next.js** (auto-detected)
-   - Click Deploy — that's it. You'll get a `*.vercel.app` URL.
-
-3. **Custom domain:**
-   - In the Vercel project → **Settings → Domains**
-   - Add your domain (e.g. `jacquelinemach.com`) and follow the DNS instructions Vercel shows you
-   - You'll typically add an A record (`76.76.21.21`) and/or a CNAME (`cname.vercel-dns.com`) at your registrar (Namecheap, GoDaddy, Porkbun, etc.)
-
-4. Every push to `main` auto-deploys.
+Vercel, auto-deploys on push to `main`. Custom domain is configured in Vercel → Settings → Domains.
 
 ## Notes
 
-- The globe is rendered client-only (`react-globe.gl` needs `window`); SSR is disabled for that component via `next/dynamic`.
-- The custom gradient cursor only renders on devices with a fine pointer (desktop, no touch).
+- The globe is pure canvas 2D, theme-aware (re-tints pink-on-black in dark mode), drag to spin.
+- ASCII drift tokens repel from the cursor (`PageAscii` below the hero, `ASCII_SCATTER` inside `Hero`).
 - All motion respects `prefers-reduced-motion`.
-- Event flyers in `public/assets/` are originals from the previous build — feel free to compress them further (the largest `PFPpng.png` is 4 MB; consider exporting at 1200px wide JPG/WebP).
-# portfolio
-# portfolio
+- Compress big images before dropping them in (`PFPpng.png` is ~4 MB — export at 1200px WebP when you get a chance).
