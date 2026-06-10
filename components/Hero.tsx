@@ -412,14 +412,6 @@ export default function Hero() {
           className="relative z-10 w-full max-w-[640px] mx-auto text-center px-2"
           style={{ marginTop: 'clamp(8px, 1.5vw, 20px)' }}
         >
-          {/* THE ASK — what she does + what she's looking for, stated
-              plainly before any vibes. Recruiters read this first. */}
-          <p
-            className="font-mono text-[10.5px] md:text-[11.5px] tracking-[0.26em] uppercase mb-3"
-            style={{ color: 'var(--ember-500)' }}
-          >
-            ✦ growth · community · events lead — open to work ✦
-          </p>
           <h3 className="font-sans font-bold uppercase text-ink-900 text-[12px] tracking-[0.2em] mb-3">
             Building memories.
           </h3>
