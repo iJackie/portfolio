@@ -140,15 +140,7 @@ const CONTENT_ITEMS: ContentItem[] = [
   },
 
   // ── PRODUCT / FEATURE VIDEOS ──────────────────────────────────────
-  //
-  // ⚠️ HIDDEN UNTIL UPLOADED TO VERCEL BLOB.
-  // These mp4s are too big for git (50–140 MB each) so they're not in
-  // the deployed bundle. When you upload them to Vercel Blob:
-  //   1. Replace each `src` with the Blob URL (e.g.,
-  //      'https://abc123.public.blob.vercel-storage.com/video_TGE.mp4')
-  //   2. Uncomment the block by removing the /* and */
-  //   3. git add . && git commit -m "wire videos" && git push
-  /*
+  // Web-ready 720p transcodes (~6–8 MB each); raw exports live in _originals/.
   {
     id: 'video-tge',
     kind: 'reel',
@@ -163,7 +155,7 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-points-kickoff',
     kind: 'reel',
     title: 'Points Kickoff',
-    src: '/assets/video_PointsKickoff (1).mp4',
+    src: '/assets/video_PointsKickoff.mp4',
     thumb: '/assets/design_design_Bear1.webp',
     eyebrow: 'PRODUCT',
     caption: 'Kickoff video for the Infrared Points program.',
@@ -173,7 +165,7 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-ibera-unstaking',
     kind: 'reel',
     title: 'iBERA Unstaking Module',
-    src: '/assets/video_iBERA Unstaking Module (Captions).mp4',
+    src: '/assets/video_iBERAUnstaking.mp4',
     thumb: '/assets/design_design_Bear1.webp',
     eyebrow: 'EDUCATIONAL',
     caption: 'Walkthrough for the iBERA unstaking flow (captioned).',
@@ -193,13 +185,12 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-redemption',
     kind: 'reel',
     title: '1.8 Public Redemption',
-    src: '/assets/video_1.8OublicRedemption.mp4',
+    src: '/assets/video_PublicRedemption.mp4',
     thumb: '/assets/design_design_Bear1.webp',
     eyebrow: 'PRODUCT',
     caption: 'Cut explaining the v1.8 public redemption window.',
     span: 'sm',
   },
-  */
 
   // ── DESIGNS — brand kits, posters, GTM decks ──────────────────────
   {
