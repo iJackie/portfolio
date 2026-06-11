@@ -49,7 +49,7 @@ That's it — the globe pin, city list, and flyer strip all derive from this one
 - Testimonials: `QUOTES` in the same file — the "what they say" section appears as soon as the array has entries.
 
 ### Swap evergreen assets
-- Profile photo: `public/assets/PFPpng.png` · Resume PDF: `public/resume.pdf` (same filenames).
+- Profile photo: `public/assets/PFPpng.webp` · Resume PDF: `public/resume.pdf` (same filenames).
 - Hero bio + "open to work" line: `components/Hero.tsx` · Stats tiles: `components/StatsStrip.tsx`.
 
 ## Design system
@@ -70,4 +70,4 @@ Vercel, auto-deploys on push to `main`. Custom domain is configured in Vercel �
 - The globe is pure canvas 2D, theme-aware (re-tints pink-on-black in dark mode), drag to spin.
 - ASCII drift tokens repel from the cursor (`PageAscii` below the hero, `ASCII_SCATTER` inside `Hero`).
 - All motion respects `prefers-reduced-motion`.
-- Compress big images before dropping them in (`PFPpng.png` is ~4 MB — export at 1200px WebP when you get a chance).
+- Compress big images before dropping them in (`PFPpng.webp` is ~4 MB — export at 1200px WebP when you get a chance).

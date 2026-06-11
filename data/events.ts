@@ -71,7 +71,7 @@ export const EVENTS: EventItem[] = [
       { value: '1',   label: 'night' },
       { value: '∞',   label: 'vibes' },
     ],
-    photos: ['/assets/flyer_LiquidStakingNight.png'],
+    photos: ['/assets/flyer_LiquidStakingNight.webp'],
     links: [{ label: 'event page', url: 'https://luma.com/u7p1vn54' }],
     featured: true,
   }),
@@ -119,7 +119,7 @@ export const EVENTS: EventItem[] = [
       { value: '5v5', label: 'format' },
       { value: '∞',   label: 'energy' },
     ],
-    photos: ['/assets/flyer_BeracupDevcon.png'],
+    photos: ['/assets/flyer_BeracupDevcon.webp'],
     links: [{ label: 'event page', url: 'https://lu.ma/beracup' }],
   }),
 
@@ -142,7 +142,7 @@ export const EVENTS: EventItem[] = [
       { value: '1',   label: 'night' },
       { value: '🍲',  label: 'hotpot' },
     ],
-    photos: ['/assets/flyer_HotpotDao.png'],
+    photos: ['/assets/flyer_HotpotDao.webp'],
     links: [{ label: 'event page', url: 'https://lu.ma/mmrgk0hj?tk=5VSvY0' }],
     featured: true,
   }),
@@ -166,7 +166,7 @@ export const EVENTS: EventItem[] = [
       { value: '3',      label: 'teams' },
       { value: '♨️',     label: 'relaxation' },
     ],
-    photos: ['/assets/flyer_BeraSpa1.png', '/assets/photo_BeraSpa2.png'],
+    photos: ['/assets/flyer_BeraSpa1.webp', '/assets/photo_BeraSpa2.webp'],
     links: [{ label: 'event page', url: 'https://lu.ma/8u1lrecl' }],
   }),
 
@@ -189,7 +189,7 @@ export const EVENTS: EventItem[] = [
       { value: '1',   label: 'night' },
       { value: '🍯',  label: 'honey' },
     ],
-    photos: ['/assets/flyer_HoneyHour.png'],
+    photos: ['/assets/flyer_HoneyHour.webp'],
     links: [{ label: 'event page', url: 'https://luma.com/honeyhour?tk=vQ2xxh' }],
   }),
 
@@ -281,7 +281,7 @@ export const EVENTS: EventItem[] = [
       { value: '♠️',   label: 'poker' },
       { value: '🎧',   label: 'afterparty' },
     ],
-    photos: ['/assets/flyer_InfraredAllIn.png', '/assets/flyer_AllinLounge.jpeg'],
+    photos: ['/assets/flyer_InfraredAllIn.webp', '/assets/flyer_AllinLounge.jpeg'],
     featured: true,
   }),
 
