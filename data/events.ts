@@ -235,7 +235,12 @@ export const EVENTS: EventItem[] = [
       { value: '🎯',  label: 'learning' },
       { value: '🎁',  label: 'rewards' },
     ],
-    photos: ['/assets/flyer_Infrared101.png'],
+    photos: [
+      '/assets/flyer_Infrared101.png',
+      '/assets/infrared101-taipei/merch-table.webp',
+      '/assets/infrared101-taipei/bear-standee-banner.webp',
+      '/assets/infrared101-taipei/balloons.webp',
+    ],
     links: [{ label: 'event page', url: 'https://luma.com/hgp7hvse' }],
   }),
 
@@ -420,7 +425,13 @@ export const EVENTS: EventItem[] = [
       { value: '🚌',  label: 'shuttles' },
       { value: '🎁',  label: 'swag' },
     ],
-    photos: ['/assets/flyer_KBWShuttle.avif'],
+    photos: [
+      '/assets/flyer_KBWShuttle.avif',
+      '/assets/SeoulShuttle/Shuttle1.webp',
+      '/assets/SeoulShuttle/ShuttleCafe.webp',
+      '/assets/SeoulShuttle/SeoulMerch.webp',
+      '/assets/SeoulShuttle/CafeCupSleeve.webp',
+    ],
     links: [{ label: 'event page', url: 'https://luma.com/38wpurid' }],
     featured: true,
   }),
@@ -444,7 +455,9 @@ export const EVENTS: EventItem[] = [
       { value: '🏝️', label: 'offsite' },
       { value: '🧘', label: 'wellness' },
     ],
-    photos: [],
+    photos: [
+      '/assets/Offsite-InfraredCefalu/OffsiteItinerary.webp',
+    ],
   }),
 
   ev({
