@@ -457,12 +457,12 @@ export const EVENTS: EventItem[] = [
     ],
     photos: [
       '/assets/Offsite-InfraredCefalu/OffsiteItinerary.webp',
-      '/assets/Offsite-InfraredCefalu/IMG_7054.webp',
-      '/assets/Offsite-InfraredCefalu/IMG_7083.webp',
-      '/assets/Offsite-InfraredCefalu/IMG_7205.webp',
-      '/assets/Offsite-InfraredCefalu/IMG_7388.webp',
-      '/assets/Offsite-InfraredCefalu/IMG_8043.webp',
-      '/assets/Offsite-InfraredCefalu/527A2B7E-E233-499E-A76B-B3F92C9BEE2C.webp',
+      '/assets/Offsite-InfraredCefalu/Map.webp',
+      '/assets/Offsite-InfraredCefalu/View1.webp',
+      '/assets/Offsite-InfraredCefalu/View2.webp',
+      '/assets/Offsite-InfraredCefalu/View3.webp',
+      '/assets/Offsite-InfraredCefalu/InfraredShirt.webp',
+      '/assets/Offsite-InfraredCefalu/GroupPic.webp',
     ],
   }),
 
