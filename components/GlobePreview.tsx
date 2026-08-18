@@ -1219,21 +1219,13 @@ function EventDetailModal({
                     )}
                   </div>
 
-                  {/* RIGHT: flyer */}
-                  <div>
-                    {event.photos[0] ? (
-                      <div
-                        className="relative w-full aspect-[4/5] overflow-hidden rounded-[6px]"
-                        style={{
-                          border: '1px solid rgba(var(--ink-rgb),0.2)',
-                          boxShadow: 'inset 0 0 0 2px var(--paper-bright)',
-                          background: 'rgba(var(--hi-rgb),0.5)',
-                        }}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={event.photos[0]} alt={event.name} className="w-full h-full object-cover" />
-                      </div>
-                    ) : (
+                  {/* RIGHT: photo column — renders EVERY event.photos entry
+                      (not just [0]) so multi-photo events show every photo.
+                      Uses w-full h-auto (natural aspect, no cropping) instead
+                      of the old aspect-[4/5] + object-cover which cropped
+                      wide flyers on both sides. */}
+                  <div className="flex flex-col gap-3">
+                    {event.photos.length === 0 ? (
                       <div
                         className="relative w-full aspect-[4/5] rounded-[6px] flex items-center justify-center"
                         style={{
@@ -1243,6 +1235,27 @@ function EventDetailModal({
                       >
                         <span className="text-6xl" aria-hidden>{event.emoji}</span>
                       </div>
+                    ) : (
+                      event.photos.map((src, i) => (
+                        <div
+                          key={src}
+                          className="relative w-full overflow-hidden rounded-[6px] flex items-center justify-center"
+                          style={{
+                            border: '1px solid rgba(var(--ink-rgb),0.2)',
+                            boxShadow: 'inset 0 0 0 2px var(--paper-bright)',
+                            background: 'rgba(var(--hi-rgb),0.35)',
+                          }}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={src}
+                            alt={i === 0 ? event.name : `${event.name} — photo ${i + 1}`}
+                            className="block w-full h-auto"
+                            style={{ maxWidth: '100%' }}
+                            loading={i === 0 ? undefined : 'lazy'}
+                          />
+                        </div>
+                      ))
                     )}
                   </div>
                 </div>
