@@ -552,6 +552,7 @@ export const EVENTS: EventItem[] = [
     ],
     photos: [
       '/assets/InfraredInvestorDinner/flyer.webp',
+      '/assets/InfraredInvestorDinner/dinner-tablescape.webp',
     ],
     links: [{ label: 'event page', url: 'https://luma.com/1dp5dlbg' }],
     featured: true,
