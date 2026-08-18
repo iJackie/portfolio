@@ -337,6 +337,42 @@ export const EVENTS: EventItem[] = [
   }),
 
   ev({
+    id: '2022-nyc-petroni-pizza-party',
+    name: "Petroni's Pizza Party",
+    location: 'New York, United States',
+    venue: 'Downtown Manhattan (secret location)',
+    lat: 40.7128,
+    lng: -74.0060,
+    startDate: '2022-03-14',
+    endDate: '2022-03-20',
+    emoji: '🍕',
+    color: '#E94B35',
+    description:
+      'A Pi Day (3.14) Edible NFT drop with Food Network star Chef Christian Petroni — collectors could lock down a Pizza Pie NFT on Crypto.com, unlock a #petroni-nft-chat on Discord to get the secret party location, receive a special-edition Gabagool merch drop, and gather for an IRL pizza party in NYC on 3.20.22. NFT holders also got to vote on the next city and unlocked airdrops of family recipes + invites to Gabagool HQ. Built with 8it and Crypto.com NFT.',
+    stats: [
+      { value: '500+', label: 'NFTs' },
+      { value: '$250', label: 'floor' },
+      { value: '1',    label: 'chef' },
+      { value: 'π',    label: 'day drop' },
+    ],
+    photos: [
+      '/assets/PetroniPizzaParty/flyer.webp',
+      '/assets/PetroniPizzaParty/pizza.webp',
+      '/assets/PetroniPizzaParty/chef-portrait.webp',
+      '/assets/PetroniPizzaParty/petroni-hand.webp',
+      '/assets/PetroniPizzaParty/art-direction.webp',
+      '/assets/PetroniPizzaParty/how-it-works.webp',
+    ],
+    links: [
+      { label: '8it page',        url: 'https://www.8it.world/petroni/' },
+      { label: 'crypto.com drop', url: 'https://crypto.com/nft/drops-event/cf1c2362a043dd68ef46614d6ea2e954?tab=info' },
+      { label: 'medium recap',    url: 'https://medium.com/cryptocomnft/celebrity-chef-christian-petroni-invites-nft-collectors-to-dinner-2e4d89e5cae9' },
+      { label: 'chef interview',  url: 'https://www.christianpetroni.com/blogs/news/christian-petroni-launches-an-edible-nft-and-takes-lessons-from-guy-fieri-exclusive-interview' },
+    ],
+    featured: true,
+  }),
+
+  ev({
     id: '2025-taipei-mrblock-2025',
     name: 'MrBlock Summit 2025',
     location: 'Taipei, Taiwan',
