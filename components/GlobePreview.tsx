@@ -65,6 +65,7 @@ const CITY_HIGHLIGHT: Record<string, string> = {
   Dubai: 'Token2049 Dubai · Brass Monkey',
   Denver: 'ETHDenver lounge + soirée',
   'Cefalù': 'Infrared offsite',
+  'New York': 'NFT NYC - EdibleNFT',
 };
 
 /* Build CITIES once from the real events. */
@@ -1285,9 +1286,12 @@ function EventDetailModal({
                         <span className="text-6xl" aria-hidden>{event.emoji}</span>
                       </div>
                     ) : (
-                      event.photos.map((src, i) => (
+                      [
+                        ...event.photos.map((src) => ({ kind: 'photo' as const, src })),
+                        ...(event.videos ?? []).map((src) => ({ kind: 'video' as const, src })),
+                      ].map((item, i) => (
                         <div
-                          key={src}
+                          key={item.src}
                           className="relative w-full overflow-hidden rounded-[6px] flex items-center justify-center"
                           style={{
                             border: '1px solid rgba(var(--ink-rgb),0.2)',
@@ -1295,14 +1299,25 @@ function EventDetailModal({
                             background: 'rgba(var(--hi-rgb),0.35)',
                           }}
                         >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={src}
-                            alt={i === 0 ? event.name : `${event.name} — photo ${i + 1}`}
-                            className="block w-full h-auto"
-                            style={{ maxWidth: '100%' }}
-                            loading={i === 0 ? undefined : 'lazy'}
-                          />
+                          {item.kind === 'photo' ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={item.src}
+                              alt={i === 0 ? event.name : `${event.name} — photo ${i + 1}`}
+                              className="block w-full h-auto"
+                              style={{ maxWidth: '100%' }}
+                              loading={i === 0 ? undefined : 'lazy'}
+                            />
+                          ) : (
+                            <video
+                              src={item.src}
+                              controls
+                              playsInline
+                              preload="metadata"
+                              className="block w-full h-auto"
+                              style={{ maxWidth: '100%' }}
+                            />
+                          )}
                         </div>
                       ))
                     )}

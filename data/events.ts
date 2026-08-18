@@ -29,6 +29,7 @@ export type EventItem = {
   description: string;
   stats: EventStat[];
   photos: string[];      // primary flyer/photo paths in /public
+  videos?: string[];     // optional video paths in /public (mp4/webm)
   merch?: EventMerch[];
   links?: EventLink[];
   featured?: boolean;
@@ -314,29 +315,6 @@ export const EVENTS: EventItem[] = [
   }),
 
   ev({
-    id: '2025-taipei-mrblock-summit',
-    name: 'MrBlock Summit 2025',
-    location: 'Taipei, Taiwan',
-    venue: 'Syntrend 12F',
-    lat: 25.0330,
-    lng: 121.5654,
-    startDate: '2025-09-05',
-    endDate: '2025-09-05',
-    emoji: '🎤',
-    color: '#E94B35',
-    description:
-      'Returning to Syntrend for the 2025 edition of MrBlock Summit. Spoke as Head of Community at Infrared — a full day of talks, panels, and connection with the Taipei crypto scene.',
-    stats: [
-      { value: '1 day', label: 'summit' },
-      { value: '🎤',    label: 'speaker' },
-      { value: 'panel', label: 'content' },
-      { value: 'TPE',   label: 'city' },
-    ],
-    photos: ['/assets/MrBlockSummit2025/speaker-card.webp'],
-    featured: true,
-  }),
-
-  ev({
     id: '2022-nyc-petroni-pizza-party',
     name: "Petroni's Pizza Party",
     location: 'New York, United States',
@@ -362,6 +340,9 @@ export const EVENTS: EventItem[] = [
       '/assets/PetroniPizzaParty/petroni-hand.webp',
       '/assets/PetroniPizzaParty/art-direction.webp',
       '/assets/PetroniPizzaParty/how-it-works.webp',
+    ],
+    videos: [
+      '/assets/PetroniPizzaParty/party-clip.mp4',
     ],
     links: [
       { label: '8it page',        url: 'https://www.8it.world/petroni/' },
@@ -391,7 +372,10 @@ export const EVENTS: EventItem[] = [
       { value: '1',      label: 'day' },
       { value: '🚀',     label: 'innovation' },
     ],
-    photos: ['/assets/flyer_MrBlock2025.avif'],
+    photos: [
+      '/assets/flyer_MrBlock2025.avif',
+      '/assets/MrBlockSummit2025/speaker-card.webp',
+    ],
     links: [{ label: 'event page', url: 'https://luma.com/mrblock_tpe_2025?tk=pgUsiB' }],
     featured: true,
   }),

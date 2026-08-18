@@ -713,9 +713,12 @@ function EventModal({
                         <span className="text-6xl" aria-hidden>{event.emoji}</span>
                       </div>
                     ) : (
-                      event.photos.map((src, i) => (
+                      [
+                        ...event.photos.map((src) => ({ kind: 'photo' as const, src })),
+                        ...(event.videos ?? []).map((src) => ({ kind: 'video' as const, src })),
+                      ].map((item, i) => (
                         <div
-                          key={src}
+                          key={item.src}
                           className="relative w-full overflow-hidden rounded-[8px] flex items-center justify-center"
                           style={{
                             border: '1px solid rgba(var(--ink-rgb),0.2)',
@@ -731,24 +734,35 @@ function EventModal({
                             // centering when its own aspect is unusual.
                           }}
                         >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={src}
-                            alt={
-                              i === 0
-                                ? event.name
-                                : `${event.name} — photo ${i + 1}`
-                            }
-                            className="block w-full h-auto"
-                            style={{
-                              // width: 100% of container, height auto so the
-                              // natural aspect ratio is preserved. NO
-                              // max-height so wide flyers letterbox and
-                              // portrait shots stay tall — nothing clips.
-                              maxWidth: '100%',
-                            }}
-                            loading={i === 0 ? undefined : 'lazy'}
-                          />
+                          {item.kind === 'photo' ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={item.src}
+                              alt={
+                                i === 0
+                                  ? event.name
+                                  : `${event.name} — photo ${i + 1}`
+                              }
+                              className="block w-full h-auto"
+                              style={{
+                                // width: 100% of container, height auto so the
+                                // natural aspect ratio is preserved. NO
+                                // max-height so wide flyers letterbox and
+                                // portrait shots stay tall — nothing clips.
+                                maxWidth: '100%',
+                              }}
+                              loading={i === 0 ? undefined : 'lazy'}
+                            />
+                          ) : (
+                            <video
+                              src={item.src}
+                              controls
+                              playsInline
+                              preload="metadata"
+                              className="block w-full h-auto"
+                              style={{ maxWidth: '100%' }}
+                            />
+                          )}
                         </div>
                       ))
                     )}
