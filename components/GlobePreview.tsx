@@ -496,8 +496,15 @@ export default function GlobePreview() {
         {/* PEEK CARD — desktop: popped out past the folder edge;
             mobile: in-flow below the globe. The translate lives on this
             OUTER positioner so framer-motion can own the transform on
-            the inner motion.div without clobbering it. */}
-        <div className="order-2 md:order-none md:absolute md:left-0 md:top-6 md:z-30 md:-translate-x-[72%] w-full max-w-[280px] mx-auto md:mx-0 md:w-[250px]">
+            the inner motion.div without clobbering it.
+
+            Translate is responsive — the outer <main> is `max-w-6xl` (1152px)
+            so the card only has room to POP FULLY OUT past the folder edge
+            once the viewport is wide enough to give the card a gutter. If
+            we always translate -72% the card gets clipped on smaller
+            desktop widths. Progression: barely peek at md, more at lg,
+            full 72% pop-out only at 2xl (≥1536px). */}
+        <div className="order-2 md:order-none md:absolute md:left-0 md:top-6 md:z-30 md:-translate-x-[15%] lg:-translate-x-[35%] xl:-translate-x-[55%] 2xl:-translate-x-[72%] w-full max-w-[280px] mx-auto md:mx-0 md:w-[250px]">
           {/* mode="popLayout" → the OLD card and the NEW card overlap
               during the swap, so the canvas highlight and the visible
               card stay in sync. */}
@@ -639,6 +646,7 @@ export default function GlobePreview() {
             activeId={activeId}
             spotlightId={effectiveCity?.id ?? null}
             onPickCity={(id) => setActiveId((prev) => (prev === id ? null : id))}
+            onPickEvent={(ev) => setModalEvent(ev)}
           />
         </div>
       </div>
@@ -795,6 +803,7 @@ function CityList({
   activeId,
   spotlightId,
   onPickCity,
+  onPickEvent,
 }: {
   cities: City[];
   activeId: string | null;
@@ -802,6 +811,10 @@ function CityList({
    *  auto-scroll the active row into view. */
   spotlightId: string | null;
   onPickCity: (id: string) => void;
+  /** Double-clicking a row (or clicking "OPEN") opens the first event
+   *  in that city — a shortcut so visitors don't have to focus the
+   *  city and THEN click into the left-side peek card. */
+  onPickEvent: (e: EventItem) => void;
 }) {
   const scrollerRef = useRef<HTMLUListElement | null>(null);
   const rowRefs = useRef<Map<string, HTMLLIElement>>(new Map());
@@ -821,8 +834,6 @@ function CityList({
   }, []);
 
   // Deterministic order — busiest cities first, then alphabetical.
-  // (Used to be shuffled per visit, which made the list impossible to
-  // scan and hid the story the data tells.)
   const sorted = useMemo(
     () =>
       [...cities].sort(
@@ -830,6 +841,29 @@ function CityList({
       ),
     [cities],
   );
+
+  // INFINITE SCROLL — render the sorted list TWICE back-to-back. When
+  // the user scrolls past the first copy's height, silently subtract
+  // that height from scrollTop so they wrap back to the top of the
+  // second copy (which visually is identical). Feels endless.
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    let wrapping = false;
+    const onScroll = () => {
+      if (wrapping) return;
+      // scrollHeight is the total of both copies rendered
+      const half = el.scrollHeight / 2;
+      if (half <= 0) return;
+      if (el.scrollTop >= half) {
+        wrapping = true;
+        el.scrollTop -= half;
+        requestAnimationFrame(() => { wrapping = false; });
+      }
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, [sorted.length]);
 
   // Gentle auto-scroll: keep the spotlighted row visible. Stops once the
   // user has interacted with the list themselves.
@@ -870,7 +904,7 @@ function CityList({
           className="font-mono text-[11px] tracking-[0.22em] uppercase"
           style={{ color: 'rgba(var(--ink-rgb),0.6)' }}
         >
-          ❀ cities · click to focus
+          ❀ cities · click · dbl-click to open
         </span>
         <span
           className="font-mono text-[10.5px] tracking-[0.18em] uppercase"
@@ -891,7 +925,13 @@ function CityList({
         ref={scrollerRef}
         className="city-list-scroller max-h-[460px] overflow-y-auto p-2 space-y-2"
       >
-        {sorted.map((c) => {
+        {/* Rendered TWICE for the infinite-scroll wrap. Each rendered
+            row still passes through the same onPickCity/onPickEvent
+            handlers, so behavior is identical either copy. Only the
+            FIRST copy registers row refs (used by the auto-scroll
+            effect to jog the spotlighted row into view). */}
+        {[...sorted, ...sorted].map((c, idx) => {
+          const isFirstCopy = idx < sorted.length;
           // A row is "spotlit" if it matches the manual selection OR the
           // current auto-tour city.
           const isSpotlit = c.id === activeId || c.id === spotlightId;
@@ -901,10 +941,17 @@ function CityList({
             .filter(Boolean)
             .slice(0, 3) as string[];
 
+          // Double-click opens the FIRST event in the city — a shortcut
+          // so visitors don't have to focus the city then click the
+          // left-side peek card.
+          const firstEvent = c.events[0];
+
           return (
             <li
-              key={c.id}
+              key={`${c.id}-${isFirstCopy ? 'a' : 'b'}`}
               ref={(el) => {
+                // Only the first copy registers a ref (used by auto-scroll).
+                if (!isFirstCopy) return;
                 if (el) rowRefs.current.set(c.id, el);
                 else rowRefs.current.delete(c.id);
               }}
@@ -912,6 +959,8 @@ function CityList({
               <button
                 type="button"
                 onClick={() => onPickCity(c.id)}
+                onDoubleClick={() => firstEvent && onPickEvent(firstEvent)}
+                title={firstEvent ? 'Double-click to open the event' : undefined}
                 className="group w-full text-left rounded-[10px] overflow-hidden transition-all"
                 style={{
                   background: isSpotlit
