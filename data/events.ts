@@ -509,6 +509,7 @@ export const EVENTS: EventItem[] = [
       { value: '🍽️',  label: 'eat-to-earn' },
     ],
     photos: [
+      '/assets/edible-nft/nyc-map.webp',
       '/assets/edible-nft/eat-to-earn-header.webp',
       '/assets/edible-nft/exclusive-dish-drops.webp',
       '/assets/edible-nft/howtoplay.webp',
