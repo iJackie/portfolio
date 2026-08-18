@@ -446,6 +446,48 @@ export const EVENTS: EventItem[] = [
     ],
     photos: [],
   }),
+
+  ev({
+    id: '2025-nyc-edible-nft-food-hunt',
+    name: 'Edible NFT Food Hunt',
+    location: 'New York, United States',
+    venue: 'Partner restaurants across NYC',
+    lat: 40.7128,
+    lng: -74.0060,
+    startDate: '2025-09-02',
+    endDate: '2025-09-05',
+    emoji: '🍔',
+    color: '#FF5A2C',
+    description:
+      'A Web3 twist on eating during NFT NYC. Diners visit partner restaurants across the city, order curated dishes, collect limited-edition Edible NFTs, and climb a leaderboard for prizes. Built with 8it — the traditional ad-supported restaurant review model is broken; this is what an eat-to-earn version looks like.',
+    stats: [
+      { value: '12',  label: 'partners' },
+      { value: 'NYC', label: 'edition' },
+      { value: '4',   label: 'days' },
+      { value: '🍽️',  label: 'eat-to-earn' },
+    ],
+    photos: [
+      '/assets/edible-nft/eat-to-earn-header.webp',
+      '/assets/edible-nft/exclusive-dish-drops.webp',
+      '/assets/edible-nft/howtoplay.webp',
+      '/assets/edible-nft/eat-it.webp',
+      '/assets/edible-nft/claim-it.webp',
+      '/assets/edible-nft/earn-it.webp',
+      '/assets/edible-nft/win-it.webp',
+      '/assets/edible-nft/partners.webp',
+      '/assets/edible-nft/join-8it-fam.webp',
+      '/assets/edible-nft/wtfaq.webp',
+      '/assets/edible-nft/last-project.webp',
+      '/assets/edible-nft/lead-gen-title.webp',
+    ],
+    links: [
+      { label: 'event page', url: 'https://www.8it.world/edible-nft-food-hunt/' },
+      { label: 'twitter',    url: 'https://twitter.com/EdibleNft' },
+      { label: 'discord',    url: 'https://discord.gg/FBSbjxYMa4' },
+      { label: '8it app',    url: 'https://8itapp.page.link/appstore' },
+    ],
+    featured: true,
+  }),
 ];
 
 export const FEATURED_EVENTS = EVENTS.filter((e) => e.featured);
