@@ -314,6 +314,29 @@ export const EVENTS: EventItem[] = [
   }),
 
   ev({
+    id: '2025-taipei-mrblock-summit',
+    name: 'MrBlock Summit 2025',
+    location: 'Taipei, Taiwan',
+    venue: 'Syntrend 12F',
+    lat: 25.0330,
+    lng: 121.5654,
+    startDate: '2025-09-05',
+    endDate: '2025-09-05',
+    emoji: '🎤',
+    color: '#E94B35',
+    description:
+      'Returning to Syntrend for the 2025 edition of MrBlock Summit. Spoke as Head of Community at Infrared — a full day of talks, panels, and connection with the Taipei crypto scene.',
+    stats: [
+      { value: '1 day', label: 'summit' },
+      { value: '🎤',    label: 'speaker' },
+      { value: 'panel', label: 'content' },
+      { value: 'TPE',   label: 'city' },
+    ],
+    photos: ['/assets/MrBlockSummit2025/speaker-card.webp'],
+    featured: true,
+  }),
+
+  ev({
     id: '2025-taipei-mrblock-2025',
     name: 'MrBlock Summit 2025',
     location: 'Taipei, Taiwan',
