@@ -715,7 +715,7 @@ function EventModal({
                         <img
                           src={event.photos[0]}
                           alt={event.name}
-                          className="w-full h-auto max-h-[68vh] object-contain"
+                          className="max-w-full max-h-[68vh] w-auto h-auto object-contain"
                           style={{ display: 'block' }}
                         />
                       </div>
@@ -746,7 +746,7 @@ function EventModal({
                         <img
                           src={event.photos[1]}
                           alt={`${event.name} additional photo`}
-                          className="w-full h-auto max-h-[40vh] object-contain"
+                          className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
                           style={{ display: 'block' }}
                         />
                       </div>
