@@ -340,7 +340,7 @@ export const EVENTS: EventItem[] = [
     id: '2022-nyc-petroni-pizza-party',
     name: "Petroni's Pizza Party",
     location: 'New York, United States',
-    venue: 'Downtown Manhattan (secret location)',
+    venue: 'Soho House',
     lat: 40.7128,
     lng: -74.0060,
     startDate: '2022-03-14',
@@ -351,7 +351,7 @@ export const EVENTS: EventItem[] = [
       'A Pi Day (3.14) Edible NFT drop with Food Network star Chef Christian Petroni — collectors could lock down a Pizza Pie NFT on Crypto.com, unlock a #petroni-nft-chat on Discord to get the secret party location, receive a special-edition Gabagool merch drop, and gather for an IRL pizza party in NYC on 3.20.22. NFT holders also got to vote on the next city and unlocked airdrops of family recipes + invites to Gabagool HQ. Built with 8it and Crypto.com NFT.',
     stats: [
       { value: '500+', label: 'NFTs' },
-      { value: '$250', label: 'floor' },
+      { value: 'IRL',  label: 'party' },
       { value: '1',    label: 'chef' },
       { value: 'π',    label: 'day drop' },
     ],
