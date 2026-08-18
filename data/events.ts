@@ -507,6 +507,32 @@ export const EVENTS: EventItem[] = [
     ],
     featured: true,
   }),
+
+  ev({
+    id: '2025-dubai-infravestor-dinner',
+    name: 'Infra-vestor Private Dinner',
+    location: 'Dubai, United Arab Emirates',
+    venue: 'Private venue · Dubai',
+    lat: 25.2048,
+    lng: 55.2708,
+    startDate: '2025-04-30',
+    endDate: '2025-04-30',
+    emoji: '🔑',
+    color: '#3F1F2D',
+    description:
+      'An invitation-only dinner gathering investors and partners in Dubai — an evening of conversation, connection, and curated cuisine at one of Dubai\'s most iconic spots. Co-hosted by berakana, Raito, Viperr, and Red.',
+    stats: [
+      { value: '46', label: 'attendees' },
+      { value: '4',  label: 'co-hosts' },
+      { value: '1',  label: 'night' },
+      { value: '🔑', label: 'private' },
+    ],
+    photos: [
+      '/assets/InfraredInvestorDinner/flyer.webp',
+    ],
+    links: [{ label: 'event page', url: 'https://luma.com/1dp5dlbg' }],
+    featured: true,
+  }),
 ];
 
 export const FEATURED_EVENTS = EVENTS.filter((e) => e.featured);
