@@ -454,8 +454,8 @@ export const EVENTS: EventItem[] = [
     venue: 'Partner restaurants across NYC',
     lat: 40.7128,
     lng: -74.0060,
-    startDate: '2025-09-02',
-    endDate: '2025-09-05',
+    startDate: '2025-06-17',
+    endDate: '2025-06-26',
     emoji: '🍔',
     color: '#FF5A2C',
     description:
@@ -463,7 +463,7 @@ export const EVENTS: EventItem[] = [
     stats: [
       { value: '12',  label: 'partners' },
       { value: 'NYC', label: 'edition' },
-      { value: '4',   label: 'days' },
+      { value: '10',  label: 'days' },
       { value: '🍽️',  label: 'eat-to-earn' },
     ],
     photos: [

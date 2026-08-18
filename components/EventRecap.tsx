@@ -695,31 +695,14 @@ function EventModal({
                     )}
                   </div>
 
-                  {/* RIGHT: flyer column — sized to show the FULL poster
-                      (object-contain instead of cover) so nothing is
-                      cropped. Bigger column ratio than before. */}
+                  {/* RIGHT: photo column — renders every photo in
+                      event.photos as an object-contain block, so NOTHING
+                      is cropped and multi-photo events (like the 12-panel
+                      Edible NFT recap) show every panel. First photo gets
+                      the tallest slot; the rest stack below at a smaller
+                      max height so the modal doesn't scroll forever. */}
                   <div className="flex flex-col gap-3">
-                    {event.photos[0] ? (
-                      <div
-                        className="relative w-full overflow-hidden rounded-[8px] flex items-center justify-center"
-                        style={{
-                          border: '1px solid rgba(var(--ink-rgb),0.2)',
-                          boxShadow:
-                            'inset 0 0 0 2px var(--paper-bright), 0 12px 28px -18px rgba(0,0,0,0.4)',
-                          background: 'rgba(var(--hi-rgb),0.45)',
-                          minHeight: 360,
-                          maxHeight: '68vh',
-                        }}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={event.photos[0]}
-                          alt={event.name}
-                          className="max-w-full max-h-[68vh] w-auto h-auto object-contain"
-                          style={{ display: 'block' }}
-                        />
-                      </div>
-                    ) : (
+                    {event.photos.length === 0 ? (
                       <div
                         className="relative w-full aspect-[4/5] rounded-[6px] flex items-center justify-center"
                         style={{
@@ -729,27 +712,45 @@ function EventModal({
                       >
                         <span className="text-6xl" aria-hidden>{event.emoji}</span>
                       </div>
-                    )}
-
-                    {/* Second photo — also contained, smaller cap */}
-                    {event.photos[1] && (
-                      <div
-                        className="relative w-full overflow-hidden rounded-[6px] flex items-center justify-center"
-                        style={{
-                          border: '1px solid rgba(var(--ink-rgb),0.2)',
-                          boxShadow: 'inset 0 0 0 2px var(--paper-bright)',
-                          background: 'rgba(var(--hi-rgb),0.4)',
-                          minHeight: 180,
-                        }}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={event.photos[1]}
-                          alt={`${event.name} additional photo`}
-                          className="max-w-full max-h-[40vh] w-auto h-auto object-contain"
-                          style={{ display: 'block' }}
-                        />
-                      </div>
+                    ) : (
+                      event.photos.map((src, i) => (
+                        <div
+                          key={src}
+                          className="relative w-full overflow-hidden rounded-[8px] flex items-center justify-center"
+                          style={{
+                            border: '1px solid rgba(var(--ink-rgb),0.2)',
+                            boxShadow:
+                              i === 0
+                                ? 'inset 0 0 0 2px var(--paper-bright), 0 12px 28px -18px rgba(0,0,0,0.4)'
+                                : 'inset 0 0 0 2px var(--paper-bright)',
+                            background: 'rgba(var(--hi-rgb),0.35)',
+                            // Give the first photo a taller slot; rest smaller
+                            // but still generous. NO fixed height cap — the
+                            // container grows to the image's natural height
+                            // at the current width, letterboxed by the flex
+                            // centering when its own aspect is unusual.
+                          }}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={src}
+                            alt={
+                              i === 0
+                                ? event.name
+                                : `${event.name} — photo ${i + 1}`
+                            }
+                            className="block w-full h-auto"
+                            style={{
+                              // width: 100% of container, height auto so the
+                              // natural aspect ratio is preserved. NO
+                              // max-height so wide flyers letterbox and
+                              // portrait shots stay tall — nothing clips.
+                              maxWidth: '100%',
+                            }}
+                            loading={i === 0 ? undefined : 'lazy'}
+                          />
+                        </div>
+                      ))
                     )}
                   </div>
                 </div>
