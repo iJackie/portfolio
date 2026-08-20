@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { EVENTS as RAW_EVENTS, type EventItem } from '@/data/events';
+import { merchForEvent } from '@/data/merch';
 
 /**
  * EventRecap — body of the "02 / EVENT RECAP" folder.
@@ -768,6 +769,68 @@ function EventModal({
                     )}
                   </div>
                 </div>
+
+                {/* MERCH STRIP — auto-populated from data/merch.ts by
+                    eventId. Only renders when this event has at least
+                    one merch item cross-referenced to it. Same photo
+                    lives ONCE on disk; the strip pulls it via merch.ts
+                    so the Content tab's MERCH filter and this strip
+                    stay in sync. */}
+                {(() => {
+                  const merch = merchForEvent(event.id);
+                  if (merch.length === 0) return null;
+                  return (
+                    <div
+                      className="mt-8 pt-6"
+                      style={{ borderTop: '1px dashed rgba(var(--ink-rgb),0.2)' }}
+                    >
+                      <p
+                        className="font-mono text-[11px] tracking-[0.22em] uppercase mb-4"
+                        style={{ color: 'rgba(var(--accent-rgb),0.85)' }}
+                      >
+                        ✦ MERCH FROM THIS EVENT
+                      </p>
+                      <div className="flex flex-wrap gap-3">
+                        {merch.map((m) => (
+                          <div
+                            key={m.id}
+                            className="relative overflow-hidden rounded-[6px]"
+                            style={{
+                              border: '1px solid rgba(var(--ink-rgb),0.2)',
+                              boxShadow: 'inset 0 0 0 2px var(--paper-bright)',
+                              background: 'rgba(var(--hi-rgb),0.4)',
+                              width: 132,
+                              height: 132,
+                            }}
+                            title={m.name}
+                          >
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={m.photo}
+                              alt={m.name}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                            <div
+                              className="absolute inset-x-0 bottom-0 px-2 py-1.5"
+                              style={{
+                                background:
+                                  'linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 100%)',
+                              }}
+                            >
+                              <p
+                                className="font-mono text-[9px] tracking-[0.14em] uppercase truncate"
+                                style={{ color: 'var(--paper-bright)' }}
+                              >
+                                {m.name}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           </motion.div>

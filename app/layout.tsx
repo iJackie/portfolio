@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: 'Jacqueline Mach',
     images: [
       {
-        url: '/assets/og.jpg',
+        url: '/assets/brand/og.jpg',
         width: 1200,
         height: 630,
         alt: 'Jacqueline Mach portfolio',
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     title: 'Jacqueline Mach · Growth, Community & Events',
     description:
       'Growth · marketing · EA · community · events. 20+ events across 10+ cities.',
-    images: ['/assets/og.jpg'],
+    images: ['/assets/brand/og.jpg'],
     creator: '@berakana_',
   },
 };

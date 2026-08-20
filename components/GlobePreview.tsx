@@ -53,6 +53,7 @@ const COUNTRY_CODE: Record<string, string> = {
   'United Arab Emirates': 'AE',
   Italy: 'IT',
   France: 'FR',
+  Japan: 'JP',
 };
 
 /* Optional 1-liner highlight per city. Falls back to "" if not set. */
@@ -66,6 +67,7 @@ const CITY_HIGHLIGHT: Record<string, string> = {
   Denver: 'ETHDenver lounge + soirée',
   'Cefalù': 'Infrared offsite',
   'New York': 'NFT NYC - EdibleNFT',
+  Tokyo: 'Akasaka Aura · Berachain evening',
 };
 
 /* Build CITIES once from the real events. */

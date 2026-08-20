@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import MediaModal, { type MediaContent, type MediaKind } from '@/components/MediaModal';
+import { MERCH } from '@/data/merch';
 
 /**
  * ContentBento — body of the "03 / CONTENT" folder.
@@ -76,12 +77,13 @@ const EXTERNAL_KINDS: ContentKind[] = ['tweet', 'thread', 'podcast'];
 // ─────────────────────────────────────────────────────────────────────
 // FILTER CHIPS
 // ─────────────────────────────────────────────────────────────────────
-type FilterKey = 'all' | 'video' | 'graphics' | 'posts' | 'talks';
+type FilterKey = 'all' | 'video' | 'graphics' | 'posts' | 'talks' | 'merch';
 
 const FILTERS: { key: FilterKey; label: string }[] = [
   { key: 'all',      label: 'ALL' },
   { key: 'video',    label: 'VIDEO' },
   { key: 'graphics', label: 'GRAPHICS' },
+  { key: 'merch',    label: 'MERCH' },
   { key: 'posts',    label: 'POSTS' },
   { key: 'talks',    label: 'TALKS' },
 ];
@@ -92,7 +94,30 @@ function itemMatchesFilter(item: ContentItem, filter: FilterKey): boolean {
   if (filter === 'graphics') return item.kind === 'image' || item.kind === 'graphic';
   if (filter === 'posts')    return item.kind === 'tweet' || item.kind === 'thread';
   if (filter === 'talks')    return item.kind === 'talk' || item.kind === 'podcast';
+  // 'merch' is handled OUTSIDE this filter: when filter === 'merch', the
+  // grid switches to render items derived from data/merch.ts instead of
+  // CONTENT_ITEMS. See the render below.
   return true;
+}
+
+/**
+ * Convert a MerchItem into a ContentItem shape so we can reuse the
+ * bento tile renderer. Merch tiles open in the image modal.
+ */
+function merchToContentItems(): ContentItem[] {
+  // Rotate spans so the merch grid doesn't come out as a straight
+  // row of same-size tiles.
+  const spans: ContentSpan[] = ['sm', 'md', 'sm', 'sm', 'md', 'sm'];
+  return MERCH.map((m, i) => ({
+    id: `merch--${m.id}`,
+    kind: 'image' as const,
+    title: m.name,
+    src: m.photo,
+    thumb: m.photo,
+    eyebrow: m.category ? m.category.toUpperCase() : 'MERCH',
+    caption: m.description,
+    span: spans[i % spans.length],
+  }));
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -120,10 +145,10 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-teaser-bus-1',
     kind: 'reel',
     title: 'KBW Shuttle Teaser, Vol. 1',
-    src: '/assets/videoTeaser_Teaser1Bus.mp4',
+    src: '/assets/content/videos/videoTeaser_Teaser1Bus.mp4',
     // For mp4 reels: a static thumb image makes the grid much faster.
     // Replace with a real screenshot when you have one.
-    thumb: '/assets/flyer_KBWShuttle.avif',
+    thumb: '/assets/events/2025-seoul-kbw/flyer_KBWShuttle.avif',
     eyebrow: 'TEASER · KBW 2025',
     caption: 'Pre-launch teaser for the Infrared × Lair shuttle.',
     span: 'tall',
@@ -132,8 +157,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-teaser-bus-2',
     kind: 'reel',
     title: 'KBW Shuttle Teaser, Vol. 2',
-    src: '/assets/videoTeaser_Teaser2Bus.mp4',
-    thumb: '/assets/flyer_KBWShuttle.avif',
+    src: '/assets/content/videos/videoTeaser_Teaser2Bus.mp4',
+    thumb: '/assets/events/2025-seoul-kbw/flyer_KBWShuttle.avif',
     eyebrow: 'TEASER · KBW 2025',
     caption: 'Second cut, built for the IG drop.',
     span: 'tall',
@@ -145,8 +170,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-tge',
     kind: 'reel',
     title: 'TGE Launch',
-    src: '/assets/video_TGE.mp4',
-    thumb: '/assets/meme_TeddyInfrared.webp',
+    src: '/assets/content/videos/video_TGE.mp4',
+    thumb: '/assets/content/memes/TeddyInfrared.webp',
     eyebrow: 'LAUNCH VIDEO',
     caption: 'Launch reel for the Infrared TGE.',
     span: 'lg',
@@ -155,8 +180,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-points-kickoff',
     kind: 'reel',
     title: 'Points Kickoff',
-    src: '/assets/video_PointsKickoff.mp4',
-    thumb: '/assets/design_design_Bear1.webp',
+    src: '/assets/content/videos/video_PointsKickoff.mp4',
+    thumb: '/assets/content/designs/Bear1.webp',
     eyebrow: 'PRODUCT',
     caption: 'Kickoff video for the Infrared Points program.',
     span: 'md',
@@ -165,8 +190,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-ibera-unstaking',
     kind: 'reel',
     title: 'iBERA Unstaking Module',
-    src: '/assets/video_iBERAUnstaking.mp4',
-    thumb: '/assets/design_design_Bear1.webp',
+    src: '/assets/content/videos/video_iBERAUnstaking.mp4',
+    thumb: '/assets/content/designs/Bear1.webp',
     eyebrow: 'EDUCATIONAL',
     caption: 'Walkthrough for the iBERA unstaking flow (captioned).',
     span: 'md',
@@ -175,8 +200,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-withdrawal',
     kind: 'reel',
     title: 'Infrared Withdrawal Flow',
-    src: '/assets/video_InfraredWithdrawl.mp4',
-    thumb: '/assets/design_design_Bear1.webp',
+    src: '/assets/content/videos/video_InfraredWithdrawl.mp4',
+    thumb: '/assets/content/designs/Bear1.webp',
     eyebrow: 'EDUCATIONAL',
     caption: 'Walkthrough of the withdrawal process.',
     span: 'sm',
@@ -185,8 +210,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'video-redemption',
     kind: 'reel',
     title: '1.8 Public Redemption',
-    src: '/assets/video_PublicRedemption.mp4',
-    thumb: '/assets/design_design_Bear1.webp',
+    src: '/assets/content/videos/video_PublicRedemption.mp4',
+    thumb: '/assets/content/designs/Bear1.webp',
     eyebrow: 'PRODUCT',
     caption: 'Cut explaining the v1.8 public redemption window.',
     span: 'sm',
@@ -197,8 +222,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'design-incubator-scene',
     kind: 'graphic',
     title: 'Infrared Incubator Scene v5',
-    src: '/assets/design_incubator_scene_v5_infrared copy.webp',
-    thumb: '/assets/design_incubator_scene_v5_infrared copy.webp',
+    src: '/assets/content/designs/IncubatorScene.webp',
+    thumb: '/assets/content/designs/IncubatorScene.webp',
     eyebrow: 'DESIGN',
     caption: 'Brand scene art for the Incubator program (v5).',
     span: 'lg',
@@ -207,8 +232,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'design-korean-gtm',
     kind: 'graphic',
     title: 'Korea GTM Cover',
-    src: '/assets/design-infrared korean gtm.webp',
-    thumb: '/assets/design-infrared korean gtm.webp',
+    src: '/assets/content/designs/KoreanGTM.webp',
+    thumb: '/assets/content/designs/KoreanGTM.webp',
     eyebrow: 'GTM · 2025',
     caption: 'Cover art for the Korea GTM deck.',
     span: 'wide',
@@ -217,8 +242,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'design-tablecloth',
     kind: 'graphic',
     title: 'Infrared Tablecloth',
-    src: '/assets/design_InfraredTablecloth.webp',
-    thumb: '/assets/design_InfraredTablecloth.webp',
+    src: '/assets/content/designs/InfraredTablecloth.webp',
+    thumb: '/assets/content/designs/InfraredTablecloth.webp',
     eyebrow: 'EVENT DESIGN',
     caption: 'Custom event tablecloth design.',
     span: 'md',
@@ -227,8 +252,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'design-bear-1',
     kind: 'graphic',
     title: 'Bear v1',
-    src: '/assets/design_design_Bear1.webp',
-    thumb: '/assets/design_design_Bear1.webp',
+    src: '/assets/content/designs/Bear1.webp',
+    thumb: '/assets/content/designs/Bear1.webp',
     eyebrow: 'BRAND',
     caption: 'Brand bear illustration (v1).',
     span: 'sm',
@@ -237,8 +262,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'design-drink-bear-sticker',
     kind: 'graphic',
     title: 'Drink Bear Pegatina (Sticker)',
-    src: '/assets/design_DrinkBearPegatina.webp',
-    thumb: '/assets/design_DrinkBearPegatina.webp',
+    src: '/assets/content/designs/DrinkBearPegatina.webp',
+    thumb: '/assets/content/designs/DrinkBearPegatina.webp',
     eyebrow: 'STICKER',
     caption: 'Sticker art for the drink-bear merch series.',
     span: 'sm',
@@ -247,8 +272,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'design-liquid-staking-advantage',
     kind: 'graphic',
     title: 'Liquid Staking Advantage',
-    src: '/assets/flyer_LiquidStakingAdvantage.webp',
-    thumb: '/assets/flyer_LiquidStakingAdvantage.webp',
+    src: '/assets/events/2024-singapore-liquidstaking/flyer_LiquidStakingAdvantage.webp',
+    thumb: '/assets/events/2024-singapore-liquidstaking/flyer_LiquidStakingAdvantage.webp',
     eyebrow: 'POSTER',
     caption: 'Side-event collateral on the LST advantage.',
     span: 'sm',
@@ -259,8 +284,8 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'meme-teddy-infrared',
     kind: 'graphic',
     title: 'Teddy x Infrared',
-    src: '/assets/meme_TeddyInfrared.webp',
-    thumb: '/assets/meme_TeddyInfrared.webp',
+    src: '/assets/content/memes/TeddyInfrared.webp',
+    thumb: '/assets/content/memes/TeddyInfrared.webp',
     eyebrow: 'MEME',
     caption: 'Community meme drop, Teddy era.',
     span: 'sm',
@@ -269,32 +294,22 @@ const CONTENT_ITEMS: ContentItem[] = [
     id: 'meme-honey-mining',
     kind: 'graphic',
     title: 'Honey Mining',
-    src: '/assets/meme_honey_mining_meme_infrared.webp',
-    thumb: '/assets/meme_honey_mining_meme_infrared.webp',
+    src: '/assets/content/memes/HoneyMining.webp',
+    thumb: '/assets/content/memes/HoneyMining.webp',
     eyebrow: 'MEME',
     caption: 'Honey-mining moment captured.',
     span: 'sm',
   },
 
-  // ── MERCH SHOTS ───────────────────────────────────────────────────
-  {
-    id: 'merch-infrared-tote',
-    kind: 'graphic',
-    title: 'Infrared Tote Bag',
-    src: '/assets/merch_InfraredToteBag.jpg',
-    thumb: '/assets/merch_InfraredToteBag.jpg',
-    eyebrow: 'MERCH',
-    caption: 'Limited-run tote, Devcon Bangkok.',
-    span: 'sm',
-  },
+  // ── MERCH shots moved to /data/merch.ts — see MERCH filter chip.
 
   // ── MISC / R&D ────────────────────────────────────────────────────
   {
     id: 'design-vape-study',
     kind: 'graphic',
     title: 'Vape Study · 1',
-    src: '/assets/vape_Study 1.webp',
-    thumb: '/assets/vape_Study 1.webp',
+    src: '/assets/content/designs/VapeStudy1.webp',
+    thumb: '/assets/content/designs/VapeStudy1.webp',
     eyebrow: 'STUDY',
     caption: 'Concept study for a future merch run.',
     span: 'sm',
@@ -306,7 +321,7 @@ const CONTENT_ITEMS: ContentItem[] = [
     kind: 'tweet',
     title: '[TODO] Tweet on hosting',
     src: 'https://twitter.com/berakana_',
-    thumb: '/assets/meme_TeddyInfrared.webp',
+    thumb: '/assets/content/memes/TeddyInfrared.webp',
     eyebrow: 'TWITTER',
     span: 'sm',
   },
@@ -315,7 +330,7 @@ const CONTENT_ITEMS: ContentItem[] = [
     kind: 'thread',
     title: '[TODO] On running 20+ events',
     src: 'https://twitter.com/berakana_',
-    thumb: '/assets/meme_honey_mining_meme_infrared.webp',
+    thumb: '/assets/content/memes/HoneyMining.webp',
     eyebrow: 'THREAD',
     span: 'sm',
   },
@@ -466,9 +481,17 @@ export default function ContentBento() {
     return arr;
   }, []);
 
+  // MERCH filter is special: instead of filtering CONTENT_ITEMS, we
+  // swap the tile source to entries derived from data/merch.ts so the
+  // Content tab has a dedicated merch view without duplicating data.
+  const merchItems = useMemo(() => merchToContentItems(), []);
+
   const filteredItems = useMemo(
-    () => shuffledContent.filter((it) => itemMatchesFilter(it, filter)),
-    [filter, shuffledContent],
+    () =>
+      filter === 'merch'
+        ? merchItems
+        : shuffledContent.filter((it) => itemMatchesFilter(it, filter)),
+    [filter, shuffledContent, merchItems],
   );
 
   const handleTileClick = (item: ContentItem) => {

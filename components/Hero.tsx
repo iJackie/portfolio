@@ -1248,7 +1248,7 @@ function BadgeFront({ sheenBg }: { sheenBg: ReturnType<typeof useMotionTemplate>
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/assets/PFPpng.webp"
+                  src="/assets/brand/PFP.webp"
                   alt="Jacqueline Mach"
                   className="w-full h-full object-cover"
                   style={{ objectPosition: 'center 22%' }}
